@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>PLEASE WORK</h1>
+      <h1>Backronym Generator</h1>
     </div>
   );
 }
