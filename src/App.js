@@ -1,11 +1,32 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import Search from './components/Search.js';
+import Gallery from './components/Gallery';
+import firebase from './firebase';
+// import { getDatabase, ref, onValue, push } from 'firebase/database';
+// import { useEffect, useState } from 'react';
 
 function App() {
+  // const [userInput, setUserInput] = useState('');
+
+  // // create reference to the databse
+  // const database = getDatabase(firebase)
+  // const dbRef = ref(database)
+  // if (userInput) {
+  //   //add userInput to our firebase
+  //   push(dbRef, userInput)
+  //   // clear userInput
+  //   setUserInput('');
+  // }
+
   return (
-    <div className="App">
-      <h1>Backronym Generator</h1>
+    <div>
+      <div className="App">
+        <h1>Backronym Generator</h1>
+
+        <Gallery />
+
+        {/* <label htmlFor=""></label>
+        <input type="text" />   */}
+      </div>
     </div>
   );
 }
