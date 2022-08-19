@@ -21,6 +21,7 @@ function App() {
             key: key,
             author: key.author,
             userInput: data[key].userInput,
+            userInputSplit: data[key].userInputSplit,
             results: data[key].results,
           }
         )
@@ -28,7 +29,7 @@ function App() {
       setGallery(newState);
       console.log(gallery)
     })
-  }, []);
+  }, [gallery]);
 
   // create reference to the databse 
   const database = getDatabase(firebase)
@@ -41,14 +42,27 @@ function App() {
   }
 
     return (
-      <div className="App">
-        <h1>Backronym Generator</h1>
       <div>
-
-      </div>        
+        <div className="App">
+          <h1>Backronym Generator</h1>
+          <ul className="resultsDisplay">
+            {
+              gallery.map( (result) => {
+                return (
+                  <li key={result.key}>
+                    <h3>{result.userInput}</h3>
+                    <p>{result.results.join(' ')}</p>
+                  </li>                                 
+                )
+              })
+            }
+          </ul>          
         <label htmlFor=""></label>
         <input type="text" />  
       </div>
+
+      </div>
+
     );
 }
 
