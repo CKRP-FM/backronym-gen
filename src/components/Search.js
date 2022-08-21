@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import shuffle from '../utilities/shuffle.js';
 
 function Search() {
   // const [letter, setLetter] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [wordInput, setWordInput] = useState('');
-  const [selectedWord, setSelectedWord] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState('');
+  const [wordInput, setWordInput] = useState(''); // state to store word entered in input field
+  const [selectedWord, setSelectedWord] = useState([]); // a state to store the word, split into a character array
   const [randomArray, setRandomArray] = useState([]);
-  const [backronym, setBackronym] = useState([]);
+  const [backronym, setBackronym] = useState([]); // a state that stores the user's chosen words to make up the backronym
   const [checkedWord, setCheckedWord] = useState('');
   // const [isChecked, setIsChecked] = useState(false);
 
@@ -26,28 +26,35 @@ function Search() {
     setWordInput(e.target.value);
   }
 
-  async function handleSearchSubmit(e) {
+  // async 
+  function handleSearchSubmit(e) {
     e.preventDefault();
 
     const clone = wordInput;
     setSelectedWord(splitIntoChars(clone));
 
-    getWords();
+    // getWords();
+    setCurrentIndex(0);
   }
 
-  function getWords() {
-    axios({
-      url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
-      method: 'GET',
-      dataResponse: 'json',
-    })
-      .then((response) => {
-        setRandomArray(subArray(shuffle(response.data)));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  useEffect(() => {
+    // function getWords() {
+      if (selectedWord[currentIndex] !== undefined) {
+        axios({
+          url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
+          method: 'GET',
+          dataResponse: 'json',
+        })
+          .then((response) => {
+            setRandomArray(subArray(shuffle(response.data)));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    // }
+  }, [currentIndex])
+
 
   // handle save word
   // store the chosen word (state current chosen word) into the backronym array
@@ -60,11 +67,11 @@ function Search() {
     // take the checkedword and push it to the backronym
     let clone = [...backronym, checkedWord];
     setBackronym(clone);
+    setRandomArray([]);
+    // getWords();
+    setCheckedWord('');
     let increment = currentIndex + 1;
     setCurrentIndex(increment);
-    setRandomArray([]);
-    getWords();
-    setCheckedWord('');
   }
 
   // on change checked
