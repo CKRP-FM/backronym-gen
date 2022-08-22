@@ -42,8 +42,9 @@ function Search() {
 
       setBackronym([]);
       setCurrentIndex(0);
+      setWordInput('');
     } else {
-      alert('Please limit your input to letters!');
+      alert('Please do not leave a blank input and limit your input to letters!');
     }
   }
 
@@ -55,7 +56,7 @@ function Search() {
 
   useEffect(() => {
     getWords();
-  }, [currentIndex]);
+  }, [currentIndex, selectedWord]);
 
   function getWords() {
     if (selectedWord[currentIndex] !== undefined) {
@@ -85,7 +86,6 @@ function Search() {
     let clone = [...backronym, checkedWord];
     setBackronym(clone);
     setRandomArray([]);
-    // getWords();
     setCheckedWord('');
     let increment = currentIndex + 1;
     setCurrentIndex(increment);
@@ -106,7 +106,14 @@ function Search() {
     <div>
       <form>
         <label htmlFor="search">Search</label>
-        <input id="search" className="searchInput" type="text" onChange={handleInput} placeholder="Enter a word" />
+        <input
+          id="search"
+          className="searchInput"
+          type="text"
+          onChange={handleInput}
+          placeholder="Enter a word"
+          value={wordInput}
+        />
         <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
       </form>
 
