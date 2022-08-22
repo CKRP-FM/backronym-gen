@@ -1,6 +1,7 @@
-import './App.css';
+import './App.scss';
 import Gallery from './components/Gallery';
 import Search from './components/Search';
+
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <h1>Backronym Generator</h1>
 
       <Search />
+
+      <Gallery />
     </div>
   );
 }
