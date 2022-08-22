@@ -120,10 +120,9 @@ function Search() {
             );
           })}
         </ul>
-        {currentIndex !== '' && currentIndex < selectedWord.length ? (
+        {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
           <button
             onClick={(e) => {
-              // setCheckedWord('');
               handleRefresh(e);
             }}
           >
