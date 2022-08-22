@@ -17,6 +17,12 @@ function Search() {
     return array.slice(0, 10);
   }
 
+  // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
+  // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
+  function onlyLetters(str) {
+    return /^[a-zA-Z]+$/.test(str);
+  }
+
   // Break down string into array of chars
   function splitIntoChars(string) {
     return string.split('');
@@ -30,11 +36,15 @@ function Search() {
   function handleSearchSubmit(e) {
     e.preventDefault();
 
-    const clone = wordInput;
-    setSelectedWord(splitIntoChars(clone));
+    if (onlyLetters(wordInput)) {
+      const clone = wordInput;
+      setSelectedWord(splitIntoChars(clone));
 
-    setBackronym([]);
-    setCurrentIndex(0);
+      setBackronym([]);
+      setCurrentIndex(0);
+    } else {
+      alert('Please limit your input to letters!');
+    }
   }
 
   function handleRefresh(e) {
