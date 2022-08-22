@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import shuffle from '../utilities/shuffle.js';
+import firebase from '../firebase.js';
+import { getDatabase, ref, push } from 'firebase/database';
 
 function Search() {
   // const [letter, setLetter] = useState('');
@@ -11,6 +13,10 @@ function Search() {
   const [backronym, setBackronym] = useState([]); // a state that stores the user's chosen words to make up the backronym
   const [checkedWord, setCheckedWord] = useState('');
   // const [isChecked, setIsChecked] = useState(false);
+  
+  //useState to disable btn (once submitted to firebase)
+  const [hideBtn, setHideBtn] = useState(false);
+
 
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
@@ -35,22 +41,23 @@ function Search() {
 
     // getWords();
     setCurrentIndex(0);
+
   }
 
   useEffect(() => {
-      if (selectedWord[currentIndex] !== undefined) {
-        axios({
-          url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
-          method: 'GET',
-          dataResponse: 'json',
-        })
-          .then((response) => {
-            setRandomArray(subArray(shuffle(response.data)));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+    if (selectedWord[currentIndex] !== undefined) {
+      axios({
+        url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
+        method: 'GET',
+        dataResponse: 'json',
+      })
+      .then((response) => {
+        setRandomArray(subArray(shuffle(response.data)));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   }, [currentIndex])
 
 
@@ -70,6 +77,7 @@ function Search() {
     setCheckedWord('');
     let increment = currentIndex + 1;
     setCurrentIndex(increment);
+
   }
 
   // on change checked
@@ -80,6 +88,24 @@ function Search() {
     } else {
       setCheckedWord('');
     }
+  }
+
+  function handleFirebase() {
+    //create a reference to fb
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+
+    //temp object to inject into firebase
+    const tempObj  = {
+      userInput: selectedWord,
+      results: backronym
+    }
+
+    //push to firebase
+    push(dbRef, tempObj);
+
+    //after the push to firebase, disable btn to prevent multiple submissions
+    setHideBtn(true);
   }
 
   return (
@@ -120,12 +146,18 @@ function Search() {
         {checkedWord !== '' ? (
           <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
         ) : (
-          <button disabled={true} onClick={(e) => handleSaveWord(e)}>
-            Save Word
-          </button>
+          // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+          null
         )}
 
         <div>Your backronym is: {backronym.join(' ')}</div>
+        
+        {/* save to firebase btn */}
+        {currentIndex === selectedWord.length ? 
+        <button onClick={handleFirebase} disabled={hideBtn}>Save Backronym!</button>
+        :
+        null }
+
       </div>
     </div>
   );
