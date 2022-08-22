@@ -38,7 +38,6 @@ function Search() {
   }
 
   useEffect(() => {
-    // function getWords() {
       if (selectedWord[currentIndex] !== undefined) {
         axios({
           url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
@@ -52,7 +51,6 @@ function Search() {
             console.log(error);
           });
       }
-    // }
   }, [currentIndex])
 
 
