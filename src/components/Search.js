@@ -33,7 +33,7 @@ function Search() {
     const clone = wordInput;
     setSelectedWord(splitIntoChars(clone));
 
-    // getWords();
+    setBackronym([]);
     setCurrentIndex(0);
   }
 
