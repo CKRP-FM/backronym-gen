@@ -13,14 +13,19 @@ function Search() {
   const [backronym, setBackronym] = useState([]); // a state that stores the user's chosen words to make up the backronym
   const [checkedWord, setCheckedWord] = useState('');
   // const [isChecked, setIsChecked] = useState(false);
-  
+
   //useState to disable btn (once submitted to firebase)
   const [hideBtn, setHideBtn] = useState(false);
-
 
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
     return array.slice(0, 10);
+  }
+
+  // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
+  // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
+  function onlyLetters(str) {
+    return /^[a-zA-Z]+$/.test(str);
   }
 
   // Break down string into array of chars
@@ -32,34 +37,47 @@ function Search() {
     setWordInput(e.target.value);
   }
 
-  // async 
+  // async
   function handleSearchSubmit(e) {
     e.preventDefault();
 
-    const clone = wordInput;
-    setSelectedWord(splitIntoChars(clone));
+    if (onlyLetters(wordInput)) {
+      const clone = wordInput;
+      setSelectedWord(splitIntoChars(clone));
 
-    // getWords();
-    setCurrentIndex(0);
+      setBackronym([]);
+      setCurrentIndex(0);
+      setWordInput('');
+    } else {
+      alert('Please do not leave a blank input and limit your input to letters!');
+    }
+  }
 
+  function handleRefresh(e) {
+    e.preventDefault();
+    setCheckedWord('');
+    getWords();
   }
 
   useEffect(() => {
+    getWords();
+  }, [currentIndex, selectedWord]);
+
+  function getWords() {
     if (selectedWord[currentIndex] !== undefined) {
       axios({
         url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
         method: 'GET',
         dataResponse: 'json',
       })
-      .then((response) => {
-        setRandomArray(subArray(shuffle(response.data)));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((response) => {
+          setRandomArray(subArray(shuffle(response.data)));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [currentIndex])
-
+  }
 
   // handle save word
   // store the chosen word (state current chosen word) into the backronym array
@@ -73,17 +91,16 @@ function Search() {
     let clone = [...backronym, checkedWord];
     setBackronym(clone);
     setRandomArray([]);
-    // getWords();
     setCheckedWord('');
     let increment = currentIndex + 1;
     setCurrentIndex(increment);
-
   }
 
   // on change checked
   // everything else gets greyed (setting ischecked to true)
   function handleCheckbox(e) {
     if (checkedWord === '') {
+      // setIsChecked(e.target.checked);
       setCheckedWord(e.target.value);
     } else {
       setCheckedWord('');
@@ -96,10 +113,10 @@ function Search() {
     const dbRef = ref(database);
 
     //temp object to inject into firebase
-    const tempObj  = {
+    const tempObj = {
       userInput: selectedWord,
-      results: backronym
-    }
+      results: backronym,
+    };
 
     //push to firebase
     push(dbRef, tempObj);
@@ -112,52 +129,62 @@ function Search() {
     <div>
       <form>
         <label htmlFor="search">Search</label>
-        <input id="search" className="searchInput" type="text" onChange={handleInput} placeholder="Enter a word" />
+        <input
+          id="search"
+          className="searchInput"
+          type="text"
+          onChange={handleInput}
+          placeholder="Enter a word"
+          value={wordInput}
+        />
         <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
       </form>
 
       <div>
         {selectedWord !== undefined || selectedWord.length !== 0 ? selectedWord : null}
         <ul>
-          {randomArray?.map((word, index) => {
+          {randomArray?.map((word) => {
             return (
-              <li key={index}>
+              <li key={word.word + word.score}>
                 <input
                   value={word.word}
-                  id="word"
+                  id={word.word}
                   type="checkbox"
+                  // checked={isChecked}
                   className="wordListItem"
                   onChange={(e) => handleCheckbox(e)}
                   disabled={checkedWord !== '' && checkedWord !== word.word}
                 />
-                <label htmlFor="word">{word.word}</label>
+                <label htmlFor={word.word}>{word.word}</label>
               </li>
             );
           })}
         </ul>
-        {/* <button
-          onClick={(e) => {
-            // setCheckedWord('');
-            handleSearchSubmit(e);
-          }}
-        >
-          Refresh
-        </button> */}
-        {checkedWord !== '' ? (
-          <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+        {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
+          <button
+            onClick={(e) => {
+              handleRefresh(e);
+            }}
+          >
+            Refresh
+          </button>
         ) : (
-          // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
-          null
+          <button disabled={true}>Refresh</button>
         )}
 
-        <div>Your backronym is: {backronym.join(' ')}</div>
-        
-        {/* save to firebase btn */}
-        {currentIndex === selectedWord.length ? 
-        <button onClick={handleFirebase} disabled={hideBtn}>Save Backronym!</button>
-        :
-        null }
+        {checkedWord !== '' ? (
+          <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+        ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+        null}
 
+        <div>Your backronym is: {backronym.join(' ')}</div>
+
+        {/* save to firebase btn */}
+        {currentIndex === selectedWord.length ? (
+          <button onClick={handleFirebase} disabled={hideBtn}>
+            Save Backronym!
+          </button>
+        ) : null}
       </div>
     </div>
   );
