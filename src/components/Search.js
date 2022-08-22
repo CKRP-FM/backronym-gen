@@ -26,7 +26,7 @@ function Search() {
     setWordInput(e.target.value);
   }
 
-  // async 
+  // async
   function handleSearchSubmit(e) {
     e.preventDefault();
 
@@ -37,22 +37,31 @@ function Search() {
     setCurrentIndex(0);
   }
 
-  useEffect(() => {
-      if (selectedWord[currentIndex] !== undefined) {
-        axios({
-          url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
-          method: 'GET',
-          dataResponse: 'json',
-        })
-          .then((response) => {
-            setRandomArray(subArray(shuffle(response.data)));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-  }, [currentIndex])
+  function handleRefresh(e) {
+    e.preventDefault();
+    setCheckedWord('');
+    getWords();
+  }
 
+  useEffect(() => {
+    getWords();
+  }, [currentIndex]);
+
+  function getWords() {
+    if (selectedWord[currentIndex] !== undefined) {
+      axios({
+        url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
+        method: 'GET',
+        dataResponse: 'json',
+      })
+        .then((response) => {
+          setRandomArray(subArray(shuffle(response.data)));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   // handle save word
   // store the chosen word (state current chosen word) into the backronym array
@@ -76,6 +85,7 @@ function Search() {
   // everything else gets greyed (setting ischecked to true)
   function handleCheckbox(e) {
     if (checkedWord === '') {
+      // setIsChecked(e.target.checked);
       setCheckedWord(e.target.value);
     } else {
       setCheckedWord('');
@@ -93,36 +103,40 @@ function Search() {
       <div>
         {selectedWord !== undefined || selectedWord.length !== 0 ? selectedWord : null}
         <ul>
-          {randomArray?.map((word, index) => {
+          {randomArray?.map((word) => {
             return (
-              <li key={index}>
+              <li key={word.word + word.score}>
                 <input
                   value={word.word}
-                  id="word"
+                  id={word.word}
                   type="checkbox"
+                  // checked={isChecked}
                   className="wordListItem"
                   onChange={(e) => handleCheckbox(e)}
                   disabled={checkedWord !== '' && checkedWord !== word.word}
                 />
-                <label htmlFor="word">{word.word}</label>
+                <label htmlFor={word.word}>{word.word}</label>
               </li>
             );
           })}
         </ul>
-        {/* <button
-          onClick={(e) => {
-            // setCheckedWord('');
-            handleSearchSubmit(e);
-          }}
-        >
-          Refresh
-        </button> */}
+        {currentIndex !== '' && currentIndex < selectedWord.length ? (
+          <button
+            onClick={(e) => {
+              // setCheckedWord('');
+              handleRefresh(e);
+            }}
+          >
+            Refresh
+          </button>
+        ) : (
+          <button disabled={true}>Refresh</button>
+        )}
+
         {checkedWord !== '' ? (
           <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
         ) : (
-          <button disabled={true} onClick={(e) => handleSaveWord(e)}>
-            Save Word
-          </button>
+          <button disabled={true}>Save Word</button>
         )}
 
         <div>Your backronym is: {backronym.join(' ')}</div>
