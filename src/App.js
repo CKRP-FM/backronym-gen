@@ -8,6 +8,8 @@ function App() {
       <h1>Backronym Generator</h1>
 
       <Search />
+
+      <Gallery />
     </div>
   );
 }

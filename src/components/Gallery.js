@@ -22,13 +22,14 @@ function Gallery() {
                 newState.push(
                     {
                         key: key,
-                        author: key.author,
-                        userInput: data[key].userInput,
-                        userInputSplit: data[key].userInputSplit,
-                        results: data[key].results,
+                        author: key.author, //for auth
+                        userInput: data[key].userInputSplit, //["k", "e", "o", "n"]
+                        results: data[key].results, // ["key", "eel", "on", "new"]
                     }
                 )
             }
+
+            //setting the user's fb submission to our gallery state
             setGallery(newState);
             console.log(gallery)
         })
@@ -42,12 +43,11 @@ function Gallery() {
                     return (
                         <li key={result.key}>
                             <h3>{result.userInput}</h3>
-                            {/* <p>{result.results.join(' ')}</p> */}
 
                             {/* mapping over each user's submission results array item (each word in array is the initial) */}
-                            {result.results.map(initial => {
+                            {result.results.map(initialWord => {
                                 return (
-                                    <p>{initial}</p>
+                                    <p>{initialWord}</p>
                                 )
                             })}
                         </li>
