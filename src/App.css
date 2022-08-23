@@ -372,12 +372,6 @@ button {
   color: #323031;
 }
 
-.modalFooter {
-  background-color: #c0f5fa;
-  text-align: center;
-  padding: 10px;
-}
-
 .howToTitle {
   text-align: left;
 }
@@ -436,6 +430,12 @@ button {
 .team i {
   color: #ff5e5b;
   margin: 0.8rem;
+}
+
+.modalFooter {
+  background-color: #c0f5fa;
+  text-align: center;
+  padding: 10px;
 }
 
 header {
