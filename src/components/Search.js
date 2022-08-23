@@ -158,75 +158,20 @@ function Search() {
 
   return (
     <header>
-      <div className='wrapper'>
-        <h1>Backronym <span>Generator</span></h1>
-
-<<<<<<< HEAD
-      <div>
-        {selectedWord !== undefined || selectedWord.length !== 0
-          ? selectedWord.map((letter, index) => {
-              return (
-                <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
-                  {letter}
-                </span>
-              );
-            })
-          : null}
-        <ul>
-          {randomArray?.map((word) => {
-            return (
-              <li key={word.word + word.score}>
-                <input
-                  value={word.word}
-                  id={word.word}
-                  type="checkbox"
-                  // checked={isChecked}
-                  className="wordListItem"
-                  onChange={(e) => handleCheckbox(e)}
-                  disabled={checkedWord !== '' && checkedWord !== word.word}
-                />
-                <label htmlFor={word.word}>{word.word}</label>
-              </li>
-            );
-          })}
-        </ul>
-        {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
-          <button
-            onClick={(e) => {
-              handleRefresh(e);
-            }}
-          >
-            Refresh
-          </button>
-        ) : (
-          <button disabled={true}>Refresh</button>
-        )}
-=======
-        <form>
-          <label htmlFor="search" className='sr-only'>Search</label>
-          <input
-            id="search"
-            className="searchInput"
-            type="text"
-            onChange={handleInput}
-            placeholder="Enter a word"
-            value={wordInput}
-          />
-          <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
-        </form>
->>>>>>> main
-
-        <div className="headerImgContainer">
-          <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
-        </div>
+      <div className="wrapper">
+        <h1>
+          Backronym <span>Generator</span>
+        </h1>
 
         <div>
-          {selectedWord !== undefined || selectedWord.length !== 0 ?
-            selectedWord.map((letter, index) => {
-              return (
-                <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
-              )
-            })
+          {selectedWord !== undefined || selectedWord.length !== 0
+            ? selectedWord.map((letter, index) => {
+                return (
+                  <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
+                    {letter}
+                  </span>
+                );
+              })
             : null}
           <ul>
             {randomArray?.map((word) => {
@@ -257,20 +202,82 @@ function Search() {
           ) : (
             <button disabled={true}>Refresh</button>
           )}
+          <form>
+            <label htmlFor="search" className="sr-only">
+              Search
+            </label>
+            <input
+              id="search"
+              className="searchInput"
+              type="text"
+              onChange={handleInput}
+              placeholder="Enter a word"
+              value={wordInput}
+            />
+            <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
+          </form>
 
-          {checkedWord !== '' ? (
-            <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
-          ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+          <div className="headerImgContainer">
+            <img
+              src={require('../assets/pen-bulb.png')}
+              alt="3D render of a pen with a light bulb attached to the end"
+            />
+          </div>
+
+          <div>
+            {selectedWord !== undefined || selectedWord.length !== 0
+              ? selectedWord.map((letter, index) => {
+                  return (
+                    <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
+                      {letter}
+                    </span>
+                  );
+                })
+              : null}
+            <ul>
+              {randomArray?.map((word) => {
+                return (
+                  <li key={word.word + word.score}>
+                    <input
+                      value={word.word}
+                      id={word.word}
+                      type="checkbox"
+                      // checked={isChecked}
+                      className="wordListItem"
+                      onChange={(e) => handleCheckbox(e)}
+                      disabled={checkedWord !== '' && checkedWord !== word.word}
+                    />
+                    <label htmlFor={word.word}>{word.word}</label>
+                  </li>
+                );
+              })}
+            </ul>
+            {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
+              <button
+                onClick={(e) => {
+                  handleRefresh(e);
+                }}
+              >
+                Refresh
+              </button>
+            ) : (
+              <button disabled={true}>Refresh</button>
+            )}
+
+            {checkedWord !== '' ? (
+              <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+            ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
             null}
 
-          <p>Your backronym is: {backronym.join(' ')}</p>
+            <p>Your backronym is: {backronym.join(' ')}</p>
 
-          {/* save to firebase btn */}
-          {currentIndex === selectedWord.length ? (
-            <button onClick={handleFirebase} disabled={hideBtn}>
-              Save Backronym!
-            </button>
-          ) : null}
+            {/* save to firebase btn */}
+            {currentIndex === selectedWord.length ? (
+              <button onClick={handleFirebase} disabled={hideBtn}>
+                Save Backronym!
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </header>
