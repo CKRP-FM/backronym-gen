@@ -159,33 +159,42 @@ function Search() {
   return (
     <header>
       <div className='wrapper'>
-        <h1>Backronym <span>Generator</span></h1>
 
-        <form>
-          <label htmlFor="search" className='sr-only'>Search</label>
-          <input
-            id="search"
-            className="searchInput"
-            type="text"
-            onChange={handleInput}
-            placeholder="Enter a word"
-            value={wordInput}
-          />
-          <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
-        </form>
+        <div className="mainSearch">
+          <form>
+            <h1>Backronym <span>Generator</span></h1>
 
-        <div className="headerImgContainer">
-          <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
+            <fieldset>
+              <label htmlFor="search" className='sr-only'>Search</label>
+              <input
+                id="search"
+                className="searchInput"
+                type="text"
+                onChange={handleInput}
+                placeholder="Enter your word..."
+                value={wordInput}
+              />
+              <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+            </fieldset>
+            
+          </form>
+
+          <div className="headerImgContainer">
+            <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
+          </div>
         </div>
 
-        <div>
-          {selectedWord !== undefined || selectedWord.length !== 0 ?
-            selectedWord.map((letter, index) => {
-              return (
-                <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
-              )
-            })
-            : null}
+        <div className='backronymSelect'>
+          <p className="userBackronym">
+            {selectedWord !== undefined || selectedWord.length !== 0 ?
+              selectedWord.map((letter, index) => {
+                return (
+                  <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
+                )
+              })
+              : null}
+          </p>
+          
           <ul>
             {randomArray?.map((word) => {
               return (
@@ -231,7 +240,6 @@ function Search() {
             ) : null}
           </div>
         </div>
-      </div>
     </header>
   );
 }

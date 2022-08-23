@@ -13,11 +13,11 @@ h3 {
 }
 
 h1 {
-  font-size: 96px;
+  font-size: 96px; //clamp
   line-height: 90px;
 
   span {
-    font-size: 72px;
+    font-size: 72px; //clamp
     line-height: 60px;
   }
 }
