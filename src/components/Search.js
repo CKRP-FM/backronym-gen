@@ -66,35 +66,48 @@ function Search() {
 
   function getWords() {
     if (selectedWord[currentIndex] !== undefined) {
+      // if first word, just fetch random words
       if (currentIndex === 0) {
-        axios({
-          url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
-          method: 'GET',
-          dataResponse: 'json',
-        })
-          .then((response) => {
-            setRandomArray(subArray(shuffle(response.data)));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        fetchRandomWords();
       } else {
-        console.log(backronym[currentIndex - 1]);
-        axios({
-          url: `https://api.datamuse.com/words?rel_bga=${backronym[currentIndex - 1]}&sp=${
-            selectedWord[currentIndex]
-          }*`,
-          method: 'GET',
-          dataResponse: 'json',
-        })
-          .then((response) => {
-            setRandomArray(subArray(shuffle(response.data)));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        fetchRelatedWords();
       }
     }
+  }
+
+  // function to fetch random words that start with a specific letter
+  function fetchRandomWords() {
+    axios({
+      url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
+      method: 'GET',
+      dataResponse: 'json',
+    })
+      .then((response) => {
+        setRandomArray(subArray(shuffle(response.data)));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // function to fetch words that often come after the previous saved word and start with a specific letter
+  function fetchRelatedWords() {
+    axios({
+      url: `https://api.datamuse.com/words?lc=${backronym[currentIndex - 1]}&sp=${selectedWord[currentIndex]}*`,
+      method: 'GET',
+      dataResponse: 'json',
+    })
+      .then((response) => {
+        // if no words related are found, just return random words
+        if (response.data.length === 0) {
+          fetchRandomWords();
+        } else {
+          setRandomArray(subArray(shuffle(response.data)));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   // handle save word
