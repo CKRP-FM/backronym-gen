@@ -260,12 +260,24 @@ h3 {
   font-family: "DynaPuff", cursive;
 }
 
-p {
+h2 {
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  color: #ff5e5b;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+}
+
+p,
+span {
   font-family: "Montserrat", sans-serif;
 }
 
 html {
   background-color: #323031;
+  color: #fff;
 }
 
 ul,
@@ -282,6 +294,27 @@ input {
 img {
   max-width: 100%;
   display: block;
+}
+
+label,
+input,
+button {
+  font-family: "Montserrat", sans-serif;
+}
+
+button,
+input {
+  border: none;
+}
+
+input {
+  accent-color: #c0f5fa;
+}
+
+button {
+  background-color: #c0f5fa;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .wrapper {
@@ -336,12 +369,11 @@ img {
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 0;
+  color: #323031;
 }
 
-.modalFooter {
-  background-color: #c0f5fa;
-  text-align: center;
-  padding: 10px;
+.howToTitle {
+  text-align: left;
 }
 
 .aboutHowTo {
@@ -359,6 +391,7 @@ img {
 .aboutHowTo p {
   margin: 0;
   margin-bottom: 20px;
+  color: #323031;
 }
 
 .closeButton {
@@ -366,29 +399,89 @@ img {
   background: none;
 }
 
+.teamHeader {
+  color: #ff5e5b;
+  text-align: center;
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team h3 {
+  color: #ff5e5b;
+  font-family: "DynaPuff", cursive;
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+  text-transform: uppercase;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+}
+.team i {
+  color: #ff5e5b;
+  margin: 0.8rem;
+}
+
+.modalFooter {
+  background-color: #c0f5fa;
+  text-align: center;
+  padding: 10px;
+}
+
+header {
+  height: 100vh;
+}
+
+.defaultColor {
+  color: black;
+}
+
+.highlightColor {
+  color: red;
+}
+
 .resultsDisplay {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
+  margin: 30px 0;
 }
 .resultsDisplay h3 {
   margin-bottom: 10px;
   color: #ff5e5b;
-  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
   text-transform: uppercase;
   text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
 }
 .resultsDisplay li {
-  flex-basis: 30%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 15px -3px rgba(255, 255, 255, 0.3);
   background-color: #fff;
+  border: 2px solid #323031;
+  box-shadow: 10px 10px 0px #c0f5fa;
 }
 .resultsDisplay p {
+  margin: 0 0 5px;
+  color: #323031;
+  text-transform: capitalize;
+}
+
+.galleryDesc {
+  text-align: center;
   margin: 0;
 }/*# sourceMappingURL=App.css.map */
