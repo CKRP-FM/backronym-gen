@@ -1,3 +1,25 @@
 header {
   height: 100vh;
 }
+
+h1 {
+  color: $red;
+  text-align: right;
+  margin-bottom: 30px;
+
+  span {
+    font-weight: 400;
+    text-transform: lowercase;
+    display: block;
+  }
+}
+
+.mainSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  margin-right: 50px;
+}

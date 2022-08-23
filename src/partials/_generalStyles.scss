@@ -24,6 +24,11 @@ label,
 input,
 button {
   font-family: $bodyFont;
+  color: $black;
+}
+
+label {
+  color: $white;
 }
 
 button,
