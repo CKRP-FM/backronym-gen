@@ -141,7 +141,13 @@ function Search() {
       </form>
 
       <div>
-        {selectedWord !== undefined || selectedWord.length !== 0 ? selectedWord : null}
+        {selectedWord !== undefined || selectedWord.length !== 0 ?
+        selectedWord.map((letter, index) => {
+          return(
+            <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
+          )
+        })
+        : null}
         <ul>
           {randomArray?.map((word) => {
             return (
