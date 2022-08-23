@@ -154,6 +154,9 @@ function Search() {
 
     //after the push to firebase, disable btn to prevent multiple submissions
     setHideBtn(true);
+    // reset
+    setBackronym([]);
+    setSelectedWord([]);
   }
 
   return (
