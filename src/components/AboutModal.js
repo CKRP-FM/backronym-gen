@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 
 const AboutModal = props => {
   if (!props.show) {
@@ -24,7 +25,7 @@ const AboutModal = props => {
           </div>           
         </div>
         <div className="modalFooter">
-          Made with ☕ and 🦨 @ Juno College 2022
+          <Footer />
         </div>
       </div>
     </div>
