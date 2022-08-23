@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import shuffle from '../utilities/shuffle.js';
 import firebase from '../firebase.js';
 import { getDatabase, ref, push } from 'firebase/database';
+import ErrorModal from './ErrorModal.js';
 
 function Search() {
-  // const [letter, setLetter] = useState('');
   const [currentIndex, setCurrentIndex] = useState('');
   const [wordInput, setWordInput] = useState(''); // state to store word entered in input field
   const [selectedWord, setSelectedWord] = useState([]); // a state to store the word, split into a character array
   const [randomArray, setRandomArray] = useState([]);
   const [backronym, setBackronym] = useState([]); // a state that stores the user's chosen words to make up the backronym
   const [checkedWord, setCheckedWord] = useState('');
-  // const [isChecked, setIsChecked] = useState(false);
+  const [error, setError] = useState('');
 
   //useState to disable btn (once submitted to firebase)
   const [hideBtn, setHideBtn] = useState(false);
@@ -22,10 +22,10 @@ function Search() {
     return array.slice(0, 10);
   }
 
-  // check if string only contains letters, regex from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
+  // check if string only contains letters and is less than 10 chars, regex from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
-  function onlyLetters(str) {
-    return /^[a-zA-Z]+$/.test(str);
+  function isValidInput(str) {
+    return /^[a-zA-Z]+$/.test(str) && str.length < 10;
   }
 
   // Break down string into array of chars
@@ -41,7 +41,7 @@ function Search() {
   function handleSearchSubmit(e) {
     e.preventDefault();
 
-    if (onlyLetters(wordInput)) {
+    if (isValidInput(wordInput)) {
       const clone = wordInput;
       setSelectedWord(splitIntoChars(clone));
 
@@ -50,7 +50,7 @@ function Search() {
       setCurrentIndex(0);
       setWordInput('');
     } else {
-      alert('Please do not leave a blank input and limit your input to letters!');
+      setError('Please do not leave a blank input and limit it to 10 characters!');
     }
   }
 
@@ -154,6 +154,9 @@ function Search() {
 
     //after the push to firebase, disable btn to prevent multiple submissions
     setHideBtn(true);
+    // reset
+    setBackronym([]);
+    setSelectedWord([]);
   }
 
   return (
@@ -162,6 +165,8 @@ function Search() {
         <h1>
           Backronym <span>Generator</span>
         </h1>
+
+        {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
         <div>
           <form>
