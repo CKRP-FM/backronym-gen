@@ -22,7 +22,7 @@ function Search() {
     return array.slice(0, 10);
   }
 
-  // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
+  // check if string only contains letters, regex from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function onlyLetters(str) {
     return /^[a-zA-Z]+$/.test(str);
@@ -46,6 +46,7 @@ function Search() {
       setSelectedWord(splitIntoChars(clone));
 
       setBackronym([]);
+      setHideBtn(false);
       setCurrentIndex(0);
       setWordInput('');
     } else {
@@ -65,17 +66,34 @@ function Search() {
 
   function getWords() {
     if (selectedWord[currentIndex] !== undefined) {
-      axios({
-        url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
-        method: 'GET',
-        dataResponse: 'json',
-      })
-        .then((response) => {
-          setRandomArray(subArray(shuffle(response.data)));
+      if (currentIndex === 0) {
+        axios({
+          url: `https://api.datamuse.com/words?sp=${selectedWord[currentIndex]}*`,
+          method: 'GET',
+          dataResponse: 'json',
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            setRandomArray(subArray(shuffle(response.data)));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        console.log(backronym[currentIndex - 1]);
+        axios({
+          url: `https://api.datamuse.com/words?rel_bga=${backronym[currentIndex - 1]}&sp=${
+            selectedWord[currentIndex]
+          }*`,
+          method: 'GET',
+          dataResponse: 'json',
+        })
+          .then((response) => {
+            setRandomArray(subArray(shuffle(response.data)));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -141,13 +159,15 @@ function Search() {
       </form>
 
       <div>
-        {selectedWord !== undefined || selectedWord.length !== 0 ?
-        selectedWord.map((letter, index) => {
-          return(
-            <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
-          )
-        })
-        : null}
+        {selectedWord !== undefined || selectedWord.length !== 0
+          ? selectedWord.map((letter, index) => {
+              return (
+                <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
+                  {letter}
+                </span>
+              );
+            })
+          : null}
         <ul>
           {randomArray?.map((word) => {
             return (
