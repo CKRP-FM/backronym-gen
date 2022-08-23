@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "./Footer";
 
+
 const AboutModal = props => {
   if (!props.show) {
     return null
@@ -13,7 +14,7 @@ const AboutModal = props => {
         <div className="aboutHeader">
           <h2 className="modalTitle">Backronym Generator</h2>
           {/* binds the close event */}
-          <button onClick={props.onClose} className='closeButton'>🍕</button>
+          <button onClick={props.onClose} className='closeButton'><span className="sr-only">Close</span>🍕</button>
         </div>
         <div className="aboutMain">
           <p>
@@ -23,6 +24,27 @@ const AboutModal = props => {
             <h2 className="howToTitle">How To Use Backronyms</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus assumenda debitis distinctio architecto fuga magnam inventore placeat, nostrum repudiandae non doloribus aut magni rerum pariatur officia laborum quaerat tenetur laboriosam.</p>              
           </div>           
+        </div>
+        <div className="teamGit">
+          <h3 className="teamHeader">Crafted by...</h3>
+          <div className="teamContainer">
+            <div className="team team1">
+              <h3 className="initials">CC</h3>
+              <i class="fa-brands fa-linkedin fa-xl"></i>
+            </div>
+            <div className="team team2">
+              <h3 className="initials">RS</h3>
+              <i class="fa-brands fa-linkedin fa-xl"></i>
+            </div>
+            <div className="team team3">
+              <h3 className="initials">KP</h3>
+              <i class="fa-brands fa-linkedin fa-xl"></i>
+            </div>
+            <div className="team team4">
+              <h3 className="initials">PY</h3>
+              <i class="fa-brands fa-linkedin fa-xl"></i>
+            </div>
+          </div>
         </div>
         <div className="modalFooter">
           <Footer />
