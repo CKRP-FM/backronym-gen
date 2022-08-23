@@ -359,6 +359,12 @@ img {
 }
 .aboutHowTo p {
   margin: 0;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  border: none;
+  background: none;
 }
 
 .resultsDisplay {

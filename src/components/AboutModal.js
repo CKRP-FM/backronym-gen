@@ -12,7 +12,7 @@ const AboutModal = props => {
         <div className="aboutHeader">
           <h2 className="modalTitle">Backronym Generator</h2>
           {/* binds the close event */}
-          <button onClick={props.onClose} className='close button'>X</button>
+          <button onClick={props.onClose} className='closeButton'>🍕</button>
         </div>
         <div className="aboutMain">
           <p>
@@ -20,12 +20,11 @@ const AboutModal = props => {
           </p> 
           <div className="aboutHowTo">
             <h2 className="howToTitle">How To Use Backronyms</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus assumenda debitis distinctio architecto fuga magnam inventore placeat, nostrum repudiandae non doloribus aut magni rerum pariatur officia laborum quaerat tenetur laboriosam.</p>   
-            
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus assumenda debitis distinctio architecto fuga magnam inventore placeat, nostrum repudiandae non doloribus aut magni rerum pariatur officia laborum quaerat tenetur laboriosam.</p>              
           </div>           
         </div>
         <div className="modalFooter">
-          Made with ☕ and 💘 @ Juno College 2022
+          Made with ☕ and 🦨 @ Juno College 2022
         </div>
       </div>
     </div>
