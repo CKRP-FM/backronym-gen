@@ -164,44 +164,6 @@ function Search() {
         </h1>
 
         <div>
-          {selectedWord !== undefined || selectedWord.length !== 0
-            ? selectedWord.map((letter, index) => {
-                return (
-                  <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
-                    {letter}
-                  </span>
-                );
-              })
-            : null}
-          <ul>
-            {randomArray?.map((word) => {
-              return (
-                <li key={word.word + word.score}>
-                  <input
-                    value={word.word}
-                    id={word.word}
-                    type="checkbox"
-                    // checked={isChecked}
-                    className="wordListItem"
-                    onChange={(e) => handleCheckbox(e)}
-                    disabled={checkedWord !== '' && checkedWord !== word.word}
-                  />
-                  <label htmlFor={word.word}>{word.word}</label>
-                </li>
-              );
-            })}
-          </ul>
-          {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
-            <button
-              onClick={(e) => {
-                handleRefresh(e);
-              }}
-            >
-              Refresh
-            </button>
-          ) : (
-            <button disabled={true}>Refresh</button>
-          )}
           <form>
             <label htmlFor="search" className="sr-only">
               Search
