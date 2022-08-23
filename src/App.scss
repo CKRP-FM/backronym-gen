@@ -1,2 +1,9 @@
-@use './partials/setup';
-@use './partials/search';
+@import './partials/setup';
+@import './partials/imports';
+@import './partials/variables';
+@import './partials/typography';
+@import './partials/generalStyles';
+@import './partials/search';
+
+@import './partials/gallery';
+

@@ -36,25 +36,27 @@ function Gallery() {
 	}, []);
 
 	return (
-		<ul className="resultsDisplay">
-			{
-				// map over the gallery state (from firebase). Results is each submission
-				gallery.map((result) => {
-					return (
-						<li key={result.key}>
-							<h3>{result.userInput}</h3>
+		<div className="wrapper">
+			<ul className="resultsDisplay">
+				{
+					// map over the gallery state (from firebase). Results is each submission
+					gallery.map((result) => {
+						return (
+							<li key={result.key}>
+								<h3>{result.userInput}</h3>
 
-							{/* mapping over each user's submission results array item (each word in array is the initial) */}
-							{result.results.map((initialWord, index) => {
-								return (
-									<p key={`${result.key}-${index}`}>{initialWord}</p>
-								)
-							})}
-						</li>
-					)
-				})
-			}
-		</ul>        
+								{/* mapping over each user's submission results array item (each word in array is the initial) */}
+								{result.results.map((initialWord, index) => {
+									return (
+										<p key={`${result.key}-${index}`}>{initialWord}</p>
+									)
+								})}
+							</li>
+						)
+					})
+				}
+			</ul>        
+		</div>
 	)
 }
 
