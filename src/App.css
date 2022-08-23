@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&family=Montserrat:wght@400;700&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -249,10 +250,100 @@ template {
   overflow: hidden;
 }
 
+html {
+  font-size: 125%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "DynaPuff", cursive;
+}
+
+h2 {
+  font-size: 3.6rem;
+  color: #ff5e5b;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  background-color: #323031;
+  color: #fff;
+}
+
+ul,
+li,
+a,
+input {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrapper {
+  max-width: 1250px;
+  width: 90%;
+  margin: 0 auto;
+}
+
 .defaultColor {
   color: black;
 }
 
 .highlightColor {
   color: red;
+}
+
+.resultsDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px 0;
+}
+.resultsDisplay h3 {
+  margin-bottom: 10px;
+  color: #ff5e5b;
+  text-transform: uppercase;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+}
+.resultsDisplay li {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px -3px rgba(255, 255, 255, 0.3);
+  background-color: #fff;
+}
+.resultsDisplay p {
+  margin: 0 0 5px;
+  color: #323031;
+}
+.resultsDisplay p::first-letter {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.galleryDesc {
+  text-align: center;
+  margin: 0;
 }/*# sourceMappingURL=App.css.map */
