@@ -1,7 +1,7 @@
+@import './partials/setup';
+@import './partials/imports';
+@import './partials/variables';
+@import './partials/typography';
+@import './partials/generalStyles';
 
-
-
-@use './partials/setup';
-@use './partials/variables';
-@use './partials/baseStyles';
-@use './partials/typography';
+@import './partials/gallery';

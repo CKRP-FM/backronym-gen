@@ -1,6 +1,14 @@
-//font-family: 'DynaPuff', cursive; //500
-//font-family: 'Montserrat', sans-serif; //400, 700
+html {
+  font-size: 125%;
+}
 
-h1, h2, h3 {
-    margin: 0;
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: $headingFont;
+}
+
+p {
+  font-family: $bodyFont;
 }
