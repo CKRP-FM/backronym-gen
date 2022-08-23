@@ -247,4 +247,12 @@ template {
           clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.defaultColor {
+  color: black;
+}
+
+.highlightColor {
+  color: red;
 }/*# sourceMappingURL=App.css.map */
