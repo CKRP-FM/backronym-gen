@@ -20,6 +20,27 @@ img {
   display: block;
 }
 
+label,
+input,
+button {
+  font-family: $bodyFont;
+}
+
+button,
+input {
+  border: none;
+}
+
+input {
+  accent-color: $ice;
+}
+
+button {
+  background-color: $ice;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .wrapper {
   max-width: 1250px;
   width: 90%;

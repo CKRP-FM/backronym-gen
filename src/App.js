@@ -9,9 +9,8 @@ function App() {
   return (
     <UserAuthContextProvider>
       <div className="App">
-        <Login />
-        <SignUp />
-        <h1>Backronym Generator</h1>
+        {/* <Login />
+        <SignUp /> */}
 
         <Search />
 
