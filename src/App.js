@@ -1,17 +1,19 @@
 import './App.scss';
 import Gallery from './components/Gallery';
 import Search from './components/Search';
-
+import { UserAuthContextProvider } from './context/UserAuthContext';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Backronym Generator</h1>
+    <UserAuthContextProvider>
+      <div className="App">
+        <h1>Backronym Generator</h1>
 
-      <Search />
+        <Search />
 
-      <Gallery />
-    </div>
+        <Gallery />
+      </div>
+    </UserAuthContextProvider>
   );
 }
 
