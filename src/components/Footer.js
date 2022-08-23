@@ -1,5 +1,10 @@
 function Footer() {
-  return <div>Footer</div>;
+  return (
+    <div className="modalFooter">
+      Made with ☕ and 🦨 @ Juno College 2022
+    </div>
+  )
+
 }
 
 export default Footer;
