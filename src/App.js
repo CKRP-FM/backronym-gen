@@ -1,6 +1,7 @@
 import './App.scss';
 import Gallery from './components/Gallery';
 import Search from './components/Search';
+import About from './components/About';
 
 
 function App() {
