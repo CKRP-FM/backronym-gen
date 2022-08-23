@@ -2,10 +2,12 @@ import firebase from '../firebase';
 
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
+import { useUserAuth } from '../context/UserAuthContext.js';
 
 function Gallery() {
 	//useState for gallery of user's backronym
 	const [gallery, setGallery] = useState([]);
+	const {user} = useUserAuth();
 	
 	//connect to firebase when Gallery component mounts
 	useEffect(() => {
@@ -19,15 +21,18 @@ function Gallery() {
 			const newState = [];
 			const data = response.val();
 			for (let key in data) {
-				newState.push(
-					{
-						key: key,
-						// author: key.author, //for auth
-						userInput: data[key].userInput, //["k", "e", "o", "n"]
-						results: data[key].results, // ["key", "eel", "on", "new"]
-					}
-				)
+				if (data[key].uid === user.uid) {
+					newState.push(
+						{
+							key: key,
+							// author: key.author, //for auth
+							userInput: data[key].userInput, //["k", "e", "o", "n"]
+							results: data[key].results, // ["key", "eel", "on", "new"]
+						}
+					)
+				}
 			}
+
 
 			//setting the user's fb submission to our gallery state
 			setGallery(newState);

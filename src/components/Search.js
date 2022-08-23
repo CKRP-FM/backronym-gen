@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import shuffle from '../utilities/shuffle.js';
 import firebase from '../firebase.js';
 import { getDatabase, ref, push } from 'firebase/database';
+import { useUserAuth } from '../context/UserAuthContext.js';
 
 function Search() {
   // const [letter, setLetter] = useState('');
@@ -21,6 +22,8 @@ function Search() {
   function subArray(array) {
     return array.slice(0, 10);
   }
+
+  const {user} = useUserAuth();
 
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
@@ -114,8 +117,9 @@ function Search() {
 
     //temp object to inject into firebase
     const tempObj = {
+      uid: user.uid,
       userInput: selectedWord,
-      results: backronym,
+      results: backronym
     };
 
     //push to firebase
