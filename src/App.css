@@ -363,6 +363,7 @@ header {
 .resultsDisplay p {
   margin: 0 0 5px;
   color: #323031;
+  text-transform: capitalize;
 }
 
 .galleryDesc {
