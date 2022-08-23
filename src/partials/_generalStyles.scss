@@ -1,6 +1,7 @@
 //general style stripping and such
 html {
   background-color: $black;
+  color: $white;
 }
 
 ul,
@@ -17,6 +18,27 @@ input {
 img {
   max-width: 100%;
   display: block;
+}
+
+label,
+input,
+button {
+  font-family: $bodyFont;
+}
+
+button,
+input {
+  border: none;
+}
+
+input {
+  accent-color: $ice;
+}
+
+button {
+  background-color: $ice;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .wrapper {

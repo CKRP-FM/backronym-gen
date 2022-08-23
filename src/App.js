@@ -1,27 +1,32 @@
 import './App.scss';
 import { useState } from 'react'
 import Gallery from './components/Gallery';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 import Search from './components/Search';
 import AboutModal from './components/AboutModal';
 import Footer from './components/Footer';
-
+import { UserAuthContextProvider } from './context/UserAuthContext';
 
 function App() {
   const [show, setShow] = useState(false)
 
   return (
-    <div className="App">
-      <h1>Backronym Generator</h1>
+    <UserAuthContextProvider>
+      <div className="App">
+        {/* <Login />
+        <SignUp /> */}
       <button onClick={ () => setShow(true) }>❓</button>
       {/* whenever this method is called it will close the modal */}
       <AboutModal onClose={() => setShow(false)} show={show} />
 
-      <Search />
+        <Search />
 
-      <Gallery />
+        <Gallery />
       
       <Footer />
-    </div>
+      </div>
+    </UserAuthContextProvider>
   );
 }
 
