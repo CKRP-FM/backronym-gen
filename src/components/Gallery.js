@@ -37,6 +37,10 @@ function Gallery() {
 
 	return (
 		<div className="wrapper">
+			<h2>Backronym Gallery</h2>
+			<p className='galleryDesc'>WOW. Wall of Wisdom. Check out these cool backronyms!</p>
+
+
 			<ul className="resultsDisplay">
 				{
 					// map over the gallery state (from firebase). Results is each submission
@@ -45,6 +49,9 @@ function Gallery() {
 							<li key={result.key}>
 								<h3>{result.userInput}</h3>
 
+								<div className="userBackronym">
+									
+								</div>
 								{/* mapping over each user's submission results array item (each word in array is the initial) */}
 								{result.results.map((initialWord, index) => {
 									return (

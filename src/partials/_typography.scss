@@ -2,6 +2,9 @@ html {
   font-size: 125%;
 }
 
+//font-family: 'DynaPuff', cursive; //500
+//font-family: 'Montserrat', sans-serif; //400, 700
+
 h1,
 h2,
 h3 {
@@ -9,6 +12,17 @@ h3 {
   font-family: $headingFont;
 }
 
-p {
+h2 {
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  color: $red;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+}
+
+p,
+span {
   font-family: $bodyFont;
 }
