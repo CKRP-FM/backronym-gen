@@ -119,7 +119,8 @@ function Search() {
     const tempObj = {
       uid: user.uid,
       userInput: selectedWord,
-      results: backronym
+      results: backronym,
+      timestamp: Date.now()
     };
 
     //push to firebase

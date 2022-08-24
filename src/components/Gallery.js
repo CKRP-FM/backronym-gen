@@ -7,6 +7,7 @@ import { useUserAuth } from '../context/UserAuthContext.js';
 function Gallery() {
 	//useState for gallery of user's backronym
 	const [gallery, setGallery] = useState([]);
+	const [backronymFilter, setBackronymFilter] = useState('recent');
 	const {user} = useUserAuth();
 	
 	//connect to firebase when Gallery component mounts
@@ -21,30 +22,50 @@ function Gallery() {
 			const newState = [];
 			const data = response.val();
 			for (let key in data) {
-				if (data[key].uid === user.uid) {
-					newState.push(
-						{
-							key: key,
-							// author: key.author, //for auth
-							userInput: data[key].userInput, //["k", "e", "o", "n"]
-							results: data[key].results, // ["key", "eel", "on", "new"]
-						}
-					)
-				}
+				newState.push(
+					{
+						key: key,
+						// author: key.author, //for auth
+						timestamp: data[key].timestamp,
+						uid: data[key].uid,
+						userInput: data[key].userInput, //["k", "e", "o", "n"]
+						results: data[key].results, // ["key", "eel", "on", "new"]
+					}
+				)
 			}
 
-
+			if (backronymFilter === 'recent') {
+				newState.sort((a, b) => b.timestamp - a.timestamp);
+			} else if (backronymFilter === 'oldest') {
+				newState.sort((a, b) => a.timestamp - b.timestamp);
+			} else if (backronymFilter === 'alphabetical') {
+				newState.sort((a, b) => {
+					return a.userInput.join('').localeCompare(b.userInput.join(''), {ignorePunctuation: true})
+				})
+			}
 			//setting the user's fb submission to our gallery state
 			setGallery(newState);
 			console.log(gallery)
 		})
-	}, []);
+	}, [backronymFilter]);
+
+	const setFilter = (e) => {
+		setBackronymFilter(e.target.value);
+	}
 
 	return (
 		<div className="wrapper">
 			<h2>Backronym Gallery</h2>
 			<p className='galleryDesc'>WOW. Wall of Wisdom. Check out these cool backronyms!</p>
 
+			<label htmlFor='filter'></label>
+			<select id="filter"
+			onChange={setFilter}
+			value={backronymFilter}>
+				<option value="recent">Most Recent</option>
+				<option value="alphabetical">Alphabetical</option>
+				<option value="oldest">Oldest to Newest</option>
+			</select>
 
 			<ul className="resultsDisplay">
 				{
