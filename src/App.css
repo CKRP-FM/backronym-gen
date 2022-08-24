@@ -309,7 +309,6 @@ input {
 
 input {
   accent-color: #c0f5fa;
-  color: #323031;
 }
 
 button {
@@ -370,12 +369,11 @@ button {
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 0;
+  color: #323031;
 }
 
-.modalFooter {
-  background-color: #c0f5fa;
-  text-align: center;
-  padding: 10px;
+.howToTitle {
+  text-align: left;
 }
 
 .aboutHowTo {
@@ -393,6 +391,7 @@ button {
 .aboutHowTo p {
   margin: 0;
   margin-bottom: 20px;
+  color: #323031;
 }
 
 .closeButton {
@@ -400,16 +399,55 @@ button {
   background: none;
 }
 
+.teamHeader {
+  color: #ff5e5b;
+  text-align: center;
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team h3 {
+  color: #ff5e5b;
+  font-family: "DynaPuff", cursive;
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+  text-transform: uppercase;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+}
+.team i {
+  color: #ff5e5b;
+  margin: 0.8rem;
+}
+
+.modalFooter {
+  background-color: #c0f5fa;
+  text-align: center;
+  padding: 10px;
+}
+
 header {
   height: 100vh;
 }
 
 .defaultColor {
-  color: #fff;
+  color: black;
 }
 
 .highlightColor {
-  color: #ff5e5b;
+  color: red;
 }
 
 .resultsDisplay {

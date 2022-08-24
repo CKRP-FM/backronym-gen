@@ -1,3 +1,169 @@
 header {
-  height: 100vh;
+  padding: 50px 0;
 }
+
+h1 {
+  color: $red;
+  text-align: right;
+  margin-bottom: 30px;
+
+  span {
+    font-weight: 400;
+    text-transform: lowercase;
+    display: block;
+    color: $white;
+  }
+}
+
+.mainSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 50px;
+  background-image: url(../assets/blob.svg);
+  background-repeat: no-repeat;
+  background-position: right; //25% 70%
+  background-size: 50%;
+  padding: 20px 0;
+
+  input, 
+  button {
+    border: 2px solid $black;
+  }
+
+  input {
+    margin-right: 10px;
+    box-shadow: 5px 5px 0px rgba($ice, 1);
+  }
+
+  button {
+    box-shadow: 5px 5px 0px rgba($white, 1);
+  }
+}
+
+.headerImgContainer {
+  animation: float 5s ease-in-out alternate infinite;
+}
+
+.backronymSelect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  span {
+    font-size: clamp(1.8rem, 1.68rem + 0.6vw, 2.4rem);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  ul {
+    margin: 20px 0;
+  }
+
+  li {
+    display: flex;
+    margin-bottom: 5px;
+  }
+
+  input[type="checkbox"] {
+    transform: translateY(-0.075rem);
+    appearance: none;
+    background-color: $white;
+    margin-right: 5px;
+    color: $black;
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 2px solid $red;
+    border-radius: 0.15rem;
+    display: grid;
+    place-content: center;
+    transition: border 120ms ease-in-out;
+
+    &::before {
+      content: '';
+      width: 0.5rem;
+      height: 0.5rem;
+      transform: scale(0);
+      box-shadow: inset 1rem 1rem $red;
+      transition: 120ms transform ease-in-out;
+    }
+
+    &:checked::before {
+      transform: scale(1.25);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      border: 2px solid $ice;
+      cursor: not-allowed;
+    }
+  }
+
+  label {
+    text-transform: capitalize;
+  }
+}
+
+.userBackronym {
+  margin: 0;
+}
+
+.defaultColor {
+  color: $white;
+}
+
+.highlightColor {
+  color: $red;
+  border-bottom: 3px solid $red;
+}
+
+.refreshBtn {
+  padding: 0;
+  background-color: transparent;
+  color: $ice;
+  font-weight: 400;
+  text-transform: none;
+  border-radius: 0;
+  border-bottom: 2px solid $ice;
+  margin-bottom: 10px;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: rgba($gray, 0.5);
+    border-bottom: 2px solid rgba($gray, 0.5);
+    cursor: not-allowed;
+  }
+}
+
+.generatedBackronym {
+  margin: 20px 0 40px;
+  text-align: center;
+  color: $white;
+  background-color: $red;
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: 2px solid $black;
+  box-shadow: 10px 10px 0px rgba($ice, 1);
+  
+  span {
+    display: block;
+  }
+}
+
+
+

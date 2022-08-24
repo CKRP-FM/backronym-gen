@@ -5,16 +5,24 @@ import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
 
 function Gallery() {
-	//useState for gallery of user's backronym
-	const [gallery, setGallery] = useState([]);
+  //useState for gallery of user's backronym
+  const [gallery, setGallery] = useState([]);
 	const [backronymFilter, setBackronymFilter] = useState('recent');
 	const {user} = useUserAuth();
-	
-	//connect to firebase when Gallery component mounts
-	useEffect(() => {
-		// database details
-		const database = getDatabase(firebase);
-		const dbRef = ref(database);
+
+  // delete entry
+  function handleDelete(e, resultKey) {
+    e.preventDefault();
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, `/${resultKey}`);
+    remove(dbRef);
+  }
+
+  //connect to firebase when Gallery component mounts
+  useEffect(() => {
+    // database details
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
 
 		//for every change in the firebase db, push the new value into our gallery state
 		onValue(dbRef, (response) => {
@@ -73,21 +81,19 @@ function Gallery() {
 					gallery.map((result) => {
 						return (
 							<li key={result.key}>
-								{
-									user === null ? "" :
-										user.email === result.email ?
-										<button>X</button> :
-											user.email === null && result.email === 'anonymous' ?
-												<button>X</button> : ""
-								}
-								<h3>{result.userInput}</h3>
-								{/* mapping over each user's submission results array item (each word in array is the initial) */}
-								{result.results.map((initialWord, index) => {
-									return (
-										<p key={`${result.key}-${index}`}>{initialWord}</p>
-									)
-								})}
-							</li>
+							{
+								user === null ? "" :
+									user.email === result.email ?
+									<button onClick={(e) => handleDelete(e, result.key)}>X</button> :
+										user.email === null && result.email === 'anonymous' ?
+											<button onClick={(e) => handleDelete(e, result.key)}>X</button> : ""
+							}
+							<h3>{result.userInput}</h3>
+							{/* mapping over each user's submission results array item (each word in array is the initial) */}
+							{result.results.map((initialWord, index) => {
+							  return <p key={`${result.key}-${index}`}>{initialWord}</p>;
+							})}
+						  </li>
 						)
 					})
 				}
