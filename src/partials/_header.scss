@@ -48,11 +48,14 @@ form {
   align-items: center;
 
   span {
-    font-size: 30px; //clamp
+    font-size: 48px; //clamp
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 20px;
     display: inline-block;
+  }
+
+  ul {
+    margin: 20px 0;
   }
 
   li {
@@ -72,22 +75,28 @@ form {
     border-radius: 0.15rem;
     display: grid;
     place-content: center;
+    transition: border 120ms ease-in-out;
 
     &::before {
       content: '';
       width: 0.5rem;
       height: 0.5rem;
       transform: scale(0);
-      transition: 120ms transform ease-in-out;
       box-shadow: inset 1rem 1rem $red;
+      transition: 120ms transform ease-in-out;
     }
 
-    &::checked::before {
-      transform: scale(1);
+    &:checked::before {
+      transform: scale(1.25);
     }
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:disabled {
+      border: 2px solid $ice;
+      cursor: not-allowed;
     }
   }
 
@@ -108,3 +117,23 @@ form {
   color: $red;
   border-bottom: 3px solid $red;
 }
+
+.refreshBtn {
+  padding: 0;
+  background-color: transparent;
+  color: $ice;
+  font-weight: 400;
+  text-transform: none;
+  border-radius: 0;
+  border-bottom: 2px solid $ice;
+  margin-bottom: 10px;
+
+  &:disabled {
+    color: rgba($gray, 0.5);
+    border-bottom: 2px solid rgba($gray, 0.5);
+    cursor: not-allowed;
+  }
+}
+
+
+

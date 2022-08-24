@@ -176,7 +176,6 @@ function Search() {
               />
               <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
             </fieldset>
-            
           </form>
 
           <div className="headerImgContainer">
@@ -213,31 +212,33 @@ function Search() {
               );
             })}
           </ul>
+
           {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
             <button
+              className='refreshBtn'
               onClick={(e) => {
                 handleRefresh(e);
               }}
             >
-              Refresh
+              Refresh Words
             </button>
           ) : (
-            <button disabled={true}>Refresh</button>
+            <button className='refreshBtn' disabled={true}>Refresh Words</button>
           )}
 
-            {checkedWord !== '' ? (
-              <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
-            ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+          {checkedWord !== '' ? (
+            <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+          ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
             null}
+          
+          <p>Your backronym is: {backronym.join(' ')}</p>
 
-            <p>Your backronym is: {backronym.join(' ')}</p>
-
-            {/* save to firebase btn */}
-            {currentIndex === selectedWord.length ? (
-              <button onClick={handleFirebase} disabled={hideBtn}>
-                Save Backronym!
-              </button>
-            ) : null}
+          {/* save to firebase btn */}
+          {currentIndex === selectedWord.length ? (
+            <button onClick={handleFirebase} disabled={hideBtn}>
+              Save Backronym!
+            </button>
+          ) : null}
           </div>
         </div>
     </header>
