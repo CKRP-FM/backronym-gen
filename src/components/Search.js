@@ -161,20 +161,19 @@ function Search() {
 
   return (
     <header>
-      <div className='wrapper'>
-
-<<<<<<< HEAD
-        <div className="mainSearch">
-=======
+      <div className="wrapper">
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
-        <div>
->>>>>>> main
+        <div className="mainSearch">
           <form>
-            <h1>Backronym <span>Generator</span></h1>
+            <h1>
+              Backronym <span>Generator</span>
+            </h1>
 
             <fieldset>
-              <label htmlFor="search" className='sr-only'>Search</label>
+              <label htmlFor="search" className="sr-only">
+                Search
+              </label>
               <input
                 id="search"
                 className="searchInput"
@@ -188,21 +187,26 @@ function Search() {
           </form>
 
           <div className="headerImgContainer">
-            <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
+            <img
+              src={require('../assets/pen-bulb.png')}
+              alt="3D render of a pen with a light bulb attached to the end"
+            />
           </div>
         </div>
 
-        <div className='backronymSelect'>
+        <div className="backronymSelect">
           <p className="userBackronym">
-            {selectedWord !== undefined || selectedWord.length !== 0 ?
-              selectedWord.map((letter, index) => {
-                return (
-                  <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
-                )
-              })
+            {selectedWord !== undefined || selectedWord.length !== 0
+              ? selectedWord.map((letter, index) => {
+                  return (
+                    <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
+                      {letter}
+                    </span>
+                  );
+                })
               : null}
           </p>
-          
+
           <ul>
             {randomArray?.map((word) => {
               return (
@@ -224,7 +228,7 @@ function Search() {
 
           {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
             <button
-              className='refreshBtn'
+              className="refreshBtn"
               onClick={(e) => {
                 handleRefresh(e);
               }}
@@ -232,15 +236,19 @@ function Search() {
               Refresh Words
             </button>
           ) : (
-            <button className='refreshBtn' disabled={true}>Refresh Words</button>
+            <button className="refreshBtn" disabled={true}>
+              Refresh Words
+            </button>
           )}
 
           {checkedWord !== '' ? (
             <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
           ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
-            null}
-          
-          <p className='generatedBackronym'>Your backronym is: <span>{backronym.join(' ')}</span></p>
+          null}
+
+          <p className="generatedBackronym">
+            Your backronym is: <span>{backronym.join(' ')}</span>
+          </p>
 
           {/* save to firebase btn */}
           {currentIndex === selectedWord.length ? (
@@ -248,8 +256,8 @@ function Search() {
               Save Backronym!
             </button>
           ) : null}
-          </div>
         </div>
+      </div>
     </header>
   );
 }
