@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import shuffle from '../utilities/shuffle.js';
 import firebase from '../firebase.js';
 import { getDatabase, ref, push } from 'firebase/database';
+import { useUserAuth } from '../context/UserAuthContext.js';
 import ErrorModal from './ErrorModal.js';
 
 function Search() {
@@ -22,7 +23,9 @@ function Search() {
     return array.slice(0, 10);
   }
 
-  // check if string only contains letters and is less than 10 chars, regex from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
+  const {user} = useUserAuth();
+
+  // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function isValidInput(str) {
     return /^[a-zA-Z]+$/.test(str) && str.length < 10;
@@ -145,8 +148,10 @@ function Search() {
 
     //temp object to inject into firebase
     const tempObj = {
+      email: user.email || 'anonymous',
       userInput: selectedWord,
       results: backronym,
+      timestamp: Date.now()
     };
 
     //push to firebase

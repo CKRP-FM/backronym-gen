@@ -14,8 +14,8 @@ function App() {
   return (
     <UserAuthContextProvider>
       <div className="App">
-        {/* <Login />
-        <SignUp /> */}
+        <Login />
+        <SignUp />
       <button onClick={ () => setShow(true) }>❓</button>
       {/* whenever this method is called it will close the modal */}
       <AboutModal onClose={() => setShow(false)} show={show} />
