@@ -5,7 +5,6 @@ import ErrorModal from './ErrorModal';
 function Login() {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
   const { logIn, logInAnon, user, logOut } = useUserAuth();
-  console.log(user);
 
   // states to manage user input
   const [email, setEmail] = useState('');

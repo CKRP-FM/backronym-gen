@@ -1,6 +1,6 @@
 import firebase from '../firebase';
 
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
 
@@ -27,7 +27,7 @@ function Gallery() {
 						key: key,
 						// author: key.author, //for auth
 						timestamp: data[key].timestamp,
-						uid: data[key].uid,
+						email: data[key].email,
 						userInput: data[key].userInput, //["k", "e", "o", "n"]
 						results: data[key].results, // ["key", "eel", "on", "new"]
 					}
@@ -73,11 +73,14 @@ function Gallery() {
 					gallery.map((result) => {
 						return (
 							<li key={result.key}>
+								{
+									user === null ? "" :
+										user.email === result.email ?
+										<button>X</button> :
+											user.email === null && result.email === 'anonymous' ?
+												<button>X</button> : ""
+								}
 								<h3>{result.userInput}</h3>
-
-								<div className="userBackronym">
-									
-								</div>
 								{/* mapping over each user's submission results array item (each word in array is the initial) */}
 								{result.results.map((initialWord, index) => {
 									return (

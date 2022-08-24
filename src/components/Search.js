@@ -117,7 +117,7 @@ function Search() {
 
     //temp object to inject into firebase
     const tempObj = {
-      uid: user.uid,
+      email: user.email || 'anonymous',
       userInput: selectedWord,
       results: backronym,
       timestamp: Date.now()
