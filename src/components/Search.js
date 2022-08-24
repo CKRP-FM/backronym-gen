@@ -231,7 +231,7 @@ function Search() {
           ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
             null}
           
-          <p>Your backronym is: {backronym.join(' ')}</p>
+          <p className='generatedBackronym'>Your backronym is: <span>{backronym.join(' ')}</span></p>
 
           {/* save to firebase btn */}
           {currentIndex === selectedWord.length ? (

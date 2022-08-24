@@ -135,5 +135,20 @@ form {
   }
 }
 
+.generatedBackronym {
+  margin: 20px 0 40px;
+  text-align: center;
+  color: $white;
+  background-color: $red;
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: 2px solid $black;
+  box-shadow: 10px 10px 0px rgba($ice, 1);
+  
+  span {
+    display: block;
+  }
+}
+
 
 
