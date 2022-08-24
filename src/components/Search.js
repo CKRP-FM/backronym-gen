@@ -161,92 +161,95 @@ function Search() {
 
   return (
     <header>
-      <div className="wrapper">
-        <h1>
-          Backronym <span>Generator</span>
-        </h1>
+      <div className='wrapper'>
 
+<<<<<<< HEAD
+        <div className="mainSearch">
+=======
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
         <div>
+>>>>>>> main
           <form>
-            <label htmlFor="search" className="sr-only">
-              Search
-            </label>
-            <input
-              id="search"
-              className="searchInput"
-              type="text"
-              onChange={handleInput}
-              placeholder="Enter a word"
-              value={wordInput}
-            />
-            <button onClick={(e) => handleSearchSubmit(e)}>Search Word</button>
+            <h1>Backronym <span>Generator</span></h1>
+
+            <fieldset>
+              <label htmlFor="search" className='sr-only'>Search</label>
+              <input
+                id="search"
+                className="searchInput"
+                type="text"
+                onChange={handleInput}
+                placeholder="Enter your word..."
+                value={wordInput}
+              />
+              <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+            </fieldset>
           </form>
 
           <div className="headerImgContainer">
-            <img
-              src={require('../assets/pen-bulb.png')}
-              alt="3D render of a pen with a light bulb attached to the end"
-            />
-          </div>
-
-          <div>
-            {selectedWord !== undefined || selectedWord.length !== 0
-              ? selectedWord.map((letter, index) => {
-                  return (
-                    <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>
-                      {letter}
-                    </span>
-                  );
-                })
-              : null}
-            <ul>
-              {randomArray?.map((word) => {
-                return (
-                  <li key={word.word + word.score}>
-                    <input
-                      value={word.word}
-                      id={word.word}
-                      type="checkbox"
-                      // checked={isChecked}
-                      className="wordListItem"
-                      onChange={(e) => handleCheckbox(e)}
-                      disabled={checkedWord !== '' && checkedWord !== word.word}
-                    />
-                    <label htmlFor={word.word}>{word.word}</label>
-                  </li>
-                );
-              })}
-            </ul>
-            {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
-              <button
-                onClick={(e) => {
-                  handleRefresh(e);
-                }}
-              >
-                Refresh
-              </button>
-            ) : (
-              <button disabled={true}>Refresh</button>
-            )}
-
-            {checkedWord !== '' ? (
-              <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
-            ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
-            null}
-
-            <p>Your backronym is: {backronym.join(' ')}</p>
-
-            {/* save to firebase btn */}
-            {currentIndex === selectedWord.length ? (
-              <button onClick={handleFirebase} disabled={hideBtn}>
-                Save Backronym!
-              </button>
-            ) : null}
+            <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
           </div>
         </div>
-      </div>
+
+        <div className='backronymSelect'>
+          <p className="userBackronym">
+            {selectedWord !== undefined || selectedWord.length !== 0 ?
+              selectedWord.map((letter, index) => {
+                return (
+                  <span key={index} className={index === currentIndex ? 'highlightColor' : 'defaultColor'}>{letter}</span>
+                )
+              })
+              : null}
+          </p>
+          
+          <ul>
+            {randomArray?.map((word) => {
+              return (
+                <li key={word.word + word.score}>
+                  <input
+                    value={word.word}
+                    id={word.word}
+                    type="checkbox"
+                    // checked={isChecked}
+                    className="wordListItem"
+                    onChange={(e) => handleCheckbox(e)}
+                    disabled={checkedWord !== '' && checkedWord !== word.word}
+                  />
+                  <label htmlFor={word.word}>{word.word}</label>
+                </li>
+              );
+            })}
+          </ul>
+
+          {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
+            <button
+              className='refreshBtn'
+              onClick={(e) => {
+                handleRefresh(e);
+              }}
+            >
+              Refresh Words
+            </button>
+          ) : (
+            <button className='refreshBtn' disabled={true}>Refresh Words</button>
+          )}
+
+          {checkedWord !== '' ? (
+            <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+          ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+            null}
+          
+          <p className='generatedBackronym'>Your backronym is: <span>{backronym.join(' ')}</span></p>
+
+          {/* save to firebase btn */}
+          {currentIndex === selectedWord.length ? (
+            <button onClick={handleFirebase} disabled={hideBtn}>
+              Save Backronym!
+            </button>
+          ) : null}
+          </div>
+        </div>
     </header>
   );
 }

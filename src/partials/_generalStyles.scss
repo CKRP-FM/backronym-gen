@@ -24,21 +24,54 @@ label,
 input,
 button {
   font-family: $bodyFont;
+  color: $black;
+}
+
+label {
+  color: $white;
+}
+
+button,
+input,
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 button,
 input {
-  border: none;
+  padding: 15px 25px;
+  border-radius: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 input {
   accent-color: $ice;
+
+  &:hover {
+    cursor: text;
+  }
 }
 
 button {
   background-color: $ice;
   font-weight: 700;
   text-transform: uppercase;
+  transition: background-color 0.4s ease-in-out;
+
+  &:hover {
+    background-color: $red;
+  }
+
+  &:disabled {
+    color: rgba($black, 0.5);
+    background-color: rgba($gray, 0.5);
+    cursor: not-allowed;
+  }
 }
 
 .wrapper {
