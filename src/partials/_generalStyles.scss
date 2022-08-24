@@ -61,6 +61,17 @@ button {
   background-color: $ice;
   font-weight: 700;
   text-transform: uppercase;
+  transition: background-color 0.4s ease-in-out;
+
+  &:hover {
+    background-color: $red;
+  }
+
+  &:disabled {
+    color: rgba($black, 0.5);
+    background-color: rgba($gray, 0.5);
+    cursor: not-allowed;
+  }
 }
 
 .wrapper {

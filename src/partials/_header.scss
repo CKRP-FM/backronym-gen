@@ -1,5 +1,5 @@
 header {
-  height: 100vh;
+  padding: 50px 0;
 }
 
 h1 {
@@ -19,6 +19,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 form {
@@ -48,7 +49,7 @@ form {
   align-items: center;
 
   span {
-    font-size: 48px; //clamp
+    font-size: clamp(1.8rem, 1.68rem + 0.6vw, 2.4rem);
     text-transform: uppercase;
     font-weight: 700;
     display: inline-block;
@@ -128,7 +129,12 @@ form {
   border-bottom: 2px solid $ice;
   margin-bottom: 10px;
 
+  &:hover {
+    background-color: transparent;
+  }
+
   &:disabled {
+    background-color: transparent;
     color: rgba($gray, 0.5);
     border-bottom: 2px solid rgba($gray, 0.5);
     cursor: not-allowed;
