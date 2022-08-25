@@ -33,7 +33,7 @@ form {
   background-size: 50%;
   padding: 20px 0;
 
-  input, 
+  input,
   button {
     border: 2px solid $black;
   }
@@ -73,7 +73,7 @@ form {
     margin-bottom: 5px;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     transform: translateY(-0.075rem);
     appearance: none;
     background-color: $white;
@@ -159,11 +159,8 @@ form {
   border-radius: 10px;
   border: 2px solid $black;
   box-shadow: 10px 10px 0px rgba($ice, 1);
-  
+
   span {
     display: block;
   }
 }
-
-
-

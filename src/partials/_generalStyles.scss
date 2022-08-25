@@ -7,7 +7,8 @@ html {
 ul,
 li,
 a,
-input {
+input,
+select {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,7 +23,8 @@ img {
 
 label,
 input,
-button {
+button,
+select {
   font-family: $bodyFont;
   color: $black;
 }
@@ -33,19 +35,31 @@ label {
 
 button,
 input,
-fieldset {
+fieldset,
+select {
   border: none;
   padding: 0;
   margin: 0;
 }
 
 button,
-input {
+input,
+select {
   padding: 15px 25px;
   border-radius: 50px;
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+a {
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s ease-in-out;
+  font-family: $bodyFont;
+  &:hover {
+    color: $red;
   }
 }
 
@@ -78,4 +92,9 @@ button {
   max-width: 1250px;
   width: 90%;
   margin: 0 auto;
+}
+
+select {
+  box-shadow: 5px 5px 0px rgba($ice, 1);
+  border: 2px solid $black;
 }

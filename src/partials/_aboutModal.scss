@@ -1,5 +1,4 @@
-.aboutModal,
-.errorModal {
+.aboutModal {
   position: fixed;
   left: 0;
   top: 0;
@@ -9,18 +8,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 60;
 }
 
-.aboutContent,
-.errorContent {
+.aboutContent {
   width: 500px;
   background-color: $white;
   border-radius: 15px;
   width: 60%;
 }
 
-.aboutHeader,
-.errorHeader {
+.aboutHeader {
   margin-left: 30px;
   margin-top: 30px;
   margin-right: 30px;

@@ -1,5 +1,10 @@
 .modalFooter {
-    background-color: $ice;
-    text-align: center;
-    padding: 10px;
+  background-color: $ice;
+  color: $black;
+  text-align: center;
+  padding: 10px;
+  font-family: $bodyFont;
+  p {
+    margin: 0;
+  }
 }
