@@ -93,3 +93,8 @@ button {
   width: 90%;
   margin: 0 auto;
 }
+
+select {
+  box-shadow: 5px 5px 0px rgba($ice, 1);
+  border: 2px solid $black;
+}
