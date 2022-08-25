@@ -8,7 +8,7 @@ function Gallery() {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
   const [backronymFilter, setBackronymFilter] = useState('recent');
-  const { user } = useUserAuth();
+  let { user } = useUserAuth();
 
   // delete entry
   function handleDelete(e, resultKey) {
