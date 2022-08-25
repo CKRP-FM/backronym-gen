@@ -15,21 +15,23 @@ function MainPage() {
 
   return (
     <div className="mainPage">
-      <NavBar />
-      <Search />
-      <div className="galleryContainer">
-        <button
-          onClick={(e) => {
-            handleShowGallery(e);
-            document.body.classList.add('modalActive');
-          }}
-        >
-          View Gallery of Saved Backronyms
-        </button>
-        <Gallery showGallery={showGallery} closeGallery={handleShowGallery} />
-      </div>
+      <Gallery showGallery={showGallery} closeGallery={handleShowGallery} />
+      <div className="mainPageContent">
+        <NavBar />
+        <Search />
+        <div className="galleryContainer">
+          <button
+            onClick={(e) => {
+              handleShowGallery(e);
+              // document.body.classList.add('modalActive');
+            }}
+          >
+            View Gallery of Saved Backronyms
+          </button>
+        </div>
 
-      <Footer />
+        {/* <Footer /> */}
+      </div>
     </div>
   );
 }

@@ -4,12 +4,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   p,
   label {
     color: $black;
   }
   label {
     font-weight: bold;
+  }
+  h2 {
+    padding-bottom: 20px;
   }
 }
 
@@ -39,7 +43,7 @@
   }
 
   li {
-    width: 30%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -94,53 +98,14 @@ html,
 body {
   min-height: 100%;
   height: 100%;
-  &.modalActive {
-    overflow: hidden;
-  }
+  // &.modalActive {
+  //   overflow: hidden;
+  // }
 }
 
-.galleryModal {
-  padding-top: 30px;
-  .closeGalleryBtn {
-    margin: 30px;
-  }
+.closeGalleryBtn {
+  margin: 30px;
 }
-
-// .gallery {
-//   position: fixed;
-//   height: 100%;
-//   width: 100%;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   overflow-y: scroll;
-//   transform: scale(0);
-//   z-index: 1;
-//   &.openAnimate {
-//     z-index: 0;
-//     transform: scale(1);
-//     .modal-background {
-//       background: $gray;
-//       .galleryModal {
-//         animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-//       }
-//     }
-//     .mainPage {
-//       z-index: 1;
-//       animation: slideUpLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-//     }
-//   }
-//   &.closeAnimate {
-//     .modal-background {
-//       .modal {
-//         animation: moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-//       }
-//     }
-//     + .content {
-//       animation: slideDownLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-//     }
-//   }
-// }
 
 .gallery {
   position: fixed;
@@ -149,114 +114,49 @@ body {
   width: 100%;
   top: 0;
   left: 0;
+  right: 0;
   transform: scale(0);
   z-index: 1;
-  overflow-y: scroll;
 
   &.openAnimate {
     z-index: 0;
     transform: scale(1);
     .galleryModalBackground {
-      background: rgba(0, 0, 0, 0.6);
       .galleryModal {
-        animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        animation: moveUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
       }
     }
-    // + .content {
-    //   z-index: 1;
-    //   animation: slideUpLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    // }
+    + .mainPageContent {
+      z-index: 1;
+      animation: slideUpLarge 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
     &.closeAnimate {
       .galleryModalBackground {
         .galleryModal {
-          animation: moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          animation: moveDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
       }
-      // + .content {
-      //   animation: slideDownLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-      // }
+      + .mainPageContent {
+        animation: slideDownLarge 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
     }
   }
 
-  .modal-background {
-    display: table-cell;
-    background: rgba(0, 0, 0, 0.8);
+  .galleryModalBackground {
     text-align: center;
-    vertical-align: middle;
-    .modal {
-      background: white;
-      padding: 50px;
+    .galleryModal {
+      background: $gray;
       display: inline-block;
       border-radius: 3px;
       font-weight: 300;
       position: relative;
-      h2 {
-        font-size: 25px;
-        line-height: 25px;
-        margin-bottom: 15px;
-      }
-      .modal-svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        border-radius: 3px;
-        rect {
-          stroke: #fff;
-          stroke-width: 2px;
-          stroke-dasharray: 778;
-          stroke-dashoffset: 778;
-        }
-      }
+      overflow-y: scroll;
+      height: 100vh;
     }
   }
 }
 
-.modal-background {
-  background: $gray;
-  text-align: center;
-}
-
-@keyframes slideUpLarge {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes slideDownLarge {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
-
-@keyframes moveUp {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes moveDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
 .mainPage {
-  // min-height: 100%;
-  // height: 100%;
   position: relative;
   z-index: 0;
 }
