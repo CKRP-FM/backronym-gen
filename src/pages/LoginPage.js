@@ -25,7 +25,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="loginPage wrapper">
+    <div className="loginPage">
       <nav className="loginPageNav">
         {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
         {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
@@ -37,7 +37,7 @@ function LoginPage() {
           <AboutModal onClose={() => setShow(false)} show={show} />
         </div>
       </nav>
-      <main>
+      <main className="wrapper">
         <div className="mainSearch loginPageMain">
           <div className="loginPageText">
             <h1>

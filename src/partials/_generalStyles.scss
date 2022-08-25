@@ -98,3 +98,12 @@ select {
   box-shadow: 5px 5px 0px rgba($ice, 1);
   border: 2px solid $black;
 }
+
+// MAIN PAGE FOOTER PLACEMENT
+
+.mainPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
