@@ -8,7 +8,11 @@ function Gallery() {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
 	const [backronymFilter, setBackronymFilter] = useState('recent');
-	const [liked, setLiked] = useState(false);
+	//a state array to track user's likes (equal to number of saved backronyms)
+	const [liked, setLiked] = useState(
+		new Array(gallery.length).fill(false)
+	);
+	
 	const {user} = useUserAuth();
 
   // delete entry
@@ -39,6 +43,19 @@ function Gallery() {
 		const database = getDatabase(firebase);
 		const childRef = ref(database, `/${resultKey}`);
 		update(childRef, updatedLikes);
+	}
+
+	function handleLikeChange(indexOfCard) {
+		//map over the liked state array and check for the index of the liked button that is checked, if it is checked, set the liked value to true
+		const updatedLikedArray = liked.map((eachLike, index) => {
+			if (index === indexOfCard) {
+				return !eachLike;
+			} else {
+				return eachLike;
+			}
+		})
+
+		setLiked(updatedLikedArray);
 	}
 
   //connect to firebase when Gallery component mounts
@@ -101,7 +118,7 @@ function Gallery() {
 			<ul className="resultsDisplay">
 				{
 					// map over the gallery state (from firebase). Results is each submission
-					gallery.map((result) => {
+					gallery.map((result, indx) => {
 						return (
 							<li key={result.key}>
 							{
@@ -113,9 +130,23 @@ function Gallery() {
 							}
 
 							{user ? 
-								(liked ? 
-									<button className='likeBtn' onClick={() => { unlike(result.key, result.likes); setLiked(!liked) }}>Unlike</button> : 
-									<button className='likeBtn' onClick={() => { handleLike(result.key, result.likes); setLiked(!liked) }}>Like</button> 
+								// (liked ? 
+								// 	<button className='likeBtn' onClick={() => { unlike(result.key, result.likes); setLiked(!liked) }}>Unlike</button> : 
+								// 	<button className='likeBtn' onClick={() => { handleLike(result.key, result.likes); setLiked(!liked) }}>Like</button> 
+								// )
+								(
+									<div>
+										<input
+											value={result.key}
+											id='likeBtn'
+											type='checkbox'
+											className='likeBtn'
+											checked={liked[indx]}
+											onChange={() => { handleLikeChange(indx) }}
+										/>
+										<label htmlFor='likeBtn'>Like</label>
+									</div>
+									
 								)
 							: null}
 

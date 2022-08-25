@@ -164,11 +164,11 @@ function Search() {
     setBackronym([]);
     setSelectedWord([]);
 
-    //let the user know that their submission is successful
+    //let the user know that their submission to fb is successful
     setError(`Your backronym has been saved!`);
     setTimeout(() => {
       setError('');
-    }, 900)
+    }, 1000)
   }
 
   return (
