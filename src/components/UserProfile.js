@@ -1,5 +1,5 @@
 import firebase from '../firebase';
-import { getDatabase, ref, get, remove } from 'firebase/database';
+import { getDatabase, ref, onValue, remove } from 'firebase/database';
 
 import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user } = useUserAuth();
-    console.log(user.email);
+    // console.log(user.email);
 
     // delete entry
     function handleDelete(e, resultKey) {
@@ -19,12 +19,12 @@ function UserProfile() {
     }
 
     useEffect(() => {
-        console.log('run once')
+        // console.log('run once')
         // database details
         const database = getDatabase(firebase);
         const dbRef = ref(database);
         
-        get(dbRef).then(response => {
+        onValue(dbRef, (response) => {
             // console.log(response.val());
             const newState = [];
             const data = response.val();
