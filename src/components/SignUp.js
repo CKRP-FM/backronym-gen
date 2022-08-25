@@ -29,6 +29,7 @@ function SignUp({ toggleSignUpModal }) {
     // try catch sign up
     try {
       await signUp(email, password);
+      toggleSignUpModal(e);
     } catch (err) {
       setError(err.message);
     }

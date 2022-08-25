@@ -4,7 +4,7 @@ import ErrorModal from './ErrorModal';
 
 function Login({ toggleLoginModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
-  const { logIn, logInAnon, user, logOut } = useUserAuth();
+  const { logIn, logInAnon, user } = useUserAuth();
 
   // states to manage user input
   const [email, setEmail] = useState('');
@@ -31,6 +31,7 @@ function Login({ toggleLoginModal }) {
     // try catch login
     try {
       await logIn(email, password);
+      toggleLoginModal(e);
     } catch (err) {
       setError(err.message);
     }
@@ -46,14 +47,7 @@ function Login({ toggleLoginModal }) {
     // try catch login as anonymous
     try {
       await logInAnon();
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleUserLogOut = async (e) => {
-    try {
-      await logOut();
+      toggleLoginModal(e);
     } catch (err) {
       setError(err.message);
     }
@@ -78,11 +72,6 @@ function Login({ toggleLoginModal }) {
             Log In
           </button>
         </form>
-        {/* ) : (
-          <button type="submit" onClick={(e) => handleUserLogOut(e)}>
-            Log Out
-          </button>
-        )} */}
 
         <div className="logInAnonContainer">
           <p>Proceed without an account?</p>

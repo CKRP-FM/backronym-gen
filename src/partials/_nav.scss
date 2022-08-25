@@ -2,6 +2,12 @@
 
 .mainNav {
   padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  p {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .navLinks {
@@ -19,6 +25,10 @@
       color: $red;
     }
   }
+}
+
+.loggedInUser {
+  font-weight: 700;
 }
 
 // login
@@ -52,7 +62,7 @@
     background-image: none;
   }
   .loginAnonBtn {
-    box-shadow: 10px 10px 0px rgba($ice, 1);
+    box-shadow: 10px 10px 0px rgba($white, 1);
     border: 2px solid $black;
   }
 }
