@@ -25,7 +25,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="loginPage">
+    <div className="loginPage wrapper">
       <nav className="loginPageNav">
         {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
         {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
