@@ -5,7 +5,7 @@ import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
 
-function NavBar() {
+function NavBar({ setUserStatus }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   // this show is for the about modal, to rename
@@ -30,10 +30,11 @@ function NavBar() {
     } catch (err) {
       setError(err.message);
     }
+    setUserStatus(false);
   };
 
   return (
-    <div className="wrapper">
+    <div className={user ? "wrapper" : "wrapper signedOutHeight"}>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <nav className="mainNav">
         <div className="navLinksContainer">
@@ -75,8 +76,8 @@ function NavBar() {
           </div>
         </div>
       </nav>
-      {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
-      {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
+      {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} setUserStatus={setUserStatus}/> : null}
+      {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} setUserStatus={setUserStatus}/> : null}
     </div>
   );
 }

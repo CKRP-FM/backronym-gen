@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 
-function SignUp({ toggleSignUpModal }) {
+function SignUp({ toggleSignUpModal, setUserStatus }) {
   // deconstructing the useUserAuth context to only get what we need (functions to sign up)
   const { signUp } = useUserAuth();
 
@@ -33,6 +33,8 @@ function SignUp({ toggleSignUpModal }) {
     } catch (err) {
       setError(err.message);
     }
+
+    setUserStatus(true);
   };
 
   return (
