@@ -168,7 +168,7 @@ function Search() {
     setError(`Your backronym has been saved!`);
     setTimeout(() => {
       setError('');
-    }, 1000)
+    }, 900)
   }
 
   return (
