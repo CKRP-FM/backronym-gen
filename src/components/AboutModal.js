@@ -6,10 +6,11 @@ import { useEffect } from 'react';
 
 
 const AboutModal = props => {
+  //statement to check if modal is opened and enable/disables main content scrolling
   useEffect(() => {
     if (props.show) {
       document.body.style.overflow = 'hidden';
-    } else if (!props.show) {
+    } else {
       document.body.style.overflow = 'unset';
     }
   }, [props.show])
