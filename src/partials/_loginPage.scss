@@ -11,3 +11,36 @@
   align-items: center;
   justify-content: center;
 }
+
+.loginPageMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.loginPageText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.signInOptions {
+  display: flex;
+  gap: 10px;
+  button {
+    box-shadow: 5px 5px 0px rgba($white, 1);
+    border: 2px solid $black;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .loginPageMain {
+    flex-direction: column-reverse;
+    .headerImgContainer img {
+      max-height: 300px;
+    }
+  }
+}
