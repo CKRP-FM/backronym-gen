@@ -105,6 +105,8 @@ body {
 
 .closeGalleryBtn {
   margin: 30px;
+  border: 2px solid $black;
+  box-shadow: 5px 5px 0px rgba($white, 1);
 }
 
 .gallery {
