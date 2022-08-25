@@ -60,10 +60,16 @@ function Gallery({ closeGallery, showGallery }) {
   };
 
   return (
-    <section className={showGallery ? 'gallery openAnimate' : 'gallery closeAnimate'}>
-      <div className="modal-background">
+    <section className={showGallery ? 'gallery openAnimate' : 'gallery'}>
+      <div className="galleryModalBackground">
         <div className="galleryModal">
-          <button className="closeGalleryBtn" onClick={(e) => closeGallery(e)}>
+          <button
+            className="closeGalleryBtn"
+            onClick={(e) => {
+              closeGallery(e);
+              document.body.classList.remove('modalActive');
+            }}
+          >
             Close Gallery
           </button>
           <h2>Backronym Gallery</h2>

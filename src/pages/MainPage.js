@@ -21,6 +21,7 @@ function MainPage() {
         <button
           onClick={(e) => {
             handleShowGallery(e);
+            document.body.classList.add('modalActive');
           }}
         >
           View Gallery of Saved Backronyms
