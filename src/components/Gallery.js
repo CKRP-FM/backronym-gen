@@ -21,11 +21,8 @@ function Gallery() {
 
 	//updating like count
 	function handleLike(resultKey, resultLikes) {
-		const addLike = resultLikes + 1;
-
-		//firebase requires updated values to be wrapped in an object
 		const updatedLikes = {
-			likes: addLike,
+			likes: resultLikes + 1,
 		}
 
 		const database = getDatabase(firebase);
@@ -35,11 +32,8 @@ function Gallery() {
 
 	//unliking
 	function unlike(resultKey, resultLikes) {
-		const unlike = resultLikes - 1;
-
-		//firebase requires updated values to be wrapped in an object
 		const updatedLikes = {
-			likes: unlike,
+			likes: resultLikes - 1,
 		}
 
 		const database = getDatabase(firebase);
