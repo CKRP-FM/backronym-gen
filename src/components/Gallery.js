@@ -1,6 +1,6 @@
 import firebase from '../firebase';
 
-import { getDatabase, ref, onValue, remove } from 'firebase/database';
+import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
 
@@ -18,27 +18,40 @@ function Gallery() {
     remove(dbRef);
   }
 
+	//updating like count
+	function handleLike(resultKey, resultLikes) {
+		const updatedLikes = {
+			likes: resultLikes + 1,
+		}
+
+		const database = getDatabase(firebase);
+		const childRef = ref(database, `/${resultKey}`);
+		update(childRef, updatedLikes);
+	}
+
   //connect to firebase when Gallery component mounts
   useEffect(() => {
     // database details
     const database = getDatabase(firebase);
     const dbRef = ref(database);
 
-    //for every change in the firebase db, push the new value into our gallery state
-    onValue(dbRef, (response) => {
-      console.log(response.val());
-      const newState = [];
-      const data = response.val();
-      for (let key in data) {
-        newState.push({
-          key: key,
-          // author: key.author, //for auth
-          timestamp: data[key].timestamp,
-          email: data[key].email,
-          userInput: data[key].userInput, //["k", "e", "o", "n"]
-          results: data[key].results, // ["key", "eel", "on", "new"]
-        });
-      }
+		//for every change in the firebase db, push the new value into our gallery state
+		onValue(dbRef, (response) => {
+			console.log(response.val());
+			const newState = [];
+			const data = response.val();
+			for (let key in data) {
+				newState.push(
+					{
+						key: key,
+						timestamp: data[key].timestamp,
+						email: data[key].email,
+						userInput: data[key].userInput, //["k", "e", "o", "n"]
+						results: data[key].results, // ["key", "eel", "on", "new"]
+						likes: data[key].likes,
+					}
+				)
+			}
 
       if (backronymFilter === 'recent') {
         newState.sort((a, b) => b.timestamp - a.timestamp);
@@ -76,7 +89,7 @@ function Gallery() {
       <ul className="resultsDisplay">
         {
           // map over the gallery state (from firebase). Results is each submission
-          gallery.map((result) => {
+          gallery.map((result, indx) => {
             return (
               <li className="galleryCard" key={result.key}>
                 {user === null ? (
@@ -92,11 +105,17 @@ function Gallery() {
                 ) : (
                   ''
                 )}
+
+							{user ? <button className='likeBtn' onClick={() => { handleLike(result.key, result.likes)}}>Like</button> : null}
+
                 <h3>{result.userInput}</h3>
                 {/* mapping over each user's submission results array item (each word in array is the initial) */}
                 {result.results.map((initialWord, index) => {
                   return <p key={`${result.key}-${index}`}>{initialWord}</p>;
                 })}
+
+							<p className='likeCount'>{result.likes}</p>
+
               </li>
             );
           })
