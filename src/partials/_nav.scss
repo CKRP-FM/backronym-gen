@@ -1,0 +1,32 @@
+// nav
+
+// .navLinks {
+//   display: flex;
+//   a {
+
+//   }
+// }
+
+// login
+
+.loginModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContent {
+  width: 500px;
+  border-radius: 15px;
+  width: 60%;
+  background-color: $gray;
+  form {
+    background-image: none;
+  }
+}

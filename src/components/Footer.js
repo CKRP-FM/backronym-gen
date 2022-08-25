@@ -1,10 +1,12 @@
 function Footer() {
   return (
     <div className="modalFooter">
-      Made with ☕ and 🦨 @ Juno College 2022
+      <p>
+        © 2022 Backronym Generator - Made at <a href="junocollege.com">Juno</a> College
+      </p>
+      <p>Created by Chow, Keon, Ping & Ryan</p>
     </div>
-  )
-
+  );
 }
 
 export default Footer;

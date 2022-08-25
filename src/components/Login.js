@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 
-function Login() {
+function Login({ toggleLoginModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
   const { logIn, logInAnon, user, logOut } = useUserAuth();
 
@@ -49,49 +49,47 @@ function Login() {
     }
   };
 
-  const handleUserLogOut =  async (e) => {
-
+  const handleUserLogOut = async (e) => {
     try {
       await logOut();
     } catch (err) {
       setError(err.message);
     }
-  }
+  };
 
   return (
-    <div className="logInContainer">
-      {
-        user === null ?
-        <h1>Log In</h1> :
-        <h1>Log Out</h1>
-      }
-      {/* TO DO: customize the message passed to the error modal */}
-      {/* {error ? <ErrorModal errorMsg={error}/> : null} */}
+    <div className="logInContainer loginModal">
+      <div className="loginContent">
+        {user === null ? <h1>Log In</h1> : <h1>Log Out</h1>}
+        {/* TO DO: customize the message passed to the error modal */}
+        {/* {error ? <ErrorModal errorMsg={error}/> : null} */}
 
-      {
-        user === null ?
-        <form className="logInForm">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" onChange={handleEmail} value={email} />
-          <label htmlFor="password">Password</label>
-          <input type="password" id="email" onChange={handlePassword} value={password} />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>
-            Log In
+        <button onClick={(e) => toggleLoginModal(e)}>x</button>
+
+        {user === null ? (
+          <form className="logInForm">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" onChange={handleEmail} value={email} />
+            <label htmlFor="password">Password</label>
+            <input type="password" id="email" onChange={handlePassword} value={password} />
+            <button type="submit" onClick={(e) => handleSubmit(e)}>
+              Log In
+            </button>
+          </form>
+        ) : (
+          <button type="submit" onClick={(e) => handleUserLogOut(e)}>
+            Log Out
           </button>
-        </form> :
+        )}
 
-        <button type="submit" onClick={(e) => handleUserLogOut(e)}>
-        Log Out
-        </button>
-      }
-
-      {
-        user === null ?
-        <button type="submit" onClick={(e) => handleAnonLogin(e)}>
-          Log In Anonymously
-        </button> :
-        ""
-      }
+        {user === null ? (
+          <button type="submit" onClick={(e) => handleAnonLogin(e)}>
+            Log In Anonymously
+          </button>
+        ) : (
+          ''
+        )}
+      </div>
     </div>
   );
 }
