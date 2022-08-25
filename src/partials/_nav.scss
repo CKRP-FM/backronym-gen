@@ -4,6 +4,7 @@
   padding: 30px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   p {
     margin: 0;
     padding: 0;
@@ -13,7 +14,7 @@
 .navLinks {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 30px;
   button {
     background-color: $black;
@@ -86,4 +87,8 @@
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.aboutBtn {
+  font-family: $headingFont;
 }
