@@ -163,6 +163,12 @@ function Search() {
     // reset
     setBackronym([]);
     setSelectedWord([]);
+
+    //let the user know that their submission is successful
+    setError(`Your backronym has been saved!`);
+    setTimeout(() => {
+      setError('');
+    }, 1000)
   }
 
   return (
