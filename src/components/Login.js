@@ -11,8 +11,6 @@ function Login({ toggleLoginModal }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  console.log(user);
-
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
