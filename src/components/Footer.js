@@ -4,7 +4,7 @@ function Footer() {
       <p>
         © 2022 Backronym Generator - Made at <a href="junocollege.com">Juno</a> College
       </p>
-      <p>Created by Chow, Keon, Ping & Ryan</p>
+      <p>Created by Chow, Keon, Ping & Ryan, with ☕ and ❤️</p>
     </div>
   );
 }

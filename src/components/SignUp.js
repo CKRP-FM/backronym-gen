@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 
-function SignUp() {
+function SignUp({ toggleSignUpModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to sign up)
   const { signUp } = useUserAuth();
 
@@ -34,19 +34,24 @@ function SignUp() {
   };
 
   return (
-    <div className="signUpContainer">
-      <h1>Sign Up</h1>
-      {/* TO DO: customize the message passed to the error modal */}
-      {/* {error ? <ErrorModal errorMsg={error}/> : null} */}
-      <form className="signUpForm">
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" onChange={handleEmail} value={email} />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="email" onChange={handlePassword} value={password} />
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Sign Up
+    <div className="signUpContainer signUpModal">
+      <div className="signUpContent">
+        <h1>Sign Up</h1>
+        {/* TO DO: customize the message passed to the error modal */}
+        {/* {error ? <ErrorModal errorMsg={error}/> : null} */}
+        <button className="closeSignUpBtn" onClick={(e) => toggleSignUpModal(e)}>
+          x
         </button>
-      </form>
+        <form className="signUpForm">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" onChange={handleEmail} value={email} />
+          <label htmlFor="password">Password</label>
+          <input type="password" id="email" onChange={handlePassword} value={password} />
+          <button className="signUpBtn" type="submit" onClick={(e) => handleSubmit(e)}>
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

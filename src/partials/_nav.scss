@@ -1,15 +1,39 @@
 // nav
 
-// .navLinks {
-//   display: flex;
-//   a {
+.mainNav {
+  padding: 30px 0;
+}
 
-//   }
-// }
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  button {
+    background-color: $black;
+    color: $white;
+    transition: 0.4s ease-in-out;
+    padding: 0;
+    margin: 0;
+    &:hover {
+      color: $ice;
+    }
+  }
+  a {
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.4s ease-in-out;
+    font-family: $bodyFont;
+    &:hover {
+      color: $ice;
+    }
+  }
+}
 
 // login
 
-.loginModal {
+.loginModal,
+.signUpModal {
   position: fixed;
   left: 0;
   top: 0;
@@ -19,14 +43,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 50;
 }
 
-.loginContent {
+.loginContent,
+.signUpContent {
   width: 500px;
   border-radius: 15px;
-  width: 60%;
-  background-color: $gray;
+  width: fit-content;
+  background-color: $black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
   form {
     background-image: none;
   }
+  .loginAnonBtn {
+    box-shadow: 5px 5px 0px white;
+    border: 2px solid #323031;
+  }
+}
+
+.logInForm,
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-right: 0;
+}
+
+.loginBtn,
+.signUpBtn {
+  margin-top: 10px;
+}
+
+.closeLoginBtn,
+.closeSignUpBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

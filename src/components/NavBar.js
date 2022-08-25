@@ -1,12 +1,19 @@
 import Login from './Login';
+import SignUp from './SignUp';
 import { useState } from 'react';
 
 function NavBar() {
-  const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
 
   const toggleLoginModal = (e) => {
     e.preventDefault();
-    setShowModal(!showModal);
+    setShowLoginModal(!showLoginModal);
+  };
+
+  const toggleSignUpModal = (e) => {
+    e.preventDefault();
+    setShowSignUpModal(!showSignUpModal);
   };
 
   return (
@@ -19,11 +26,15 @@ function NavBar() {
             <a href="/">Home</a>
           </li>
           <li>
-            <button onClick={(e) => toggleLoginModal(e)}>Log In / Sign Up</button>
+            <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
+          </li>
+          <li>
+            <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
           </li>
         </ul>
       </nav>
-      {showModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
+      {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
+      {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
     </div>
   );
 }
