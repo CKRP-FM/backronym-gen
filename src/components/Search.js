@@ -152,6 +152,7 @@ function Search() {
       userInput: selectedWord,
       results: backronym,
       timestamp: Date.now(),
+      likes: 0
     };
 
     //push to firebase
@@ -162,6 +163,12 @@ function Search() {
     // reset
     setBackronym([]);
     setSelectedWord([]);
+
+    //let the user know that their submission to fb is successful
+    setError(`Your backronym has been saved!`);
+    setTimeout(() => {
+      setError('');
+    }, 1000)
   }
 
   return (
