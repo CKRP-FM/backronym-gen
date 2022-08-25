@@ -4,6 +4,7 @@ import {
   signInAnonymously,
   signInWithEmailAndPassword,
   signOut,
+  deleteUser
 } from 'firebase/auth';
 import { createContext, useEffect, useState, useContext } from 'react';
 import { auth } from '../firebase';
@@ -35,6 +36,9 @@ export function UserAuthContextProvider({ children }) {
     return signInAnonymously(auth);
   }
 
+  function deleteProfile() {
+    return deleteUser(auth.currentUser)
+  }
   // this useEffect is to set the current user to whoever is logged in when auth state changes (either logged in as email/pw or anonymously)
   // returns a function that allows the db auth state listener to unsubscribe when component dismounts
   // onAuthStateChanged returns the current user logged in
@@ -50,7 +54,7 @@ export function UserAuthContextProvider({ children }) {
   return (
     // this provider allows us to use all the auth functions and access user value anywhere across the app
     // everything in app.js is wrapped inside <UserAuthContextProvider></userAuthContext.Provider> so that all the children components can access the auth properties
-    <userAuthContext.Provider value={{ user, logIn, signUp, logOut, logInAnon }}>{children}</userAuthContext.Provider>
+    <userAuthContext.Provider value={{ user, logIn, signUp, logOut, logInAnon, deleteProfile }}>{children}</userAuthContext.Provider>
   );
 }
 

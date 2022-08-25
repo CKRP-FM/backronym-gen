@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react';
 
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
-    const { user } = useUserAuth();
+    const { user, deleteProfile } = useUserAuth();
+    const [error, setError] = useState('');
     // console.log(user.email);
 
     // delete entry
@@ -16,6 +17,19 @@ function UserProfile() {
         const database = getDatabase(firebase);
         const dbRef = ref(database, `/${resultKey}`);
         remove(dbRef);
+    }
+
+    // delete account
+    const handleUserAccountDeletion = async (e) => {
+        e.preventDefault();
+        
+        setError('');
+
+        try {
+            await deleteProfile();
+        } catch (err) {
+            setError(err.message);
+        }
     }
 
     useEffect(() => {
@@ -71,6 +85,7 @@ function UserProfile() {
             <Link to="/">
                 <button>Back</button>
             </Link>
+            <button>Delete Account</button>
         </div>
     )
 }
