@@ -8,6 +8,7 @@ function Gallery() {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
 	const [backronymFilter, setBackronymFilter] = useState('recent');
+	const [liked, setLiked] = useState(false);
 	const {user} = useUserAuth();
 
   // delete entry
@@ -21,8 +22,24 @@ function Gallery() {
 	//updating like count
 	function handleLike(resultKey, resultLikes) {
 		const addLike = resultLikes + 1;
+
+		//firebase requires updated values to be wrapped in an object
 		const updatedLikes = {
 			likes: addLike,
+		}
+
+		const database = getDatabase(firebase);
+		const childRef = ref(database, `/${resultKey}`);
+		update(childRef, updatedLikes);
+	}
+
+	//unliking
+	function unlike(resultKey, resultLikes) {
+		const unlike = resultLikes - 1;
+
+		//firebase requires updated values to be wrapped in an object
+		const updatedLikes = {
+			likes: unlike,
 		}
 
 		const database = getDatabase(firebase);
@@ -101,7 +118,12 @@ function Gallery() {
 											<button onClick={(e) => handleDelete(e, result.key)}>X</button> : ""
 							}
 
-							{user ? <button className='likeBtn' onClick={() => handleLike(result.key, result.likes)}>Like</button> : null}
+							{user ? 
+								(liked ? 
+									<button className='likeBtn' onClick={() => { unlike(result.key, result.likes); setLiked(!liked) }}>Unlike</button> : 
+									<button className='likeBtn' onClick={() => { handleLike(result.key, result.likes); setLiked(!liked) }}>Like</button> 
+								)
+							: null}
 
 							<h3>{result.userInput}</h3>
 							{/* mapping over each user's submission results array item (each word in array is the initial) */}

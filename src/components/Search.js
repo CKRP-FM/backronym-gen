@@ -151,7 +151,8 @@ function Search() {
       email: user.email || 'anonymous',
       userInput: selectedWord,
       results: backronym,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      score: 0
     };
 
     //push to firebase
