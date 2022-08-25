@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
+import ErrorModal from './ErrorModal';
 
 function SignUp({ toggleSignUpModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to sign up)
   const { signUp } = useUserAuth();
 
   // states to manage user input
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -37,8 +38,7 @@ function SignUp({ toggleSignUpModal }) {
     <div className="signUpContainer signUpModal">
       <div className="signUpContent">
         <h1>Sign Up</h1>
-        {/* TO DO: customize the message passed to the error modal */}
-        {/* {error ? <ErrorModal errorMsg={error}/> : null} */}
+        {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
         <button className="closeSignUpBtn" onClick={(e) => toggleSignUpModal(e)}>
           x
         </button>

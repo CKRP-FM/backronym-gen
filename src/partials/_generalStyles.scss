@@ -53,6 +53,16 @@ select {
   }
 }
 
+a {
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s ease-in-out;
+  font-family: $bodyFont;
+  &:hover {
+    color: $red;
+  }
+}
+
 input {
   accent-color: $ice;
 
