@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 
-function Login({ toggleLoginModal }) {
+function Login({ toggleLoginModal, setUserStatus }) {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
   const { logIn, logInAnon, user } = useUserAuth();
 
@@ -33,6 +33,8 @@ function Login({ toggleLoginModal }) {
     } catch (err) {
       setError(err.message);
     }
+
+    setUserStatus(true);
   };
 
   // Log in as Anonymous
@@ -49,6 +51,8 @@ function Login({ toggleLoginModal }) {
     } catch (err) {
       setError(err.message);
     }
+    
+    setUserStatus(true);
   };
 
   return (
