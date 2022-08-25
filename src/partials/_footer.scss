@@ -4,8 +4,17 @@
   text-align: center;
   padding: 5px;
   font-family: $bodyFont;
-  font-size: 18px;
+  font-size: 0.8rem;
   p {
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .modalFooter {
+    font-size: 0.7rem;
+    p {
+      line-height: 1.5;
+    }
   }
 }
