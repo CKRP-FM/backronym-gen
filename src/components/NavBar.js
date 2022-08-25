@@ -34,7 +34,7 @@ function NavBar({ setUserStatus }) {
   };
 
   return (
-    <div className="wrapper">
+    <div className={user ? "wrapper" : "wrapper signedOutHeight"}>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <nav className="mainNav">
         <div className="navLinksContainer">

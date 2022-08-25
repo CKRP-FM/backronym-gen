@@ -102,3 +102,7 @@
 .aboutBtn {
   font-family: $headingFont;
 }
+
+.signedOutHeight {
+  height: calc(100vh - 80px);
+}
