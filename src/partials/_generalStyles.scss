@@ -7,7 +7,8 @@ html {
 ul,
 li,
 a,
-input {
+input,
+select {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,7 +23,8 @@ img {
 
 label,
 input,
-button {
+button,
+select {
   font-family: $bodyFont;
   color: $black;
 }
@@ -33,14 +35,16 @@ label {
 
 button,
 input,
-fieldset {
+fieldset,
+select {
   border: none;
   padding: 0;
   margin: 0;
 }
 
 button,
-input {
+input,
+select {
   padding: 15px 25px;
   border-radius: 50px;
 

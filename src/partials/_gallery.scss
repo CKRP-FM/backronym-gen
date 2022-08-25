@@ -1,5 +1,22 @@
 //for gallery component
 
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sortingContainer {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  select {
+    text-align: center;
+  }
+}
+
 .resultsDisplay {
   display: flex;
   flex-wrap: wrap;
