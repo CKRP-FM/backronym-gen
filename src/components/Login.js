@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
+import { useNavigate } from 'react-router-dom';
 
-function Login({ toggleLoginModal, setUserStatus }) {
+function Login({ toggleLoginModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
   const { logIn, logInAnon, user } = useUserAuth();
+
+  // redirect user to another page
+  const navigate = useNavigate();
 
   // states to manage user input
   const [email, setEmail] = useState('');
@@ -30,11 +34,13 @@ function Login({ toggleLoginModal, setUserStatus }) {
     try {
       await logIn(email, password);
       toggleLoginModal(e);
+      // redirect user to the home following a successful sign up
+      navigate('/');
     } catch (err) {
       setError(err.message);
     }
 
-    setUserStatus(true);
+    // setUserStatus(true);
   };
 
   // Log in as Anonymous
@@ -48,11 +54,13 @@ function Login({ toggleLoginModal, setUserStatus }) {
     try {
       await logInAnon();
       toggleLoginModal(e);
+      // redirect user to the login page
+      navigate('/');
     } catch (err) {
       setError(err.message);
     }
-    
-    setUserStatus(true);
+
+    // setUserStatus(true);
   };
 
   return (

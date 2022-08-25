@@ -1,28 +1,14 @@
-import Login from './Login';
-import SignUp from './SignUp';
 import { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
 
-function NavBar({ setUserStatus }) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
+function NavBar() {
   // this show is for the about modal, to rename
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
   const { user, logOut } = useUserAuth();
-
-  const toggleLoginModal = (e) => {
-    e.preventDefault();
-    setShowLoginModal(!showLoginModal);
-  };
-
-  const toggleSignUpModal = (e) => {
-    e.preventDefault();
-    setShowSignUpModal(!showSignUpModal);
-  };
 
   const handleUserLogOut = async (e) => {
     try {
@@ -30,11 +16,10 @@ function NavBar({ setUserStatus }) {
     } catch (err) {
       setError(err.message);
     }
-    setUserStatus(false);
   };
 
   return (
-    <div className={user ? "wrapper" : "wrapper signedOutHeight"}>
+    <div className={user ? 'wrapper' : 'wrapper signedOutHeight'}>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <nav className="mainNav">
         <div className="navLinksContainer">
@@ -44,16 +29,6 @@ function NavBar({ setUserStatus }) {
               {' '}
               <a href="/">Home</a>
             </li>
-            {user === null ? (
-              <li>
-                <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
-              </li>
-            ) : null}
-            {user === null ? (
-              <li>
-                <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
-              </li>
-            ) : null}
             {user !== null ? (
               <li>
                 <button type="submit" onClick={(e) => handleUserLogOut(e)}>
@@ -76,8 +51,6 @@ function NavBar({ setUserStatus }) {
           </div>
         </div>
       </nav>
-      {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} setUserStatus={setUserStatus}/> : null}
-      {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} setUserStatus={setUserStatus}/> : null}
     </div>
   );
 }
