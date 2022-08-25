@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   // this show is for the about modal, to rename
@@ -38,9 +39,9 @@ function NavBar() {
             ) : null}
           </ul>
           {user ? (
-            <p>
-              Currently logged in as <span className="loggedInUser">{user.email ? user.email : 'Anonymous'}</span>
-            </p>
+              <p>
+                Currently logged in as <Link to={`/profile/${user.uid}`}><span className="loggedInUser profileLink">{user.email ? user.email : 'Anonymous'}</span></Link>
+              </p>
           ) : null}
           <div className="aboutPopOut">
             <button className="aboutBtn" onClick={() => setShow(true)}>

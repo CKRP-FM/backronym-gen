@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import UserProfile from './components/UserProfile';
 
 function App() {
   // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -30,6 +31,8 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+
+          <Route path="/profile/:uid" element={<UserProfile/>}/>
 
           {/* Any other route redirects to error */}
           <Route path="*" element={<ErrorPage />}></Route>
