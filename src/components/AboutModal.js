@@ -1,5 +1,7 @@
 import React from "react";
 import Footer from "./Footer";
+import {FaLinkedin} from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 
 
 const AboutModal = props => {
@@ -30,19 +32,43 @@ const AboutModal = props => {
           <div className="teamContainer">
             <div className="team team1">
               <h3 className="initials">CC</h3>
-              <i class="fa-brands fa-linkedin fa-xl"></i>
+              <IconContext.Provider value={{className: "linkedIn", size: 28}}>
+              <div>
+                <a href="https://www.linkedin.com/in/chxw/">
+                  <FaLinkedin />
+                </a>
+              </div>   
+              </IconContext.Provider>
             </div>
             <div className="team team2">
               <h3 className="initials">RS</h3>
-              <i class="fa-brands fa-linkedin fa-xl"></i>
+              <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
+                <div>
+                  <a href="www.linkedin.com/in/ryansted">
+                    <FaLinkedin />
+                  </a>
+                </div>
+              </IconContext.Provider>
             </div>
             <div className="team team3">
               <h3 className="initials">KP</h3>
-              <i class="fa-brands fa-linkedin fa-xl"></i>
+              <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
+                <div>
+                  <a href="https://www.linkedin.com/in/keonpierre/">
+                    <FaLinkedin />
+                  </a>
+                </div>
+              </IconContext.Provider>
             </div>
             <div className="team team4">
               <h3 className="initials">PY</h3>
-              <i class="fa-brands fa-linkedin fa-xl"></i>
+              <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
+                <div>
+                  <a href="https://www.linkedin.com/in/pingyuuu/">
+                    <FaLinkedin />
+                  </a>
+                </div>
+              </IconContext.Provider>
             </div>
           </div>
         </div>

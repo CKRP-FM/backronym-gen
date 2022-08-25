@@ -23,7 +23,7 @@ function Search() {
     return array.slice(0, 10);
   }
 
-  const {user} = useUserAuth();
+  const { user } = useUserAuth();
 
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
@@ -89,7 +89,7 @@ function Search() {
         setRandomArray(subArray(shuffle(response.data)));
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   }
 
@@ -109,7 +109,7 @@ function Search() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   }
 

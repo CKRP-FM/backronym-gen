@@ -1,0 +1,102 @@
+// nav
+
+.mainNav {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  button {
+    background-color: $black;
+    color: $white;
+    transition: 0.4s ease-in-out;
+    padding: 0;
+    margin: 0;
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
+.navLinksContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.loggedInUser {
+  font-weight: 700;
+}
+
+// login
+
+.loginModal,
+.signUpModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.loginContent,
+.signUpContent {
+  width: 500px;
+  border-radius: 15px;
+  width: fit-content;
+  background-color: $black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
+  form {
+    background-image: none;
+  }
+  .loginAnonBtn {
+    box-shadow: 10px 10px 0px rgba($white, 1);
+    border: 2px solid $black;
+  }
+}
+
+.logInForm,
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-right: 0;
+}
+
+.loginBtn,
+.signUpBtn {
+  margin-top: 10px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: $headingFont;
+}
+
+.aboutBtn {
+  font-family: $headingFont;
+}
+
+// .signedOutHeight {
+//   height: calc(100vh - 80px);
+// }

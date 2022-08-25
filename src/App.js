@@ -1,30 +1,39 @@
 import './App.scss';
-import { useState } from 'react'
-import Gallery from './components/Gallery';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import Search from './components/Search';
-import AboutModal from './components/AboutModal';
-import Footer from './components/Footer';
 import { UserAuthContextProvider } from './context/UserAuthContext';
+import { Routes, Route } from 'react-router-dom';
+// pages
+import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
+import ErrorPage from './pages/ErrorPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const [show, setShow] = useState(false)
+  // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  // const setUserStatus = (status) => {
+  //   setIsUserLoggedIn(status);
+  // };
 
   return (
     <UserAuthContextProvider>
       <div className="App">
-        <Login />
-        <SignUp />
-      <button onClick={ () => setShow(true) }>❓</button>
-      {/* whenever this method is called it will close the modal */}
-      <AboutModal onClose={() => setShow(false)} show={show} />
+        <Routes>
+          {/* Default route is login/landing page */}
+          <Route path="/login" element={<LoginPage />}></Route>
 
-        <Search />
+          {/* Only accessed if user is logged in thanks to ProtectedRoute component */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <MainPage />
+              </ProtectedRoute>
+            }
+          ></Route>
 
-        <Gallery />
-      
-      <Footer />
+          {/* Any other route redirects to error */}
+          <Route path="*" element={<ErrorPage />}></Route>
+        </Routes>
       </div>
     </UserAuthContextProvider>
   );
