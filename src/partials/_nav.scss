@@ -82,11 +82,11 @@
   margin-top: 10px;
 }
 
-.closeLoginBtn,
-.closeSignUpBtn {
+.closeBtn {
   position: absolute;
   top: 20px;
   right: 20px;
+  font-family: $headingFont;
 }
 
 .aboutBtn {

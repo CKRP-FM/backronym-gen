@@ -40,7 +40,7 @@ function SignUp({ toggleSignUpModal }) {
       <div className="signUpContent">
         <h1>Sign Up</h1>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
-        <button className="closeSignUpBtn" onClick={(e) => toggleSignUpModal(e)}>
+        <button className="closeBtn" onClick={(e) => toggleSignUpModal(e)}>
           x
         </button>
         <form className="signUpForm">

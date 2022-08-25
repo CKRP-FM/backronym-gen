@@ -59,7 +59,7 @@ function Login({ toggleLoginModal }) {
         <h1>Log In</h1>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
-        <button className="closeLoginBtn" onClick={(e) => toggleLoginModal(e)}>
+        <button className="closeBtn" onClick={(e) => toggleLoginModal(e)}>
           x
         </button>
 

@@ -59,3 +59,16 @@
   text-align: center;
   margin: 0;
 }
+
+.galleryCard {
+  position: relative;
+}
+
+.deleteBtn {
+  font-family: $headingFont;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: $ice;
+  padding: 10px;
+}

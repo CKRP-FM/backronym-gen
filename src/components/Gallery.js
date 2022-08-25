@@ -78,13 +78,17 @@ function Gallery() {
           // map over the gallery state (from firebase). Results is each submission
           gallery.map((result) => {
             return (
-              <li key={result.key}>
+              <li className="galleryCard" key={result.key}>
                 {user === null ? (
                   ''
                 ) : user.email === result.email ? (
-                  <button onClick={(e) => handleDelete(e, result.key)}>X</button>
+                  <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                    X
+                  </button>
                 ) : user.email === null && result.email === 'anonymous' ? (
-                  <button onClick={(e) => handleDelete(e, result.key)}>X</button>
+                  <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                    X
+                  </button>
                 ) : (
                   ''
                 )}
