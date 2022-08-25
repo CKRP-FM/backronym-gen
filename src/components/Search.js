@@ -152,7 +152,7 @@ function Search() {
       userInput: selectedWord,
       results: backronym,
       timestamp: Date.now(),
-      score: 0
+      likes: 0
     };
 
     //push to firebase
