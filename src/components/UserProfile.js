@@ -111,6 +111,14 @@ function UserProfile() {
             </div>
             <div className="wrapper">
                 <h2>Your Profile</h2>
+                {
+                    backronymKeys.length === 0 ?
+                    <div className="emptyProfileMessage">
+                        <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
+                    </div>
+                    : null
+                }
+
                 <ul className="resultsDisplay">
                     {
                         uid === user.uid ?
@@ -165,12 +173,8 @@ function UserProfile() {
                     <Link to="/">
                         <button className='backButton'>Back</button>
                     </Link>
-                    {/* <Link to="/login"> */}
-                        {/* <button className='deleteProfileButton' onClick={(e) => handleUserAccountDeletion(e)}
-                        >Delete Account</button> */}
-                        <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
-                        >Delete Account</button>
-                    {/* </Link> */}
+                    <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
+                    >Delete Account</button>
                 </div>
             </div>
         </section>

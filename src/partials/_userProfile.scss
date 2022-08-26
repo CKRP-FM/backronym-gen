@@ -36,8 +36,9 @@
     background-color: $red;
     transition: 0.25s ease-in-out;
 
+    height: 0;
     position: relative;
-    top: -27vh;
+    top: -50vh;
 }
 
 .deleteMessageContainer {
@@ -76,4 +77,16 @@
 
 .addHeight {
     top: 0vh;
+    height: 100%;
+}
+
+.emptyProfileMessage {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 { 
+        width: 75%
+    }
 }

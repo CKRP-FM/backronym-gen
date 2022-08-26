@@ -1293,8 +1293,9 @@ body {
 .accountDeleteBanner {
   background-color: #ff5e5b;
   transition: 0.25s ease-in-out;
+  height: 0;
   position: relative;
-  top: -27vh;
+  top: -50vh;
 }
 
 .deleteMessageContainer {
@@ -1330,4 +1331,15 @@ body {
 
 .addHeight {
   top: 0vh;
+  height: 100%;
+}
+
+.emptyProfileMessage {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.emptyProfileMessage h3 {
+  width: 75%;
 }/*# sourceMappingURL=App.css.map */
