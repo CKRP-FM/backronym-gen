@@ -24,10 +24,12 @@ function UserProfile() {
 
     // delete user's of backronyms
     function handleDeleteBackronyms(backronymKeyList) {
-        const database = getDatabase(firebase);
-        for (let key of backronymKeyList) {
-            const dbRef = ref(database, `/${key}`);
-            remove(dbRef);
+        if (backronymKeyList.length > 0) {
+            const database = getDatabase(firebase);
+            for (let key of backronymKeyList) {
+                const dbRef = ref(database, `/${key}`);
+                remove(dbRef);
+            }
         }
     }
 
@@ -73,7 +75,7 @@ function UserProfile() {
     }, []);
 
     return(
-        <div className='wrapper'>
+        <div className='wrapper userProfile'>
             <h2>Profile</h2>
             <ul className="resultsDisplay">
                 {
@@ -97,13 +99,15 @@ function UserProfile() {
                 }
             </ul>
 
-            <Link to="/">
-                <button>Back</button>
-            </Link>
-            <Link to="/">
-                <button onClick={(e) => handleUserAccountDeletion(e)}
-                >Delete Account</button>
-            </Link>
+            <div className='profileButtons'>
+                <Link to="/">
+                    <button>Back</button>
+                </Link>
+                <Link to="/">
+                    <button onClick={(e) => handleUserAccountDeletion(e)}
+                    >Delete Account</button>
+                </Link>
+            </div>
         </div>
     )
 }
