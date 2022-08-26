@@ -1,3 +1,5 @@
+// error modal
+
 .errorModal {
   position: fixed;
   top: 0;
@@ -13,4 +15,23 @@
   p {
     text-align: center;
   }
+}
+
+// error page
+.errorPageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  gap: 20px;
+}
+
+.errorPageImg {
+  animation: float 5s ease-in-out alternate infinite;
+  padding-bottom: 30px;
 }
