@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa'
+import { FaRegTrashAlt, FaHeart } from 'react-icons/fa';
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
@@ -126,12 +126,26 @@ function Gallery({ closeGallery, showGallery }) {
                       {user === null ? (
                         ''
                       ) : user.email === result.email ? (
-                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key)}}>
-                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        <button
+                          className="deleteBtn"
+                          onClick={(e) => {
+                            setDeleteWarning(true);
+                            setDeleteID(result.key);
+                          }}
+                        >
+                          <span className="sr-only">Delete</span>
+                          <FaRegTrashAlt />
                         </button>
                       ) : user.email === null && result.email === 'anonymous' ? (
-                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key) }}> 
-                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        <button
+                          className="deleteBtn"
+                          onClick={(e) => {
+                            setDeleteWarning(true);
+                            setDeleteID(result.key);
+                          }}
+                        >
+                          <span className="sr-only">Delete</span>
+                          <FaRegTrashAlt />
                         </button>
                       ) : (
                         ''
@@ -150,8 +164,7 @@ function Gallery({ closeGallery, showGallery }) {
                       ) : null}
                     </div>
 
-                      <p className="likeCount">{result.likes}</p>
-                    </div>
+                    <p className="likeCount">{result.likes}</p>
                   </li>
                 );
               })
