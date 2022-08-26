@@ -2,7 +2,7 @@ import React from 'react';
 
 function ErrorModal({ errorMsg, setError }) {
   return (
-    <div className="errorModal">
+    <div className="errorModal" onClick={() => {setError('')}}>
       <div className="errorMsgContainer">
         <p className="errorMessage">{errorMsg}</p>
         {/* Close error pop up and reset error state when user clicks x */}
