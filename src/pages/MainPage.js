@@ -21,6 +21,7 @@ function MainPage() {
         <Search />
         <div className="galleryContainer">
           <button
+            className="viewGalleryBtn"
             onClick={(e) => {
               handleShowGallery(e);
               // document.body.classList.add('modalActive');
@@ -30,7 +31,7 @@ function MainPage() {
           </button>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );
