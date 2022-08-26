@@ -35,9 +35,6 @@ function Login({ toggleLoginModal }) {
       navigate('/');
     } catch (err) {
       setError(err.message);
-      // setTimeout(() => {
-      //   setError('');
-      // }, 2000);
     }
 
     // setUserStatus(true);
@@ -55,9 +52,6 @@ function Login({ toggleLoginModal }) {
       navigate('/');
     } catch (err) {
       setError(err.message);
-      // setTimeout(() => {
-      //   setError('');
-      // }, 2000);
     }
 
     // setUserStatus(true);

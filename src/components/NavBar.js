@@ -15,9 +15,6 @@ function NavBar() {
       await logOut();
     } catch (err) {
       setError(err.message);
-      setTimeout(() => {
-        setError('');
-      }, 2000);
     }
   };
 
