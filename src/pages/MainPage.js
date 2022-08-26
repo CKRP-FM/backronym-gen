@@ -7,11 +7,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function MainPage() {
-  const [showGallery, setShowGallery] = useState(false);
+  const [showGallery, setShowGallery] = useState(2);
 
   const handleShowGallery = (e) => {
     e.preventDefault();
-    setShowGallery(!showGallery);
+    // 2 is the initial state (closed gallery), 1 is the state where gallery is open, 0 is the state where gallery is closed AFTER it has been open once
+    // the reason why showGallery isn't just a true/false state is because in order for gallery animation to work, it needs to first have class 'gallery', then once open, it has class 'gallery openAnimate' and then once closed, it has class 'openAnimate closeAnimate'
+    // however gallery cannot have an initial class of 'openAnimate closeAnimate' as it creates a bug where the closing animation flashes when the component loads due to starting state being false, therefore 3 states are needed to track: initial state, open state and closed state after initial state
+    if (showGallery === 2 || showGallery === 0) {
+      setShowGallery(1);
+    } else {
+      setShowGallery(0);
+    }
   };
 
   return (
@@ -31,7 +38,7 @@ function MainPage() {
               // document.body.classList.add('modalActive');
             }}
           >
-            View Gallery of Saved Backronyms
+            View Saved Gallery
           </button>
         </div>
         <Footer />
