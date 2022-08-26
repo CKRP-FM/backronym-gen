@@ -27,9 +27,6 @@ function Login({ toggleLoginModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // reset error
-    setError('');
-
     // try catch login
     try {
       await logIn(email, password);
@@ -47,9 +44,6 @@ function Login({ toggleLoginModal }) {
   const handleAnonLogin = async (e) => {
     e.preventDefault();
 
-    // reset error
-    setError('');
-
     // try catch login as anonymous
     try {
       await logInAnon();
@@ -66,7 +60,7 @@ function Login({ toggleLoginModal }) {
   return (
     <div className="logInContainer loginModal">
       <div className="loginContent">
-        <h1>Log In</h1>
+        <h2>Log In</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
         <button className="closeBtn" onClick={(e) => toggleLoginModal(e)}>

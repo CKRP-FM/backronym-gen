@@ -4,6 +4,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  p,
+  label {
+    color: $black;
+  }
+  label {
+    font-weight: bold;
+  }
+  h2 {
+    padding-bottom: 20px;
+  }
 }
 
 .sortingContainer {
@@ -23,6 +34,7 @@
   justify-content: center;
   gap: 30px;
   margin: 50px 0 100px 0;
+  padding: 0 20px;
 
   h3 {
     margin-bottom: 10px;
@@ -32,7 +44,7 @@
   }
 
   li {
-    width: 30%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,27 +60,158 @@
     margin: 0 0 5px;
     color: $black;
     text-transform: capitalize;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 
 .galleryDesc {
   text-align: center;
   margin: 0;
+  font-weight: bold;
 }
 
 .galleryCard {
   position: relative;
 }
 
-.deleteBtn {
-  font-family: $headingFont;
+.userGalleryControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+
+  .deleteBtn {
+    margin-bottom: 10px;
+  }
+
+  .likeBtn {
+    margin-bottom: 3px;
+  }
+
+  .viewGalleryBtn {
+    border: 2px solid #323031;
+    box-shadow: 5px 5px 0px white;
+  }
+}
+
+.deleteBtn,
+.likeBtn {
+  background-color: transparent;
+  color: $black;
+  padding: 0;
+  transition: color 0.4s ease-in-out;
+
+  &:hover {
+    background-color: transparent;
+    color: $red;
+  }
+}
+
+.likeCount {
+  font-size: 0.8rem;
+  margin: 0 !important;
+  color: $red !important;
+  font-weight: 700;
+}
+
+// gallery cards
+
+.galleryCard {
+  position: relative;
+  .likeCount {
+    color: $red;
+  }
+}
+
+.cardOptions {
   position: absolute;
   left: 10px;
   top: 10px;
-  background-color: $ice;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  button {
+    font-family: $headingFont;
+    transition: 0.3s ease;
+    background-color: transparent;
+    padding: 5px;
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
+// GALLERY REVEAL ANIMATION (adapted from https://codepen.io/designcouch/pen/obvKxm)
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+  // &.modalActive {
+  //   overflow: hidden;
+  // }
+}
+
+.closeGalleryBtn {
+  margin: 30px;
+  border: 2px solid $black;
+  box-shadow: 5px 5px 0px rgba($white, 1);
+}
+
+.gallery {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: scale(0);
+  z-index: 1;
+
+  &.openAnimate {
+    z-index: 0;
+    transform: scale(1);
+    .galleryModalBackground {
+      .galleryModal {
+        animation: moveUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    + .mainPageContent {
+      z-index: 1;
+      animation: slideUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    &.closeAnimate {
+      .galleryModalBackground {
+        .galleryModal {
+          animation: moveDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+      }
+      + .mainPageContent {
+        animation: slideDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+  }
+
+  .galleryModalBackground {
+    text-align: center;
+    .galleryModal {
+      background: $gray;
+      display: inline-block;
+      border-radius: 3px;
+      font-weight: 300;
+      position: relative;
+      overflow-y: scroll;
+      height: 100vh;
+      padding: 0 20px;
+      width: 100%;
+    }
+  }
+}
+
+.mainPage {
+  position: relative;
+  z-index: 0;
 }

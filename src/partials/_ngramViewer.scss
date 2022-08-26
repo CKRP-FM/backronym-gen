@@ -1,0 +1,66 @@
+.ngramViewerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ngramViewer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.viewNgramPageBtn {
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px white;
+}
+
+// tooltip
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted $white;
+  color: $ice;
+  font-weight: bold;
+}
+
+.tooltip {
+  .icon {
+    font-size: 0.6rem;
+  }
+  .tooltipText {
+    font-weight: 400;
+    visibility: hidden;
+    width: 300px;
+    font-size: 0.8rem;
+    background-color: $white;
+    color: $black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: pre-wrap;
+    // left: -100px;
+    z-index: 1;
+  }
+}
+
+.tooltip:hover {
+  .tooltipText {
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tooltip:hover {
+    .tooltipText {
+      visibility: hidden;
+    }
+  }
+}

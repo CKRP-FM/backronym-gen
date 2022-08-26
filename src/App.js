@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import NgramViewer from './pages/NgramViewer';
 import UserProfile from './components/UserProfile';
 
 function App() {
@@ -27,6 +28,15 @@ function App() {
           ></Route>
 
           <Route path="/profile/:uid" element={<UserProfile/>}/>
+
+          <Route
+            path="/ngramviewer"
+            element={
+              <ProtectedRoute>
+                <NgramViewer />
+              </ProtectedRoute>
+            }
+          ></Route>
 
           {/* Any other route redirects to error */}
           <Route path="*" element={<ErrorPage />}></Route>

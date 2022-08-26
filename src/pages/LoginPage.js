@@ -37,21 +37,27 @@ function LoginPage() {
           <AboutModal onClose={() => setShow(false)} show={show} />
         </div>
       </nav>
-      <div className="mainSearch">
-        <div className="contentContainer">
-          <h1>
-            Backronym <span>Generator</span>
-          </h1>
-          <div className='buttonContainer'>
-            <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
-            <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
+      <main className="wrapper">
+        <div className="mainSearch loginPageMain">
+          <div className="loginPageText">
+            <h1>
+              Backronym <span>Generator</span>
+            </h1>
+            <div className="signInOptions">
+              <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
+              <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
+            </div>
+          </div>
+
+          <div className="headerImgContainer">
+            <img
+              src={require('../assets/pen-bulb.png')}
+              alt="3D render of a pen with a light bulb attached to the end"
+            />
           </div>
         </div>
+      </main>
 
-        <div className="headerImgContainer">
-          <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />
-        </div>
-      </div>
       <Footer />
     </div>
   );

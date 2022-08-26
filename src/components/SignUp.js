@@ -23,9 +23,6 @@ function SignUp({ toggleSignUpModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // reset error
-    setError('');
-
     // try catch sign up
     try {
       await signUp(email, password);
@@ -40,7 +37,7 @@ function SignUp({ toggleSignUpModal }) {
   return (
     <div className="signUpContainer signUpModal">
       <div className="signUpContent">
-        <h1>Sign Up</h1>
+        <h2>Sign Up</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
         <button className="closeBtn" onClick={(e) => toggleSignUpModal(e)}>
           x

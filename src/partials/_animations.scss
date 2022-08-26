@@ -26,12 +26,40 @@
   }
 }
 
-// @keyframes slideDown {
-//   0% {
-//     transform: translateY(0px);
-//   }
+// Animation for gallery
 
-//   100% {
-//     transform: translateY(500px);
-//   }
-// }
+@keyframes slideUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}

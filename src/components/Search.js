@@ -20,7 +20,10 @@ function Search() {
 
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
-    return array.slice(0, 10);
+    // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
+    let newArray = array.filter((str) => str.word.length > 1 || str.word == 'a' || str.word == 'i' || str.word == 'o');
+    // only get the first 10 results
+    return newArray.slice(0, 10);
   }
 
   const { user } = useUserAuth();
@@ -28,7 +31,7 @@ function Search() {
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function isValidInput(str) {
-    return /^[a-zA-Z]+$/.test(str) && str.length < 10;
+    return /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
   }
 
   // Break down string into array of chars
@@ -53,7 +56,7 @@ function Search() {
       setCurrentIndex(0);
       setWordInput('');
     } else {
-      setError('Please do not leave a blank input and limit it to 10 characters!');
+      setError('Your input has to be a word between 2 and 10 characters!');
     }
   }
 
@@ -152,16 +155,20 @@ function Search() {
       userInput: selectedWord,
       results: backronym,
       timestamp: Date.now(),
+      likes: 0,
     };
 
     //push to firebase
     push(dbRef, tempObj);
 
-    //after the push to firebase, disable btn to prevent multiple submissions
+    // after the push to firebase, disable btn to prevent multiple submissions
     setHideBtn(true);
     // reset
     setBackronym([]);
     setSelectedWord([]);
+
+    // let the user know that their submission to fb is successful
+    setError(`Your backronym has been saved!`);
   }
 
   return (
