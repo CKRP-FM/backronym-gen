@@ -60,7 +60,7 @@ function Login({ toggleLoginModal }) {
   return (
     <div className="logInContainer loginModal">
       <div className="loginContent">
-        <h1>Log In</h1>
+        <h2>Log In</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
         <button className="closeBtn" onClick={(e) => toggleLoginModal(e)}>

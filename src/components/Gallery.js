@@ -1,16 +1,16 @@
+import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa'
 import firebase from '../firebase';
-
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
-
-//icons
-import { FaHeart, FaTrashAlt } from 'react-icons/fa';
+import DeleteConfirmation from './DeleteConfirmation.js';
 
 function Gallery({ closeGallery, showGallery }) {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
   const [backronymFilter, setBackronymFilter] = useState('recent');
+  const [deleteWarning, setDeleteWarning] = useState(false);
+  const [deleteID, setDeleteID] = useState('');
   let { user } = useUserAuth();
 
   // delete entry
@@ -19,6 +19,9 @@ function Gallery({ closeGallery, showGallery }) {
     const database = getDatabase(firebase);
     const dbRef = ref(database, `/${resultKey}`);
     remove(dbRef);
+
+    //reset delete ID state
+    setDeleteID('');
   }
 
   //updating like count
@@ -106,19 +109,25 @@ function Gallery({ closeGallery, showGallery }) {
           <ul className="resultsDisplay">
             {
               // map over the gallery state (from firebase). Results is each submission
-              gallery.map((result, index) => {
+              gallery.map((result) => {
                 return (
                   <li className="galleryCard" key={result.key}>
-                    <div className="cardOptions">
+                    <h3>{result.userInput}</h3>
+                    {/* mapping over each user's submission results array item (each word in array is the initial) */}
+                    {result.results.map((initialWord, index) => {
+                      return <p key={`${result.key}-${index}`}>{initialWord}</p>;
+                    })}
+
+                    <div className="userGalleryControls">
                       {user === null ? (
                         ''
                       ) : user.email === result.email ? (
-                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                          <FaTrashAlt />
+                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key)}}>
+                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
                         </button>
                       ) : user.email === null && result.email === 'anonymous' ? (
-                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                          <FaTrashAlt />
+                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key) }}> 
+                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
                         </button>
                       ) : (
                         ''
@@ -137,11 +146,8 @@ function Gallery({ closeGallery, showGallery }) {
                       ) : null}
                     </div>
 
-                    <h3>{result.userInput}</h3>
-                    {/* mapping over each user's submission results array item (each word in array is the initial) */}
-                    {result.results.map((initialWord, index) => {
-                      return <p key={`${result.key}-${index}`}>{initialWord}</p>;
-                    })}
+                      <p className="likeCount">{result.likes}</p>
+                    </div>
                   </li>
                 );
               })

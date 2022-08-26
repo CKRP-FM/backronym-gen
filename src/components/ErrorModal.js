@@ -7,8 +7,10 @@ function ErrorModal({ errorMsg, setError }) {
     }, 3000);
   }
   return (
-    <div className="errorModal">
-      <p className="errorMessage">{errorMsg}</p>
+    <div className="errorModal" onClick={() => { setError('') }}>
+      <div className="errorMsgContainer">
+        <p className="errorMessage">{errorMsg}</p>
+      </div>
     </div>
   );
 }
