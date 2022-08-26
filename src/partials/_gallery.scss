@@ -73,19 +73,6 @@
   font-weight: bold;
 }
 
-.galleryCard {
-  position: relative;
-}
-
-.deleteBtn {
-  font-family: $headingFont;
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  background-color: $ice;
-  padding: 10px;
-}
-
 .viewGalleryBtn {
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px white;
@@ -96,6 +83,34 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 100px;
+}
+
+// gallery cards
+
+.galleryCard {
+  position: relative;
+  .likeCount {
+    color: $red;
+  }
+}
+
+.cardOptions {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  button {
+    font-family: $headingFont;
+    transition: 0.3s ease;
+    background-color: transparent;
+    padding: 5px;
+    &:hover {
+      color: $red;
+    }
+  }
 }
 
 // GALLERY REVEAL ANIMATION (adapted from https://codepen.io/designcouch/pen/obvKxm)

@@ -53,7 +53,7 @@ function Search() {
       setCurrentIndex(0);
       setWordInput('');
     } else {
-      setError('Please do not leave a blank input and limit it to 10 characters!');
+      setError('Please do not leave a blank input and limit it to under 10 characters!');
     }
   }
 
@@ -152,23 +152,20 @@ function Search() {
       userInput: selectedWord,
       results: backronym,
       timestamp: Date.now(),
-      likes: 0
+      likes: 0,
     };
 
     //push to firebase
     push(dbRef, tempObj);
 
-    //after the push to firebase, disable btn to prevent multiple submissions
+    // after the push to firebase, disable btn to prevent multiple submissions
     setHideBtn(true);
     // reset
     setBackronym([]);
     setSelectedWord([]);
 
-    //let the user know that their submission to fb is successful
+    // let the user know that their submission to fb is successful
     setError(`Your backronym has been saved!`);
-    setTimeout(() => {
-      setError('');
-    }, 1000)
   }
 
   return (
