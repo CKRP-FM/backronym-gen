@@ -11,6 +11,7 @@ function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user, deleteProfile } = useUserAuth();
     const [error, setError] = useState('');
+    const [backronymKeys, setBackronymKeys] = useState([]);
     const { uid } = useParams();
 
     // delete entry
@@ -21,12 +22,19 @@ function UserProfile() {
         remove(dbRef);
     }
 
+    function handleDeleteBackronyms(backronymKeyList) {
+        const database = getDatabase(firebase);
+        for (let key of backronymKeyList) {
+            const dbRef = ref(database, `/${key}`);
+            remove(dbRef);
+        }
+    }
+
     // delete account
     const handleUserAccountDeletion = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
         setError('');
-
         try {
             await deleteProfile();
         } catch (err) {
@@ -43,8 +51,14 @@ function UserProfile() {
         onValue(dbRef, (response) => {
             // console.log(response.val());
             const newState = [];
+            const tempKeyState = []
             const data = response.val();
             for(let key in data) {
+
+                if (data[key].email === user.email || (data[key].email === 'anonymous' && user.email === null)) {
+                    tempKeyState.push(key);
+                }
+
                 newState.push({
                     key: key,
                     timestamp: data[key].timestamp,
@@ -53,6 +67,7 @@ function UserProfile() {
                     results: data[key].results,
                 })
             }
+            setBackronymKeys(tempKeyState);
             setGallery(newState);
         })
     }, []);
@@ -86,7 +101,11 @@ function UserProfile() {
                 <button>Back</button>
             </Link>
             <Link to="/">
-                <button onClick={(e) => handleUserAccountDeletion(e)}>Delete Account</button>
+                <button onClick={(e) => {
+                    handleUserAccountDeletion(e)
+                    // handleDeleteBackronyms(backronymKeys)
+                    }}
+                >Delete Account</button>
             </Link>
         </div>
     )
