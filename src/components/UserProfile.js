@@ -5,12 +5,13 @@ import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
 
+import ErrorPage from '../pages/ErrorPage';
+
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user, deleteProfile } = useUserAuth();
     const [error, setError] = useState('');
     const { uid } = useParams();
-    // console.log(user.email);
 
     // delete entry
     function handleDelete(e, resultKey) {
@@ -38,22 +39,19 @@ function UserProfile() {
         // database details
         const database = getDatabase(firebase);
         const dbRef = ref(database);
-        
+            
         onValue(dbRef, (response) => {
-            console.log(response.val());
+            // console.log(response.val());
             const newState = [];
             const data = response.val();
             for(let key in data) {
-                // console.log(data[key].email)
-                if (data[key].email === user.email || (data[key].email === 'anonymous' && user.email === null)) {
-                    newState.push({
-                        key: key,
-                        timestamp: data[key].timestamp,
-                        email: data[key].email,
-                        userInput: data[key].userInput,
-                        results: data[key].results,
-                    })
-                }
+                newState.push({
+                    key: key,
+                    timestamp: data[key].timestamp,
+                    email: data[key].email,
+                    userInput: data[key].userInput,
+                    results: data[key].results,
+                })
             }
             setGallery(newState);
         })
@@ -64,8 +62,10 @@ function UserProfile() {
             <h2>Profile</h2>
             <ul className="resultsDisplay">
                 {
+                    uid === user.uid ?
                     gallery.map((result) => {
-                        return (
+                        return(
+                            (result.email === user.email || (result.email === 'anonymous' && user.email === null)) ?
                             <li className="galleryCard" key={result.key}>
                                 <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
                                     X
@@ -76,9 +76,9 @@ function UserProfile() {
                                         return <p key={`${result.key}-${index}`}>{initialWord}</p>;
                                     })
                                 }
-                            </li>
+                            </li> : ""
                         )
-                    })
+                    }) : <ErrorPage />
                 }
             </ul>
 
