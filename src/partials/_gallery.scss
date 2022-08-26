@@ -60,10 +60,6 @@
     margin: 0 0 5px;
     color: $black;
     text-transform: capitalize;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 
@@ -73,11 +69,63 @@
   font-weight: bold;
 }
 
-.viewGalleryBtn {
-  border: 2px solid #323031;
-  box-shadow: 5px 5px 0px white;
+.galleryCard {
+  position: relative;
 }
 
+<<<<<<< HEAD
+=======
+.userGalleryControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+
+  .deleteBtn {
+    margin-bottom: 10px;
+  }
+  
+  .likeBtn {
+    margin-bottom: 3px;
+  }
+
+  .viewGalleryBtn {
+    border: 2px solid #323031;
+    box-shadow: 5px 5px 0px white;
+  }
+}
+
+.deleteBtn, 
+.likeBtn {
+  background-color: transparent;
+  color: $black;
+  padding: 0;
+  transition: color 0.4s ease-in-out;
+
+  &:hover {
+    background-color: transparent;
+    color: $red;
+  }
+}
+
+.likeCount {
+  font-size: 0.8rem;
+  margin: 0 !important;
+  color: $red !important;
+  font-weight: 700;
+}
+
+
+.galleryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+}
+
+>>>>>>> main
 // gallery cards
 
 .galleryCard {

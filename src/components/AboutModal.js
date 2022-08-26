@@ -1,13 +1,22 @@
-import React from "react";
-import Footer from "./Footer";
+import React from 'react';
+import Footer from './Footer';
 import {FaLinkedin} from 'react-icons/fa';
 import { IconContext } from 'react-icons';
-
+import { useEffect } from 'react';
 
 const AboutModal = props => {
+  //statement to check if modal is opened and enable/disables main content scrolling
+  useEffect(() => {
+    if (props.show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [props.show])
+
   if (!props.show) {
     return null
-  }
+  } 
   
   return (
     <div className="aboutModal" onClick={props.onClose}>
@@ -24,7 +33,7 @@ const AboutModal = props => {
           </p> 
           <div className="aboutHowTo">
             <h2 className="howToTitle">How To Use Backronyms</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus assumenda debitis distinctio architecto fuga magnam inventore placeat, nostrum repudiandae non doloribus aut magni rerum pariatur officia laborum quaerat tenetur laboriosam.</p>              
+            <p>First, enter a word that you want an acronym for. Our generator will first give you a random list of words for the first initial. Then, our generator will give you words that it think best suits your previously selected word. This will repeat until your backronym is created! Neat! Make sure you save your awesome backronym to our backronym gallery. Logged in users can be able to like and delete backronyms, so be sure to create an account!</p>              
           </div>           
         </div>
         <div className="teamGit">
