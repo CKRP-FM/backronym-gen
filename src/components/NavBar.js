@@ -27,7 +27,7 @@ function NavBar() {
           <ul className="navLinks">
             {/* for when user is on user page, can go back to home */}
             <li>
-              <a href="/">Home</a>
+              <Link to={`/`}>Home</Link>
             </li>
             <li>
               <Link to={`/ngramviewer`}>Ngram Viewer</Link>
