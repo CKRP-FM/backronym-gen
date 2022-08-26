@@ -166,13 +166,13 @@ function Gallery({ closeGallery, showGallery }) {
                             handleLike(result.key, result.likes);
                           }}
                         >
-                          <FaRegHeart />
-                          <p className="likeCount">{result.likes}</p>
+                          <span className="sr-only">Like</span><FaRegHeart />
                         </button>
                       ) : null}
+
+                      <p className="likeCount">{result.likes}</p>
                     </div>
 
-                    <p className="likeCount">{result.likes}</p>
                   </li>
                 );
               })

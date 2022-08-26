@@ -3,7 +3,9 @@
   position: fixed;
   left: 0;
   top: 0;
-  left: 30%;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   background-color: $red;
   display: flex;
   align-items: center;
@@ -23,11 +25,12 @@
   border-radius: 10px;
   position: absolute;
 
-  .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+  //to be removed? no more x on error modals as its self closing
+  // .closeButton {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  // }
 }
 
 // error page
