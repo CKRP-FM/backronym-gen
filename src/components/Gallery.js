@@ -1,5 +1,5 @@
+import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa'
 import firebase from '../firebase';
-
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
@@ -102,41 +102,43 @@ function Gallery({ closeGallery, showGallery }) {
           <ul className="resultsDisplay">
             {
               // map over the gallery state (from firebase). Results is each submission
-              gallery.map((result, indx) => {
+              gallery.map((result) => {
                 return (
                   <li className="galleryCard" key={result.key}>
-                    {user === null ? (
-                      ''
-                    ) : user.email === result.email ? (
-                      <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                        X
-                      </button>
-                    ) : user.email === null && result.email === 'anonymous' ? (
-                      <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                        X
-                      </button>
-                    ) : (
-                      ''
-                    )}
-
-                    {user ? (
-                      <button
-                        className="likeBtn"
-                        onClick={() => {
-                          handleLike(result.key, result.likes);
-                        }}
-                      >
-                        Like
-                      </button>
-                    ) : null}
-
                     <h3>{result.userInput}</h3>
                     {/* mapping over each user's submission results array item (each word in array is the initial) */}
                     {result.results.map((initialWord, index) => {
                       return <p key={`${result.key}-${index}`}>{initialWord}</p>;
                     })}
 
-                    <p className="likeCount">{result.likes}</p>
+                    <div className="userGalleryControls">
+                      {user === null ? (
+                        ''
+                      ) : user.email === result.email ? (
+                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        </button>
+                      ) : user.email === null && result.email === 'anonymous' ? (
+                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        </button>
+                      ) : (
+                        ''
+                      )}
+
+                      {user ? (
+                        <button
+                          className="likeBtn"
+                          onClick={() => {
+                            handleLike(result.key, result.likes);
+                          }}
+                        >
+                          <span className="sr-only">Like</span><FaRegHeart />
+                        </button>
+                      ) : null}
+
+                      <p className="likeCount">{result.likes}</p>
+                    </div>
                   </li>
                 );
               })
