@@ -384,6 +384,22 @@ select {
   border: 2px solid #323031;
 }
 
+.mainPageContent {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mainButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+  gap: 20px;
+}
+
 @-webkit-keyframes float {
   0% {
     transform: translateY(0px);
@@ -429,6 +445,70 @@ select {
     color: #c0f5fa;
   }
 }
+@-webkit-keyframes slideUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slideUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@-webkit-keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@-webkit-keyframes moveUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes moveUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes moveDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+@keyframes moveDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
 .aboutModal {
   position: fixed;
   left: 0;
@@ -443,11 +523,10 @@ select {
 }
 
 .aboutContent {
-  width: 500px;
   overflow-y: initial !important;
   background-color: #fff;
   border-radius: 15px;
-  width: 80%;
+  width: 50%;
 }
 
 .aboutHeader {
@@ -554,16 +633,25 @@ select {
 }
 
 .modalFooter {
-  background-color: #c0f5fa;
-  color: #323031;
+  background-color: inherit;
+  color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
 }
 .modalFooter p {
   margin: 0;
 }
 
+@media screen and (max-width: 575px) {
+  .modalFooter {
+    font-size: 0.7rem;
+  }
+  .modalFooter p {
+    line-height: 1.5;
+  }
+}
 header {
   padding: 50px 0;
 }
@@ -723,6 +811,16 @@ form button {
   flex-direction: column;
   align-items: center;
 }
+.gallery p,
+.gallery label {
+  color: #323031;
+}
+.gallery label {
+  font-weight: bold;
+}
+.gallery h2 {
+  padding-bottom: 20px;
+}
 
 .sortingContainer {
   margin-top: 50px;
@@ -741,6 +839,7 @@ form button {
   justify-content: center;
   gap: 30px;
   margin: 50px 0 100px 0;
+  padding: 0 20px;
 }
 .resultsDisplay h3 {
   margin-bottom: 10px;
@@ -749,7 +848,7 @@ form button {
   text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
 }
 .resultsDisplay li {
-  width: 30%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -765,26 +864,144 @@ form button {
   color: #323031;
   text-transform: capitalize;
 }
-.resultsDisplay p:last-child {
-  margin-bottom: 0;
-}
 
 .galleryDesc {
   text-align: center;
   margin: 0;
+  font-weight: bold;
 }
 
 .galleryCard {
   position: relative;
 }
 
-.deleteBtn {
-  font-family: "DynaPuff", cursive;
+.userGalleryControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+.userGalleryControls .deleteBtn {
+  margin-bottom: 10px;
+}
+.userGalleryControls .likeBtn {
+  margin-bottom: 3px;
+}
+.userGalleryControls .viewGalleryBtn {
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px white;
+}
+
+.deleteBtn,
+.likeBtn {
+  background-color: transparent;
+  color: #323031;
+  padding: 0;
+  transition: color 0.4s ease-in-out;
+}
+.deleteBtn:hover,
+.likeBtn:hover {
+  background-color: transparent;
+  color: #ff5e5b;
+}
+
+.likeCount {
+  font-size: 0.8rem;
+  margin: 0 !important;
+  color: #ff5e5b !important;
+  font-weight: 700;
+}
+
+.galleryCard {
+  position: relative;
+}
+.galleryCard .likeCount {
+  color: #ff5e5b;
+}
+
+.cardOptions {
   position: absolute;
   left: 10px;
   top: 10px;
-  background-color: #c0f5fa;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cardOptions button {
+  font-family: "DynaPuff", cursive;
+  transition: 0.3s ease;
+  background-color: transparent;
+  padding: 5px;
+}
+.cardOptions button:hover {
+  color: #ff5e5b;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+
+.closeGalleryBtn {
+  margin: 30px;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px white;
+}
+
+.gallery {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: scale(0);
+  z-index: 1;
+}
+.gallery.openAnimate {
+  z-index: 0;
+  transform: scale(1);
+}
+.gallery.openAnimate .galleryModalBackground .galleryModal {
+  -webkit-animation: moveUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          animation: moveUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.gallery.openAnimate + .mainPageContent {
+  z-index: 1;
+  -webkit-animation: slideUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          animation: slideUp 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.gallery.openAnimate.closeAnimate .galleryModalBackground .galleryModal {
+  -webkit-animation: moveDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          animation: moveDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.gallery.openAnimate.closeAnimate + .mainPageContent {
+  -webkit-animation: slideDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          animation: slideDown 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.gallery .galleryModalBackground {
+  text-align: center;
+}
+.gallery .galleryModalBackground .galleryModal {
+  background: #e0e0e0;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 300;
+  position: relative;
+  overflow-y: scroll;
+  height: 100vh;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.mainPage {
+  position: relative;
+  z-index: 0;
 }
 
 .mainNav {
@@ -892,19 +1109,50 @@ form button {
 
 .errorModal {
   position: fixed;
+  left: 0;
   top: 0;
   left: 30%;
   background-color: #ff5e5b;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 15px;
-  border-radius: 10px;
-  gap: 10px;
   z-index: 60;
 }
 .errorModal p {
   text-align: center;
+  font-weight: 700;
+}
+
+.errorMsgContainer {
+  background-color: #ff5e5b;
+  width: 30%;
+  padding: 30px 40px;
+  border-radius: 10px;
+  position: absolute;
+}
+.errorMsgContainer .closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.errorPageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.errorPageContainer h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.errorPageImg {
+  -webkit-animation: float 5s ease-in-out alternate infinite;
+          animation: float 5s ease-in-out alternate infinite;
+  padding-bottom: 30px;
 }
 
 .loginPage {
@@ -921,10 +1169,115 @@ form button {
   justify-content: center;
 }
 
-.contentContainer {
+.loginPageMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.loginPageText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.signInOptions {
+  display: flex;
+  gap: 10px;
+}
+.signInOptions button {
+  box-shadow: 5px 5px 0px white;
+  border: 2px solid #323031;
+}
+
+@media screen and (max-width: 575px) {
+  .loginPageMain {
+    flex-direction: column-reverse;
+  }
+  .loginPageMain .headerImgContainer img {
+    max-height: 300px;
+  }
+}
+.ngramViewerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ngramViewer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.viewNgramPageBtn {
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px white;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #fff;
+  color: #c0f5fa;
+  font-weight: bold;
+}
+
+.tooltip .icon {
+  font-size: 0.6rem;
+}
+.tooltip .tooltipText {
+  font-weight: 400;
+  visibility: hidden;
+  width: 300px;
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #323031;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: pre-wrap;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltipText {
+  visibility: visible;
+}
+
+@media screen and (max-width: 800px) {
+  .tooltip:hover .tooltipText {
+    visibility: hidden;
+  }
+}
+.profileButtons {
   text-align: center;
 }
 
-.buttonContainer button {
-  margin: 0 5px;
+.backButton {
+  margin: 30px;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #fff;
+}
+
+.deleteProfileButton {
+  color: #fff;
+  background-color: #ff5e5b;
+  margin: 30px;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #fff;
+  transition: inherit;
+}
+.deleteProfileButton:hover {
+  color: #323031;
+  background-color: #fff;
+  box-shadow: 5px 5px 0px #ff5e5b;
 }/*# sourceMappingURL=App.css.map */
