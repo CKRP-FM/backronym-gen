@@ -6,12 +6,16 @@ import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
 
 import ErrorPage from '../pages/ErrorPage';
+import DeleteConfirmation from './DeleteConfirmation';
 
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user, deleteProfile } = useUserAuth();
     const [error, setError] = useState('');
     const [backronymKeys, setBackronymKeys] = useState([]);
+    const [deleteWarning, setDeleteWarning] = useState(false);
+    const [deleteID, setDeleteID] = useState('');
+    const [deleteAccountAttempt, setDeleteAccountAttempt] = useState(false);
     const { uid } = useParams();
 
     //updating like count
@@ -31,6 +35,8 @@ function UserProfile() {
         const database = getDatabase(firebase);
         const dbRef = ref(database, `/${resultKey}`);
         remove(dbRef);
+
+        setDeleteID('');
     }
 
     // delete user's of backronyms
@@ -87,55 +93,87 @@ function UserProfile() {
     }, []);
 
     return(
-        <div className='wrapper userProfile'>
-            <h2>Profile</h2>
-            <ul className="resultsDisplay">
+        <section className="userProfile">
+            <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
                 {
-                    uid === user.uid ?
-                    gallery.map((result) => {
-                        return(
-                            (result.email === user.email || (result.email === 'anonymous' && user.email === null)) ?
-                            <li className="galleryCard" key={result.key}>
-                                <div className="userGalleryControls">
-
-                                    <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                                        <span className="sr-only">Delete</span>
-                                        <FaRegTrashAlt />
-                                    </button>
-
-                                    <button
-                                        className="likeBtn"
-                                        onClick={() => {
-                                            handleLike(result.key, result.likes);
-                                        }}
-                                        >
-                                        <FaRegHeart />
-                                        <p className="likeCount">{result.likes}</p>
-                                    </button>
-
-                                </div>
-                                <h3>{result.userInput}</h3>
-                                {
-                                    result.results.map((initialWord, index) => {
-                                        return <p key={`${result.key}-${index}`}>{initialWord}</p>;
-                                    })
-                                }
-                            </li> : ""
-                        )
-                    }) : <ErrorPage />
+                    
+                    <div className='deleteMessageContainer wrapper'>
+                        <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
+                        <div className='deleteButtonContainer'>
+                        <Link to="/login">
+                            <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
+                        </Link>
+                        <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
+                        </div>
+                        
+                    </div>
                 }
-            </ul>
-
-            <div className='profileButtons'>
-                <Link to="/">
-                    <button className='backButton'>Back</button>
-                </Link>
-                <Link to="/login">
-                    <button className='deleteProfileButton' onClick={(e) => handleUserAccountDeletion(e)}
-                    >Delete Account</button>
-                </Link>
             </div>
-        </div>
+            <div className="wrapper">
+                <h2>Your Profile</h2>
+                <ul className="resultsDisplay">
+                    {
+                        uid === user.uid ?
+                        gallery.map((result) => {
+                            return(
+                                (result.email === user.email || (result.email === 'anonymous' && user.email === null)) ?
+                                <li className="galleryCard" key={result.key}>
+                                    <div className="userGalleryControls">
+
+                                        <button className="deleteBtn" onClick={(e) => {
+                                            setDeleteWarning(true);
+                                            setDeleteID(result.key);
+                                            }}>
+
+                                            <span className="sr-only">Delete</span>
+                                            <FaRegTrashAlt />
+
+                                        </button>
+
+                                        {deleteWarning ? (
+                                            <DeleteConfirmation
+                                            setDeleteWarning={setDeleteWarning}
+                                            handleDelete={handleDelete}
+                                            deleteID={deleteID}
+                                            />
+                                        ) : null}
+
+                                        <button
+                                            className="likeBtn"
+                                            onClick={() => {
+                                                handleLike(result.key, result.likes);
+                                            }}
+                                            >
+                                            <FaRegHeart />
+                                            <p className="likeCount">{result.likes}</p>
+                                        </button>
+                                    
+                                    </div>
+                                    <h3>{result.userInput}</h3>
+                                    {
+                                        result.results.map((initialWord, index) => {
+                                            return <p key={`${result.key}-${index}`}>{initialWord}</p>;
+                                        })
+                                    }
+                                </li> : ""
+                            )
+                        }) : <ErrorPage />
+                    }
+                </ul>
+
+                <div className='profileButtons'>
+                    <Link to="/">
+                        <button className='backButton'>Back</button>
+                    </Link>
+                    {/* <Link to="/login"> */}
+                        {/* <button className='deleteProfileButton' onClick={(e) => handleUserAccountDeletion(e)}
+                        >Delete Account</button> */}
+                        <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
+                        >Delete Account</button>
+                    {/* </Link> */}
+                </div>
+            </div>
+        </section>
     )
 }
 

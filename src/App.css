@@ -1258,6 +1258,14 @@ body {
     visibility: hidden;
   }
 }
+.userProfile {
+  position: absolute;
+  width: 100%;
+}
+.userProfile h2 {
+  padding-top: 30px;
+}
+
 .profileButtons {
   text-align: center;
 }
@@ -1274,10 +1282,52 @@ body {
   margin: 30px;
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px #fff;
-  transition: inherit;
+  transition: 0.4s ease-in-out;
 }
 .deleteProfileButton:hover {
   color: #323031;
   background-color: #fff;
   box-shadow: 5px 5px 0px #ff5e5b;
+}
+
+.accountDeleteBanner {
+  background-color: #ff5e5b;
+  transition: 0.25s ease-in-out;
+  position: relative;
+  top: -27vh;
+}
+
+.deleteMessageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.deleteMessageContainer p {
+  color: #fff;
+  margin: 0;
+  font-weight: bold;
+}
+
+.deleteButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.deleteButtonContainer > * {
+  transition: none;
+}
+.deleteButtonContainer button {
+  margin: 30px;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #fff;
+  transition: 0.4s ease-in-out;
+}
+.deleteButtonContainer button:hover {
+  background-color: #fff;
+  box-shadow: 5px 5px 0px #323031;
+}
+
+.addHeight {
+  top: 0vh;
 }/*# sourceMappingURL=App.css.map */
