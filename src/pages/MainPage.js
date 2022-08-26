@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import Search from '../components/Search';
 import Footer from '../components/Footer';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [showGallery, setShowGallery] = useState(false);
@@ -19,7 +20,10 @@ function MainPage() {
       <div className="mainPageContent">
         <NavBar />
         <Search />
-        <div className="galleryContainer">
+        <div className="mainButtonsContainer">
+          <Link to={`/ngramviewer`} className="viewNgramBtn">
+            <button className="viewNgramPageBtn">Try the Ngram Viewer</button>
+          </Link>
           <button
             className="viewGalleryBtn"
             onClick={(e) => {
