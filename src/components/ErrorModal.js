@@ -4,7 +4,7 @@ function ErrorModal({ errorMsg, setError }) {
   {
     setTimeout(() => {
       setError('');
-    }, 2000);
+    }, 3000);
   }
   return (
     <div className="errorModal">

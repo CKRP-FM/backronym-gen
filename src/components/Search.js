@@ -28,7 +28,7 @@ function Search() {
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function isValidInput(str) {
-    return /^[a-zA-Z]+$/.test(str) && str.length < 10;
+    return /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
   }
 
   // Break down string into array of chars
@@ -53,7 +53,7 @@ function Search() {
       setCurrentIndex(0);
       setWordInput('');
     } else {
-      setError('Please do not leave a blank input and limit it to under 10 characters!');
+      setError('Your input has to be a word between 2 and 10 characters!');
     }
   }
 
