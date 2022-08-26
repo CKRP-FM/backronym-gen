@@ -37,7 +37,7 @@ export function UserAuthContextProvider({ children }) {
   }
 
   function deleteProfile() {
-    return deleteUser(auth.currentUser)
+    return deleteUser(auth.currentUser);
   }
   // this useEffect is to set the current user to whoever is logged in when auth state changes (either logged in as email/pw or anonymously)
   // returns a function that allows the db auth state listener to unsubscribe when component dismounts

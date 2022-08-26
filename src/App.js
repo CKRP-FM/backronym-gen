@@ -9,12 +9,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import UserProfile from './components/UserProfile';
 
 function App() {
-  // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-  // const setUserStatus = (status) => {
-  //   setIsUserLoggedIn(status);
-  // };
-
   return (
     <UserAuthContextProvider>
       <div className="App">

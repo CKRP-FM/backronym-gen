@@ -1,7 +1,7 @@
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
 
@@ -9,6 +9,7 @@ function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user, deleteProfile } = useUserAuth();
     const [error, setError] = useState('');
+    const { uid } = useParams();
     // console.log(user.email);
 
     // delete entry
@@ -39,7 +40,7 @@ function UserProfile() {
         const dbRef = ref(database);
         
         onValue(dbRef, (response) => {
-            // console.log(response.val());
+            console.log(response.val());
             const newState = [];
             const data = response.val();
             for(let key in data) {
@@ -47,11 +48,10 @@ function UserProfile() {
                 if (data[key].email === user.email || (data[key].email === 'anonymous' && user.email === null)) {
                     newState.push({
                         key: key,
-                        // author: key.author, //for auth
                         timestamp: data[key].timestamp,
                         email: data[key].email,
-                        userInput: data[key].userInput, //["k", "e", "o", "n"]
-                        results: data[key].results, // ["key", "eel", "on", "new"]
+                        userInput: data[key].userInput,
+                        results: data[key].results,
                     })
                 }
             }
@@ -85,7 +85,9 @@ function UserProfile() {
             <Link to="/">
                 <button>Back</button>
             </Link>
-            <button>Delete Account</button>
+            <Link to="/">
+                <button onClick={(e) => handleUserAccountDeletion(e)}>Delete Account</button>
+            </Link>
         </div>
     )
 }
