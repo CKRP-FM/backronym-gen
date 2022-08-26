@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaHeart } from 'react-icons/fa';
+import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa';
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
@@ -151,6 +151,14 @@ function Gallery({ closeGallery, showGallery }) {
                         ''
                       )}
 
+                      {deleteWarning ? (
+                        <DeleteConfirmation
+                          setDeleteWarning={setDeleteWarning}
+                          handleDelete={handleDelete}
+                          deleteID={deleteID}
+                        />
+                      ) : null}
+
                       {user ? (
                         <button
                           className="likeBtn"
@@ -158,7 +166,7 @@ function Gallery({ closeGallery, showGallery }) {
                             handleLike(result.key, result.likes);
                           }}
                         >
-                          <FaHeart />
+                          <FaRegHeart />
                           <p className="likeCount">{result.likes}</p>
                         </button>
                       ) : null}
