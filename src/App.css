@@ -260,6 +260,17 @@ h3 {
   font-family: "DynaPuff", cursive;
 }
 
+h1 {
+  font-size: clamp(2.4rem, 1.92rem + 2.4vw, 4.8rem);
+  line-height: clamp(2rem, 1.5rem + 2.5vw, 4.5rem);
+  -webkit-animation: colorShift 15s ease-in-out alternate infinite;
+          animation: colorShift 15s ease-in-out alternate infinite;
+}
+h1 span {
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  line-height: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+
 h2 {
   font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
   color: #ff5e5b;
@@ -283,7 +294,8 @@ html {
 ul,
 li,
 a,
-input {
+input,
+select {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -298,23 +310,67 @@ img {
 
 label,
 input,
-button {
+button,
+select {
   font-family: "Montserrat", sans-serif;
+  color: #323031;
+}
+
+label {
+  color: #fff;
 }
 
 button,
-input {
+input,
+fieldset,
+select {
   border: none;
+  padding: 0;
+  margin: 0;
+}
+
+button,
+input,
+select {
+  padding: 15px 25px;
+  border-radius: 50px;
+}
+button:hover,
+input:hover,
+select:hover {
+  cursor: pointer;
+}
+
+a {
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s ease-in-out;
+  font-family: "Montserrat", sans-serif;
+}
+a:hover {
+  color: #ff5e5b;
 }
 
 input {
   accent-color: #c0f5fa;
+}
+input:hover {
+  cursor: text;
 }
 
 button {
   background-color: #c0f5fa;
   font-weight: 700;
   text-transform: uppercase;
+  transition: background-color 0.4s ease-in-out;
+}
+button:hover {
+  background-color: #ff5e5b;
+}
+button:disabled {
+  color: rgba(50, 48, 49, 0.5);
+  background-color: rgba(224, 224, 224, 0.5);
+  cursor: not-allowed;
 }
 
 .wrapper {
@@ -323,6 +379,56 @@ button {
   margin: 0 auto;
 }
 
+select {
+  box-shadow: 5px 5px 0px #c0f5fa;
+  border: 2px solid #323031;
+}
+
+@-webkit-keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@-webkit-keyframes colorShift {
+  0% {
+    color: #ff5e5b;
+  }
+  55% {
+    color: #f4ce44;
+  }
+  100% {
+    color: #c0f5fa;
+  }
+}
+@keyframes colorShift {
+  0% {
+    color: #ff5e5b;
+  }
+  55% {
+    color: #f4ce44;
+  }
+  100% {
+    color: #c0f5fa;
+  }
+}
 .aboutModal {
   position: fixed;
   left: 0;
@@ -333,13 +439,15 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 60;
 }
 
 .aboutContent {
   width: 500px;
+  overflow-y: initial !important;
   background-color: #fff;
   border-radius: 15px;
-  width: 60%;
+  width: 80%;
 }
 
 .aboutHeader {
@@ -366,14 +474,19 @@ button {
 }
 .aboutMain p {
   font-family: "Montserrat", sans-serif;
+  color: #323031;
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 0;
-  color: #323031;
 }
 
-.howToTitle {
-  text-align: left;
+.modalFooter {
+  background-color: #c0f5fa;
+  text-align: center;
+  line-height: 1.5rem;
+}
+.modalFooter p {
+  border-bottom: none;
 }
 
 .aboutHowTo {
@@ -382,7 +495,8 @@ button {
   margin-right: 30px;
 }
 .aboutHowTo h2 {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: left;
   color: #ff5e5b;
   font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
   text-transform: uppercase;
@@ -392,6 +506,7 @@ button {
   margin: 0;
   margin-bottom: 20px;
   color: #323031;
+  text-align: left;
 }
 
 .closeButton {
@@ -423,31 +538,201 @@ button {
 .team h3 {
   color: #ff5e5b;
   font-family: "DynaPuff", cursive;
+  margin-bottom: 10px;
   font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
   text-transform: uppercase;
   text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
 }
-.team i {
-  color: #ff5e5b;
-  margin: 0.8rem;
+
+.linkedIn {
+  color: #323031;
+  transition: all 0.2s ease-in-out;
+}
+
+.linkedIn:hover {
+  transform: scale(1.05);
 }
 
 .modalFooter {
   background-color: #c0f5fa;
+  color: #323031;
   text-align: center;
   padding: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.modalFooter p {
+  margin: 0;
 }
 
 header {
-  height: 100vh;
+  padding: 50px 0;
+}
+
+h1 {
+  color: #ff5e5b;
+  text-align: right;
+  margin-bottom: 30px;
+}
+h1 span {
+  font-weight: 400;
+  text-transform: lowercase;
+  display: block;
+  color: #fff;
+}
+
+.mainSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 50px;
+  background-image: url(../assets/blob.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 50%;
+  padding: 20px 0;
+}
+form input,
+form button {
+  border: 2px solid #323031;
+}
+form input {
+  margin-right: 10px;
+  box-shadow: 5px 5px 0px #c0f5fa;
+}
+form button {
+  box-shadow: 5px 5px 0px white;
+}
+
+.headerImgContainer {
+  -webkit-animation: float 5s ease-in-out alternate infinite;
+          animation: float 5s ease-in-out alternate infinite;
+}
+
+.backronymSelect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.backronymSelect span {
+  font-size: clamp(1.8rem, 1.68rem + 0.6vw, 2.4rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+}
+.backronymSelect ul {
+  margin: 20px 0;
+}
+.backronymSelect li {
+  display: flex;
+  margin-bottom: 5px;
+}
+.backronymSelect input[type=checkbox] {
+  transform: translateY(-0.075rem);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin-right: 5px;
+  color: #323031;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid #ff5e5b;
+  border-radius: 0.15rem;
+  display: grid;
+  place-content: center;
+  transition: border 120ms ease-in-out;
+}
+.backronymSelect input[type=checkbox]::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: scale(0);
+  box-shadow: inset 1rem 1rem #ff5e5b;
+  transition: 120ms transform ease-in-out;
+}
+.backronymSelect input[type=checkbox]:checked::before {
+  transform: scale(1.25);
+}
+.backronymSelect input[type=checkbox]:hover {
+  cursor: pointer;
+}
+.backronymSelect input[type=checkbox]:disabled {
+  border: 2px solid #c0f5fa;
+  cursor: not-allowed;
+}
+.backronymSelect label {
+  text-transform: capitalize;
+}
+
+.userBackronym {
+  margin: 0;
 }
 
 .defaultColor {
-  color: black;
+  color: #fff;
 }
 
 .highlightColor {
-  color: red;
+  color: #ff5e5b;
+  border-bottom: 3px solid #ff5e5b;
+}
+
+.refreshBtn {
+  padding: 0;
+  background-color: transparent;
+  color: #c0f5fa;
+  font-weight: 400;
+  text-transform: none;
+  border-radius: 0;
+  border-bottom: 2px solid #c0f5fa;
+  margin-bottom: 10px;
+}
+.refreshBtn:hover {
+  background-color: transparent;
+}
+.refreshBtn:disabled {
+  background-color: transparent;
+  color: rgba(224, 224, 224, 0.5);
+  border-bottom: 2px solid rgba(224, 224, 224, 0.5);
+  cursor: not-allowed;
+}
+
+.generatedBackronym {
+  margin: 20px 0 40px;
+  text-align: center;
+  color: #fff;
+  background-color: #ff5e5b;
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: 2px solid #323031;
+  box-shadow: 10px 10px 0px #c0f5fa;
+}
+.generatedBackronym span {
+  display: block;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sortingContainer {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.sortingContainer select {
+  text-align: center;
 }
 
 .resultsDisplay {
@@ -455,7 +740,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin: 30px 0;
+  margin: 50px 0 100px 0;
 }
 .resultsDisplay h3 {
   margin-bottom: 10px;
@@ -480,8 +765,166 @@ header {
   color: #323031;
   text-transform: capitalize;
 }
+.resultsDisplay p:last-child {
+  margin-bottom: 0;
+}
 
 .galleryDesc {
   text-align: center;
   margin: 0;
+}
+
+.galleryCard {
+  position: relative;
+}
+
+.deleteBtn {
+  font-family: "DynaPuff", cursive;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: #c0f5fa;
+  padding: 10px;
+}
+
+.mainNav {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.navLinks button {
+  background-color: #323031;
+  color: #fff;
+  transition: 0.4s ease-in-out;
+  padding: 0;
+  margin: 0;
+}
+.navLinks button:hover {
+  color: #ff5e5b;
+}
+
+.navLinksContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.loggedInUser {
+  font-weight: 700;
+}
+
+.loginModal,
+.signUpModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.loginContent,
+.signUpContent {
+  width: 500px;
+  border-radius: 15px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #323031;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
+}
+.loginContent form,
+.signUpContent form {
+  background-image: none;
+}
+.loginContent .loginAnonBtn,
+.signUpContent .loginAnonBtn {
+  box-shadow: 10px 10px 0px white;
+  border: 2px solid #323031;
+}
+
+.logInForm,
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-right: 0;
+}
+
+.loginBtn,
+.signUpBtn {
+  margin-top: 10px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: "DynaPuff", cursive;
+}
+
+.aboutBtn {
+  font-family: "DynaPuff", cursive;
+}
+
+.profileLink {
+  text-transform: none;
+}
+
+.errorModal {
+  position: fixed;
+  top: 0;
+  left: 30%;
+  background-color: #ff5e5b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border-radius: 10px;
+  gap: 10px;
+  z-index: 60;
+}
+.errorModal p {
+  text-align: center;
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.loginPageNav {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentContainer {
+  text-align: center;
+}
+
+.buttonContainer button {
+  margin: 0 5px;
 }/*# sourceMappingURL=App.css.map */

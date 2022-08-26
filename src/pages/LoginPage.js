@@ -38,12 +38,15 @@ function LoginPage() {
         </div>
       </nav>
       <div className="mainSearch">
-        <h1>
-          Backronym <span>Generator</span>
-        </h1>
-
-        <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
-        <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
+        <div className="contentContainer">
+          <h1>
+            Backronym <span>Generator</span>
+          </h1>
+          <div className='buttonContainer'>
+            <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
+            <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
+          </div>
+        </div>
 
         <div className="headerImgContainer">
           <img src={require('../assets/pen-bulb.png')} alt="3D render of a pen with a light bulb attached to the end" />

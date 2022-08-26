@@ -22,6 +22,7 @@ function UserProfile() {
         remove(dbRef);
     }
 
+    // delete user's of backronyms
     function handleDeleteBackronyms(backronymKeyList) {
         const database = getDatabase(firebase);
         for (let key of backronymKeyList) {
@@ -32,8 +33,9 @@ function UserProfile() {
 
     // delete account
     const handleUserAccountDeletion = async (e) => {
-        // e.preventDefault();
         
+        handleDeleteBackronyms(backronymKeys);
+
         setError('');
         try {
             await deleteProfile();
@@ -43,13 +45,11 @@ function UserProfile() {
     }
 
     useEffect(() => {
-        // console.log('run once')
         // database details
         const database = getDatabase(firebase);
         const dbRef = ref(database);
             
         onValue(dbRef, (response) => {
-            // console.log(response.val());
             const newState = [];
             const tempKeyState = []
             const data = response.val();
@@ -101,10 +101,7 @@ function UserProfile() {
                 <button>Back</button>
             </Link>
             <Link to="/">
-                <button onClick={(e) => {
-                    handleUserAccountDeletion(e)
-                    // handleDeleteBackronyms(backronymKeys)
-                    }}
+                <button onClick={(e) => handleUserAccountDeletion(e)}
                 >Delete Account</button>
             </Link>
         </div>
