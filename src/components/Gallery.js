@@ -77,7 +77,6 @@ function Gallery({ closeGallery, showGallery }) {
   };
 
   return (
-    // TO FIX: the initial class has to be 'gallery' only on page load to prevent the close animation to happen briefly on page load
     <section
       className={`gallery ${showGallery === 1 ? 'openAnimate' : ''} ${
         showGallery === 0 ? 'openAnimate closeAnimate' : ''

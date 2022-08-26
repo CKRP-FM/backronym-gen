@@ -4,23 +4,25 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 function NgramViewer() {
-  // useEffect(() => {
-  //   axios({
-  //     url: 'https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3',
-  //     method: 'GET',
-  //     dataResponse: 'json',
-  //   })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios({
+      url: 'https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3',
+      method: 'GET',
+      dataResponse: 'json',
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   // const getNgram = async () => {
   //   await axios
-  //     .get('https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3')
+  //     .get(
+  //       'https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3'
+  //     )
   //     .then((response) => console.log(response))
   //     .catch((err) => console.log(err));
   // };
