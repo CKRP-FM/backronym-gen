@@ -20,7 +20,10 @@ function Search() {
 
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
-    return array.slice(0, 10);
+    // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
+    let newArray = array.filter((str) => str.word.length > 1 || str.word == 'a' || str.word == 'i' || str.word == 'o');
+    // only get the first 10 results
+    return newArray.slice(0, 10);
   }
 
   const { user } = useUserAuth();
