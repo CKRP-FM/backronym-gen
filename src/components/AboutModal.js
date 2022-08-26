@@ -43,7 +43,7 @@ const AboutModal = props => {
               <h3 className="initials">CC</h3>
               <IconContext.Provider value={{className: "linkedIn", size: 28}}>
               <div>
-                <a href="https://www.linkedin.com/in/chxw/">
+                  <a href="https://www.linkedin.com/in/chxw/" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin />
                 </a>
               </div>   
@@ -53,7 +53,7 @@ const AboutModal = props => {
               <h3 className="initials">RS</h3>
               <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
                 <div>
-                  <a href="www.linkedin.com/in/ryansted">
+                  <a href="www.linkedin.com/in/ryansted" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
                   </a>
                 </div>
@@ -63,7 +63,7 @@ const AboutModal = props => {
               <h3 className="initials">KP</h3>
               <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
                 <div>
-                  <a href="https://www.linkedin.com/in/keonpierre/">
+                  <a href="https://www.linkedin.com/in/keonpierre/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
                   </a>
                 </div>
@@ -73,7 +73,7 @@ const AboutModal = props => {
               <h3 className="initials">PY</h3>
               <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
                 <div>
-                  <a href="https://www.linkedin.com/in/pingyuuu/">
+                  <a href="https://www.linkedin.com/in/pingyuuu/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
                   </a>
                 </div>
