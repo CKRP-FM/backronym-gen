@@ -37,8 +37,6 @@
 }
 
 // login
-
-.loginModal,
 .signUpModal {
   position: fixed;
   left: 0;
@@ -52,7 +50,6 @@
   z-index: 50;
 }
 
-.loginContent,
 .signUpContent {
   width: 500px;
   border-radius: 15px;

@@ -86,7 +86,7 @@
     background-repeat: no-repeat;
     background-position: left;
     transition: background-position 1s steps(29);
-    transition-duration: 1s 0s;
+    transition-duration: 1s;
 
     &:active {
       transition-duration: 0s;
