@@ -23,9 +23,6 @@ function SignUp({ toggleSignUpModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // reset error
-    setError('');
-
     // try catch sign up
     try {
       await signUp(email, password);

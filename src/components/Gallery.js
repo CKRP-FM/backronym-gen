@@ -77,6 +77,7 @@ function Gallery({ closeGallery, showGallery }) {
   };
 
   return (
+    // TO FIX: the initial class has to be 'gallery' only on page load to prevent the close animation to happen briefly on page load
     <section className={showGallery ? 'gallery openAnimate' : 'gallery openAnimate closeAnimate'}>
       <div className="galleryModalBackground">
         <div className="galleryModal">
@@ -132,8 +133,6 @@ function Gallery({ closeGallery, showGallery }) {
                         ''
                       )}
 
-                      {deleteWarning ? <DeleteConfirmation setDeleteWarning={setDeleteWarning} handleDelete={handleDelete} deleteID={deleteID} /> : null}
-
                       {user ? (
                         <button
                           className="likeBtn"
@@ -141,9 +140,11 @@ function Gallery({ closeGallery, showGallery }) {
                             handleLike(result.key, result.likes);
                           }}
                         >
-                          <span className="sr-only">Like</span><FaRegHeart />
+                          <FaHeart />
+                          <p className="likeCount">{result.likes}</p>
                         </button>
                       ) : null}
+                    </div>
 
                       <p className="likeCount">{result.likes}</p>
                     </div>

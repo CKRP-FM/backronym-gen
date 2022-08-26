@@ -28,7 +28,7 @@
 
 // Animation for gallery
 
-@keyframes slideUpLarge {
+@keyframes slideUp {
   0% {
     transform: translateY(0%);
   }
@@ -37,7 +37,7 @@
   }
 }
 
-@keyframes slideDownLarge {
+@keyframes slideDown {
   0% {
     transform: translateY(-100%);
   }
