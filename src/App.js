@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import NgramViewer from './pages/NgramViewer';
 
 function App() {
   // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -27,6 +28,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <MainPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+          <Route
+            path="/ngramviewer"
+            element={
+              <ProtectedRoute>
+                <NgramViewer />
               </ProtectedRoute>
             }
           ></Route>

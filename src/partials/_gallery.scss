@@ -73,6 +73,8 @@
   position: relative;
 }
 
+<<<<<<< HEAD
+=======
 .userGalleryControls {
   display: flex;
   flex-direction: column;
@@ -123,6 +125,7 @@
   padding-bottom: 100px;
 }
 
+>>>>>>> main
 // gallery cards
 
 .galleryCard {
@@ -214,6 +217,7 @@ body {
       overflow-y: scroll;
       height: 100vh;
       padding: 0 20px;
+      width: 100%;
     }
   }
 }
