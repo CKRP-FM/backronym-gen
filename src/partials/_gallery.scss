@@ -76,14 +76,22 @@
   align-items: center;
   position: absolute;
   bottom: 15px;
-  right: 15px;
+  right: 0;
 
-  .deleteBtn {
-    margin-bottom: 10px;
-  }
-
+  // adapted from https: //codepen.io/mattbhenley/details/gQbWgd
   .likeBtn {
-    margin-bottom: 3px;
+    width: 50px;
+    height: 50px;
+    background: url(../assets/like-btn.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    transition: background-position 1s steps(29);
+    transition-duration: 1s 0s;
+
+    &:active {
+      transition-duration: 0s;
+      background-position: -1450px 0;
+    }
   }
 
   .viewGalleryBtn {

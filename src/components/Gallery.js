@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
@@ -166,7 +166,7 @@ function Gallery({ closeGallery, showGallery }) {
                             handleLike(result.key, result.likes);
                           }}
                         >
-                          <span className="sr-only">Like</span><FaRegHeart />
+                          <span className="sr-only">Like</span>
                         </button>
                       ) : null}
 
