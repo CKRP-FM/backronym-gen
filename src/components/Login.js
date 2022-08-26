@@ -27,9 +27,6 @@ function Login({ toggleLoginModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // reset error
-    setError('');
-
     // try catch login
     try {
       await logIn(email, password);
@@ -46,9 +43,6 @@ function Login({ toggleLoginModal }) {
   // Log in as Anonymous
   const handleAnonLogin = async (e) => {
     e.preventDefault();
-
-    // reset error
-    setError('');
 
     // try catch login as anonymous
     try {

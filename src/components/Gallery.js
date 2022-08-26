@@ -4,6 +4,9 @@ import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
 
+//icons
+import { FaHeart, FaTrashAlt } from 'react-icons/fa';
+
 function Gallery({ closeGallery, showGallery }) {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
@@ -71,6 +74,7 @@ function Gallery({ closeGallery, showGallery }) {
   };
 
   return (
+    // TO FIX: the initial class has to be 'gallery' only on page load to prevent the close animation to happen briefly on page load
     <section className={showGallery ? 'gallery openAnimate' : 'gallery openAnimate closeAnimate'}>
       <div className="galleryModalBackground">
         <div className="galleryModal">
@@ -102,41 +106,42 @@ function Gallery({ closeGallery, showGallery }) {
           <ul className="resultsDisplay">
             {
               // map over the gallery state (from firebase). Results is each submission
-              gallery.map((result, indx) => {
+              gallery.map((result, index) => {
                 return (
                   <li className="galleryCard" key={result.key}>
-                    {user === null ? (
-                      ''
-                    ) : user.email === result.email ? (
-                      <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                        X
-                      </button>
-                    ) : user.email === null && result.email === 'anonymous' ? (
-                      <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
-                        X
-                      </button>
-                    ) : (
-                      ''
-                    )}
+                    <div className="cardOptions">
+                      {user === null ? (
+                        ''
+                      ) : user.email === result.email ? (
+                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                          <FaTrashAlt />
+                        </button>
+                      ) : user.email === null && result.email === 'anonymous' ? (
+                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                          <FaTrashAlt />
+                        </button>
+                      ) : (
+                        ''
+                      )}
 
-                    {user ? (
-                      <button
-                        className="likeBtn"
-                        onClick={() => {
-                          handleLike(result.key, result.likes);
-                        }}
-                      >
-                        Like
-                      </button>
-                    ) : null}
+                      {user ? (
+                        <button
+                          className="likeBtn"
+                          onClick={() => {
+                            handleLike(result.key, result.likes);
+                          }}
+                        >
+                          <FaHeart />
+                          <p className="likeCount">{result.likes}</p>
+                        </button>
+                      ) : null}
+                    </div>
 
                     <h3>{result.userInput}</h3>
                     {/* mapping over each user's submission results array item (each word in array is the initial) */}
                     {result.results.map((initialWord, index) => {
                       return <p key={`${result.key}-${index}`}>{initialWord}</p>;
                     })}
-
-                    <p className="likeCount">{result.likes}</p>
                   </li>
                 );
               })
