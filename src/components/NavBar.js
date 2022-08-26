@@ -41,9 +41,9 @@ function NavBar() {
             ) : null}
           </ul>
           {user ? (
-            <p>
-              Currently logged in as <span className="loggedInUser">{user.email ? user.email : 'Anonymous'}</span>
-            </p>
+              <p>
+                Currently logged in as <Link to={`/profile/${user.uid}`}><span className="loggedInUser profileLink">{user.email ? user.email : 'Anonymous'}</span></Link>
+              </p>
           ) : null}
           <div className="aboutPopOut">
             <button className="aboutBtn" onClick={() => setShow(true)}>

@@ -7,14 +7,9 @@ import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import NgramViewer from './pages/NgramViewer';
+import UserProfile from './components/UserProfile';
 
 function App() {
-  // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-  // const setUserStatus = (status) => {
-  //   setIsUserLoggedIn(status);
-  // };
-
   return (
     <UserAuthContextProvider>
       <div className="App">
@@ -31,6 +26,8 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+
+          <Route path="/profile/:uid" element={<UserProfile/>}/>
 
           <Route
             path="/ngramviewer"
