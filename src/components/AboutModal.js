@@ -4,7 +4,6 @@ import {FaLinkedin} from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { useEffect } from 'react';
 
-
 const AboutModal = props => {
   //statement to check if modal is opened and enable/disables main content scrolling
   useEffect(() => {

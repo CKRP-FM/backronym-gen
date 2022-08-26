@@ -3,11 +3,13 @@ import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
+import { DeleteConfirmation } from './DeleteConfirmation.js';
 
 function Gallery({ closeGallery, showGallery }) {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
   const [backronymFilter, setBackronymFilter] = useState('recent');
+  const [deleteWarning, setDeleteWarning] = useState(false);
   let { user } = useUserAuth();
 
   // delete entry
@@ -115,7 +117,7 @@ function Gallery({ closeGallery, showGallery }) {
                       {user === null ? (
                         ''
                       ) : user.email === result.email ? (
-                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                        <button className="deleteBtn" onClick={(e) => setDeleteWarning(true)}>
                           <span className='sr-only'>Delete</span><FaRegTrashAlt />
                         </button>
                       ) : user.email === null && result.email === 'anonymous' ? (
@@ -125,6 +127,8 @@ function Gallery({ closeGallery, showGallery }) {
                       ) : (
                         ''
                       )}
+
+                      {deleteWarning ? <DeleteConfirmation setDeleteWarning={setDeleteWarning} handleDelete={handleDelete}/> : null}
 
                       {user ? (
                         <button
