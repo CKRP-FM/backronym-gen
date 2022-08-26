@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa'
+import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa';
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
@@ -126,16 +126,38 @@ function Gallery({ closeGallery, showGallery }) {
                       {user === null ? (
                         ''
                       ) : user.email === result.email ? (
-                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key)}}>
-                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        <button
+                          className="deleteBtn"
+                          onClick={(e) => {
+                            setDeleteWarning(true);
+                            setDeleteID(result.key);
+                          }}
+                        >
+                          <span className="sr-only">Delete</span>
+                          <FaRegTrashAlt />
                         </button>
                       ) : user.email === null && result.email === 'anonymous' ? (
-                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key) }}> 
-                          <span className='sr-only'>Delete</span><FaRegTrashAlt />
+                        <button
+                          className="deleteBtn"
+                          onClick={(e) => {
+                            setDeleteWarning(true);
+                            setDeleteID(result.key);
+                          }}
+                        >
+                          <span className="sr-only">Delete</span>
+                          <FaRegTrashAlt />
                         </button>
                       ) : (
                         ''
                       )}
+
+                      {deleteWarning ? (
+                        <DeleteConfirmation
+                          setDeleteWarning={setDeleteWarning}
+                          handleDelete={handleDelete}
+                          deleteID={deleteID}
+                        />
+                      ) : null}
 
                       {user ? (
                         <button
@@ -144,14 +166,13 @@ function Gallery({ closeGallery, showGallery }) {
                             handleLike(result.key, result.likes);
                           }}
                         >
-                          <FaHeart />
+                          <FaRegHeart />
                           <p className="likeCount">{result.likes}</p>
                         </button>
                       ) : null}
                     </div>
 
-                      <p className="likeCount">{result.likes}</p>
-                    </div>
+                    <p className="likeCount">{result.likes}</p>
                   </li>
                 );
               })

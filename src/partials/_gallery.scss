@@ -73,8 +73,6 @@
   position: relative;
 }
 
-<<<<<<< HEAD
-=======
 .userGalleryControls {
   display: flex;
   flex-direction: column;
@@ -86,7 +84,7 @@
   .deleteBtn {
     margin-bottom: 10px;
   }
-  
+
   .likeBtn {
     margin-bottom: 3px;
   }
@@ -97,7 +95,7 @@
   }
 }
 
-.deleteBtn, 
+.deleteBtn,
 .likeBtn {
   background-color: transparent;
   color: $black;
@@ -117,15 +115,6 @@
   font-weight: 700;
 }
 
-
-.galleryContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 100px;
-}
-
->>>>>>> main
 // gallery cards
 
 .galleryCard {
