@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DeleteConfirmation({ setDeleteWarning, handleDelete }) {
+function DeleteConfirmation({ setDeleteWarning, handleDelete, deleteID }) {
   return (
     <div className="errorModal" onClick={() => { setDeleteWarning(false) }}>
       <div className="errorMsgContainer">
@@ -16,7 +16,7 @@ function DeleteConfirmation({ setDeleteWarning, handleDelete }) {
 
         <button 
           className="deleteBackronym"
-          onClick={(e) => handleDelete(e, result.key)}
+          onClick={(e) => handleDelete(e, deleteID)}
         >Delete</button>
         
       </div>

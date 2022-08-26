@@ -3,13 +3,14 @@ import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext.js';
-import { DeleteConfirmation } from './DeleteConfirmation.js';
+import DeleteConfirmation from './DeleteConfirmation.js';
 
 function Gallery({ closeGallery, showGallery }) {
   //useState for gallery of user's backronym
   const [gallery, setGallery] = useState([]);
   const [backronymFilter, setBackronymFilter] = useState('recent');
   const [deleteWarning, setDeleteWarning] = useState(false);
+  const [deleteID, setDeleteID] = useState('');
   let { user } = useUserAuth();
 
   // delete entry
@@ -18,6 +19,9 @@ function Gallery({ closeGallery, showGallery }) {
     const database = getDatabase(firebase);
     const dbRef = ref(database, `/${resultKey}`);
     remove(dbRef);
+
+    //reset delete ID state
+    setDeleteID('');
   }
 
   //updating like count
@@ -117,18 +121,18 @@ function Gallery({ closeGallery, showGallery }) {
                       {user === null ? (
                         ''
                       ) : user.email === result.email ? (
-                        <button className="deleteBtn" onClick={(e) => setDeleteWarning(true)}>
+                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key)}}>
                           <span className='sr-only'>Delete</span><FaRegTrashAlt />
                         </button>
                       ) : user.email === null && result.email === 'anonymous' ? (
-                        <button className="deleteBtn" onClick={(e) => handleDelete(e, result.key)}>
+                          <button className="deleteBtn" onClick={(e) => { setDeleteWarning(true); setDeleteID(result.key) }}> 
                           <span className='sr-only'>Delete</span><FaRegTrashAlt />
                         </button>
                       ) : (
                         ''
                       )}
 
-                      {deleteWarning ? <DeleteConfirmation setDeleteWarning={setDeleteWarning} handleDelete={handleDelete}/> : null}
+                      {deleteWarning ? <DeleteConfirmation setDeleteWarning={setDeleteWarning} handleDelete={handleDelete} deleteID={deleteID} /> : null}
 
                       {user ? (
                         <button
