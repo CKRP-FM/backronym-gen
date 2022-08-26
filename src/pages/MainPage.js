@@ -30,7 +30,6 @@ function MainPage() {
             View Gallery of Saved Backronyms
           </button>
         </div>
-
         <Footer />
       </div>
     </div>

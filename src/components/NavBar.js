@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   // this show is for the about modal, to rename
@@ -26,8 +27,10 @@ function NavBar() {
           <ul className="navLinks">
             {/* for when user is on user page, can go back to home */}
             <li>
-              {' '}
               <a href="/">Home</a>
+            </li>
+            <li>
+              <Link to={`/ngramviewer`}>Ngram Viewer</Link>
             </li>
             {user !== null ? (
               <li>
