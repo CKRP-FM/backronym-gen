@@ -1,7 +1,7 @@
 import { FaRegTrashAlt } from 'react-icons/fa';
 import DeleteConfirmation from './DeleteConfirmation.js';
 import { getDatabase, ref, remove, update } from 'firebase/database';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import firebase from '../firebase.js';
 import { useUserAuth } from '../context/UserAuthContext.js';
 import ErrorModal from './ErrorModal.js';
@@ -93,7 +93,7 @@ function GalleryCard({ result }) {
 
         {user ? (
           <button
-            className="likeBtn"
+            className={likedStatus === 'liked' ? 'likeFilled' : 'likeBtn'}
             onClick={() => {
               handleLike(result.key, result.likes);
             }}
