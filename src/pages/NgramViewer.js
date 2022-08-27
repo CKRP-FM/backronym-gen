@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import firebase from '../firebase';
 import ErrorModal from '../components/ErrorModal';
+import { Link } from 'react-router-dom';
 
 function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
@@ -115,7 +116,7 @@ function NgramViewer() {
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
                 <fieldset>
-                  <legend>Enter a word, several words (seperated by a comma) or a phrase:</legend>
+                  <legend>Enter a word, several words seperated by a comma, or a phrase:</legend>
                   <label htmlFor="searchNgram" className="sr-only">
                     Search for a word or phrase
                   </label>
@@ -130,9 +131,11 @@ function NgramViewer() {
 
                 {/* If user wants to select from our list of saved backronyms */}
                 <fieldset>
-                  <legend>Or pick from our existing backronyms and check their frequency in printed sources! </legend>
+                  <legend>
+                    Or pick from our existing backronyms: (psst, you can add a new one <Link to="/">here</Link>)
+                  </legend>
                   <label htmlFor="savedBackronyms" className="sr-only">
-                    Search for the frenquency of a saved backronym
+                    Search for the frequency of a saved backronym
                   </label>
                   <select
                     name="savedBackronyms"
