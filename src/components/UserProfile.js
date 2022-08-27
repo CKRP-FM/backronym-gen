@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaRegHeart } from 'react-icons/fa';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import firebase from '../firebase';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { Link, useParams } from 'react-router-dom';
@@ -147,13 +147,11 @@ function UserProfile() {
                                         ) : null}
 
                                         <button
-                                            className="likeBtn"
-                                            onClick={() => {
-                                                handleLike(result.key, result.likes);
-                                            }}
-                                            >
-                                            <FaRegHeart />
-                                            <p className="likeCount">{result.likes}</p>
+                                        className="likeBtn"
+                                        onClick={() => {
+                                            handleLike(result.key, result.likes);
+                                        }}>
+                                            <span className="sr-only">Like</span>
                                         </button>
                                     
                                     </div>
