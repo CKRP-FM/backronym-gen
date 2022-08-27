@@ -43,7 +43,6 @@ function Gallery({ closeGallery, showGallery }) {
 
     //for every change in the firebase db, push the new value into our gallery state
     onValue(dbRef, (response) => {
-      // console.log(response.val());
       const newState = [];
       const data = response.val();
       for (let key in data) {
@@ -68,7 +67,6 @@ function Gallery({ closeGallery, showGallery }) {
       }
       //setting the user's fb submission to our gallery state
       setGallery(newState);
-      // console.log(gallery);
     });
   }, [backronymFilter]);
 
@@ -77,7 +75,6 @@ function Gallery({ closeGallery, showGallery }) {
   };
 
   return (
-    // TO FIX: the initial class has to be 'gallery' only on page load to prevent the close animation to happen briefly on page load
     <section
       className={`gallery ${showGallery === 1 ? 'openAnimate' : ''} ${
         showGallery === 0 ? 'openAnimate closeAnimate' : ''
@@ -172,7 +169,6 @@ function Gallery({ closeGallery, showGallery }) {
 
                       <p className="likeCount">{result.likes}</p>
                     </div>
-
                   </li>
                 );
               })
