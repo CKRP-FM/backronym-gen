@@ -1,13 +1,17 @@
 .loadingContainer {
     padding: 20px;
     position: fixed;
-}
-
-.loadingBar {
     display: flex;
     justify-content: center;
     align-items: center;
-    // display: block;
+}
+
+.loadingText {
+    position: absolute;
+    text-transform: uppercase;
+}
+
+.loadingBar {
     position: relative;
 
     width: 250px;
@@ -17,6 +21,8 @@
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
+    animation: spin 18s linear infinite;
+    
 
     &::before {
         content: "";
@@ -30,6 +36,7 @@
         border-radius: 50%;
         border-left-color: transparent;
         border-right-color: transparent;
+        animation: spin 16s linear infinite;
     }
 
     &::after {
@@ -44,10 +51,12 @@
         border-radius: 50%;
         border-left-color: transparent;
         border-right-color: transparent;
+        animation: spin 15s linear infinite;
     }
     
 }
 
 @keyframes spin {
-    
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(3600deg);}
 }

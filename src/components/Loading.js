@@ -1,9 +1,8 @@
 function Loading() {
     return (
         <div className="loadingContainer">
-            <div className="loadingBar">
-                <p className="loadingText">Loading</p>
-            </div>
+            <p className="loadingText">Loading</p>
+            <div className="loadingBar"></div>
         </div>
     )
 }
