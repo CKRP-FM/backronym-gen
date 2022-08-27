@@ -99,8 +99,14 @@ button {
 }
 
 select {
+  text-align: left;
   box-shadow: 5px 5px 0px rgba($ice, 1);
   border: 2px solid $black;
+  appearance: none;
+  background-image: url(../assets/chevron-down-solid.svg);
+  background-repeat: no-repeat;
+  background-size: 5%;
+  background-position: 90% 50%;
 }
 
 // MAIN PAGE FOOTER PLACEMENT
@@ -114,9 +120,15 @@ select {
 
 .mainButtonsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding-bottom: 100px;
   gap: 20px;
+
+  button {
+    border: 2px solid #323031;
+    box-shadow: 5px 5px 0px white;
+  }
 }

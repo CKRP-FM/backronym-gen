@@ -247,21 +247,20 @@ function Search() {
             >
               Refresh Words
             </button>
-          ) : (
-            <button className="refreshBtn" disabled={true}>
-              Refresh Words
-            </button>
-          )}
+          ) : null }
 
           {checkedWord !== '' ? (
             <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
           ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
           null}
 
-          <p className="generatedBackronym">
-            Your backronym is: <span>{backronym.join(' ')}</span>
-          </p>
-
+          {backronym.length >= 1 ? 
+            <p className="generatedBackronym">
+              Your backronym is: <span>{backronym.join(' ')}</span>
+            </p> 
+            : null
+          }
+          
           {/* save to firebase btn */}
           {currentIndex === selectedWord.length ? (
             <button onClick={handleFirebase} disabled={hideBtn}>

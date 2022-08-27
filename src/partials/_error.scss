@@ -3,8 +3,9 @@
   position: fixed;
   left: 0;
   top: 0;
-  left: 30%;
-  background-color: $red;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,12 +23,6 @@
   padding: 30px 40px;
   border-radius: 10px;
   position: absolute;
-
-  .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
 }
 
 // error page
@@ -47,4 +42,44 @@
 .errorPageImg {
   animation: float 5s ease-in-out alternate infinite;
   padding-bottom: 30px;
+}
+
+//delete page
+.deleteMsgContainer {
+  background-color: $black;
+
+  p {
+    color: $white;
+    font-weight: 400;
+    text-transform: none;
+    margin-bottom: 20px;
+  }
+
+  button {
+    border: 2px solid transparent;
+    transition: color background-color border 0.4s ease-in-out;
+
+    &:hover {
+      background-color: transparent;
+      color: $red;
+      border: 2px solid $red;
+    }
+
+    &:first-child:hover {
+      color: $ice;
+      border: 2px solid $ice;
+    }
+  }
+
+}
+
+.deleteControls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.deleteBackronym {
+  background-color: $red;
 }

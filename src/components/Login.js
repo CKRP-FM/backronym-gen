@@ -3,9 +3,9 @@ import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import { useNavigate } from 'react-router-dom';
 
-function Login({ toggleLoginModal }) {
+function Login({ toggleSignUpModal }) {
   // deconstructing the useUserAuth context to only get what we need (functions to log in)
-  const { logIn, logInAnon, user } = useUserAuth();
+  const { logIn, logInAnon } = useUserAuth();
 
   // redirect user to another page
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ function Login({ toggleLoginModal }) {
     // try catch login
     try {
       await logIn(email, password);
-      toggleLoginModal(e);
       // redirect user to the home following a successful sign up
       navigate('/');
     } catch (err) {
@@ -47,7 +46,6 @@ function Login({ toggleLoginModal }) {
     // try catch login as anonymous
     try {
       await logInAnon();
-      toggleLoginModal(e);
       // redirect user to the login page
       navigate('/');
     } catch (err) {
@@ -58,31 +56,31 @@ function Login({ toggleLoginModal }) {
   };
 
   return (
-    <div className="logInContainer loginModal">
-      <div className="loginContent">
-        <h2>Log In</h2>
-        {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
+    <div className="loginContainer" >
+      <h2>Account Log In</h2>
+      {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
-        <button className="closeBtn" onClick={(e) => toggleLoginModal(e)}>
-          x
+      <form className="logInForm">
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" onChange={handleEmail} value={email} />
+        <label htmlFor="password">Password</label>
+        <input type="password" id="email" onChange={handlePassword} value={password} />
+        <button className="loginBtn" type="submit" onClick={(e) => handleSubmit(e)}>
+          Log In
         </button>
+      </form>
 
-        <form className="logInForm">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" onChange={handleEmail} value={email} />
-          <label htmlFor="password">Password</label>
-          <input type="password" id="email" onChange={handlePassword} value={password} />
-          <button className="loginBtn" type="submit" onClick={(e) => handleSubmit(e)}>
-            Log In
-          </button>
-        </form>
+      <div className="logInAnonContainer">
+        <p>Don't have an account?</p>
 
-        <div className="logInAnonContainer">
-          <p>Proceed without an account?</p>
+        <div className="signUpControls">
           <button className="loginAnonBtn" type="submit" onClick={(e) => handleAnonLogin(e)}>
             Log In Anonymously
           </button>
+          <p>or</p>
+          <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
         </div>
+
       </div>
     </div>
   );

@@ -1,23 +1,16 @@
 import React from 'react';
 import AboutModal from '../components/AboutModal';
 import Footer from '../components/Footer';
-import ErrorModal from '../components/ErrorModal';
 import { useState } from 'react';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 
 function LoginPage() {
   // for auth
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [error, setError] = useState('');
   // this show is for the about modal, to rename
   const [show, setShow] = useState(false);
 
-  const toggleLoginModal = (e) => {
-    e.preventDefault();
-    setShowLoginModal(!showLoginModal);
-  };
 
   const toggleSignUpModal = (e) => {
     e.preventDefault();
@@ -27,7 +20,6 @@ function LoginPage() {
   return (
     <div className="loginPage">
       <nav className="loginPageNav">
-        {showLoginModal ? <Login toggleLoginModal={toggleLoginModal} /> : null}
         {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
         <div className="aboutPopOut">
           <button className="aboutBtn" onClick={() => setShow(true)}>
@@ -43,10 +35,9 @@ function LoginPage() {
             <h1>
               Backronym <span>Generator</span>
             </h1>
-            <div className="signInOptions">
-              <button onClick={(e) => toggleLoginModal(e)}>Log In</button>
-              <button onClick={(e) => toggleSignUpModal(e)}>Sign Up</button>
-            </div>
+
+            <Login toggleSignUpModal={toggleSignUpModal}/>
+
           </div>
 
           <div className="headerImgContainer">
