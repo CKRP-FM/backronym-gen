@@ -2,46 +2,76 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import firebase from '../firebase';
+import ErrorModal from '../components/ErrorModal';
 
 function NgramViewer() {
+  const [currentInput, setCurrentInput] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [gallery, setGallery] = useState([]);
+  const [error, setError] = useState('');
 
+  //connect to firebase when NgramViewer component mounts
   useEffect(() => {
-    axios({
-      url: 'https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3',
-      method: 'GET',
-      dataResponse: 'json',
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // database details
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+
+    //for every change in the firebase db, push the new value into our gallery state
+    onValue(dbRef, (response) => {
+      const newState = [];
+      const data = response.val();
+      for (let key in data) {
+        newState.push({
+          key: key,
+          timestamp: data[key].timestamp,
+          email: data[key].email,
+          userInput: data[key].userInput, //["k", "e", "o", "n"]
+          results: data[key].results, // ["key", "eel", "on", "new"]
+          likes: data[key].likes,
+        });
+      }
+      setGallery(newState);
+    });
   }, []);
 
-  // const getNgram = async () => {
-  //   await axios
-  //     .get(
-  //       'https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3'
-  //     )
-  //     .then((response) => console.log(response))
-  //     .catch((err) => console.log(err));
-  // };
+  // useEffect(() => {
+  //   axios({
+  //     url: `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`,
+  //     method: 'GET',
+  //     dataResponse: 'json',
+  //   })
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // }, [searchInput]);
 
-  // getNgram();
+  const getNgram = async () => {
+    await axios
+      .get(
+        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`
+      )
+      .then((response) => console.log(response))
+      .catch((err) => setError(err.message));
+  };
 
   const handleInput = (e) => {
-    setSearchInput(e.target.value);
+    setCurrentInput(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log('hi');
+    setSearchInput(currentInput);
+    getNgram();
   };
 
   return (
     <div className="ngramViewer">
+      {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <NavBar />
       <main className="wrapper">
         <section className="ngramViewerContent">
@@ -68,20 +98,44 @@ function NgramViewer() {
           </p>
           <div className="visualizerContainer">
             <form className="ngramForm">
+              {/* If user wants to search for ANY word or phrase */}
               <fieldset>
                 <legend>Enter a word, several words (seperated by a comma) or a phrase:</legend>
-                <label htmlFor="searchNgram" class="sr-only">
+                <label htmlFor="searchNgram" className="sr-only">
                   Search for a word or phrase
                 </label>
-                <input type="text" id="searchNgram" onChange={handleInput} placeholder="Frankenstein, Dracula..." />
+                <input
+                  type="text"
+                  id="searchNgram"
+                  onChange={handleInput}
+                  placeholder="Frankenstein, Dracula..."
+                  // value={currentInput}
+                />
               </fieldset>
+
+              {/* If user wants to select from our list of saved backronyms */}
               <fieldset>
                 <legend>Or pick from our existing backronyms and check their frequency in printed sources! </legend>
-                <label htmlFor="savedBackronyms" class="sr-only">
+                <label htmlFor="savedBackronyms" className="sr-only">
                   Search for the frenquency of a saved backronym
                 </label>
-                <select name="savedBackronyms" id="savedBackronyms">
-                  <option value="hi">hi</option>
+                <select
+                  name="savedBackronyms"
+                  id="savedBackronyms"
+                  defaultValue={'default'}
+                  // value={currentInput}
+                  onChange={handleInput}
+                >
+                  <option value="default" disabled>
+                    Select your option
+                  </option>
+                  {gallery.map((result) => {
+                    return (
+                      <option value={result.userInput} key={result.key}>
+                        {result.userInput}
+                      </option>
+                    );
+                  })}
                 </select>
               </fieldset>
               <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
