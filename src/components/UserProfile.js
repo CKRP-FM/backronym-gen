@@ -70,14 +70,8 @@ function UserProfile() {
             
         onValue(dbRef, (response) => {
             const newState = [];
-            const tempKeyState = []
             const data = response.val();
             for(let key in data) {
-
-                if (data[key].email === user.email || (data[key].email === 'anonymous' && user.email === null)) {
-                    tempKeyState.push(key);
-                }
-
                 newState.push({
                     key: key,
                     timestamp: data[key].timestamp,
@@ -87,16 +81,24 @@ function UserProfile() {
                     likes: data[key].likes,
                 })
             }
-            setBackronymKeys(tempKeyState);
             setGallery(newState);
         })
     }, []);
+
+    useEffect(() => {
+        const tempKeyState = [];
+            gallery.forEach((result) => {
+                if (result.email === user.email || (result.email === 'anonymous' && user.email === null)) {
+                    tempKeyState.push(result.key);
+                }
+            })
+        setBackronymKeys(tempKeyState);
+    }, [gallery]);
 
     return(
         <section className="userProfile">
             <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
                 {
-                    
                     <div className='deleteMessageContainer wrapper'>
                         <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
                         <div className='deleteButtonContainer'>
@@ -112,7 +114,7 @@ function UserProfile() {
             <div className="wrapper">
                 <h2>Your Profile</h2>
                 {
-                    backronymKeys.length === 0 ?
+                    uid === user.uid && backronymKeys.length === 0 ?
                     <div className="emptyProfileMessage">
                         <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
                     </div>
@@ -153,7 +155,7 @@ function UserProfile() {
                                         }}>
                                             <span className="sr-only">Like</span>
                                         </button>
-                                    
+                                        <p className="likeCount">{result.likes}</p>
                                     </div>
                                     <h3>{result.userInput}</h3>
                                     {
