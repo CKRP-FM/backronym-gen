@@ -169,7 +169,6 @@ function Gallery({ closeGallery, showGallery }) {
 
                       <p className="likeCount">{result.likes}</p>
                     </div>
-
                   </li>
                 );
               })
