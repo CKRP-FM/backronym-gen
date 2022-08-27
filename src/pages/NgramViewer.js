@@ -98,15 +98,25 @@ function NgramViewer() {
               <span className="tooltipText">
                 In the fields of computational linguistics and probability, an n-gram is a contiguous sequence of n
                 items from a given sample of text or speech. Source:{' '}
-                <a href="https://en.wikipedia.org/wiki/N-gram">Wikipedia</a>
+                <a href="https://en.wikipedia.org/wiki/N-gram" target="_blank" rel="noopener noreferrer">
+                  Wikipedia
+                </a>
               </span>
             </span>{' '}
             found in printed sources (e.g. books). This means you can plug in words (or phrases, using comma-delimited
             search strings) and chart the popular usage of these words over the course of history. Basically, by
             searching specific terms, it is possible to identify historical trends.{' '}
             <span>
-              Source: <a href="https://en.wikipedia.org/wiki/Google_Ngram_Viewer">Wikipedia</a> and{' '}
-              <a href="https://uwaterloo.ca/writing-and-communication-centre/blog/post/experiment-google-ngram-viewer-or-how-i-learned-stop">
+              Source:{' '}
+              <a href="https://en.wikipedia.org/wiki/Google_Ngram_Viewer" target="_blank" rel="noopener noreferrer">
+                Wikipedia
+              </a>{' '}
+              and{' '}
+              <a
+                href="https://uwaterloo.ca/writing-and-communication-centre/blog/post/experiment-google-ngram-viewer-or-how-i-learned-stop"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 University of Waterloo
               </a>
             </span>
