@@ -380,8 +380,16 @@ button:disabled {
 }
 
 select {
+  text-align: left;
   box-shadow: 5px 5px 0px #c0f5fa;
   border: 2px solid #323031;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url(../assets/chevron-down-solid.svg);
+  background-repeat: no-repeat;
+  background-size: 5%;
+  background-position: 90% 50%;
 }
 
 .mainPageContent {
@@ -393,11 +401,16 @@ select {
 
 .mainButtonsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding-bottom: 100px;
   gap: 20px;
+}
+.mainButtonsContainer button {
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px white;
 }
 
 @-webkit-keyframes float {
@@ -800,7 +813,6 @@ form button {
   padding: 20px 40px;
   border-radius: 10px;
   border: 2px solid #323031;
-  box-shadow: 10px 10px 0px #c0f5fa;
 }
 .generatedBackronym span {
   display: block;
@@ -828,9 +840,6 @@ form button {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-}
-.sortingContainer select {
-  text-align: center;
 }
 
 .resultsDisplay {
@@ -881,17 +890,24 @@ form button {
   align-items: center;
   position: absolute;
   bottom: 15px;
-  right: 15px;
-}
-.userGalleryControls .deleteBtn {
-  margin-bottom: 10px;
+  right: 0;
 }
 .userGalleryControls .likeBtn {
-  margin-bottom: 3px;
+  width: 50px;
+  height: 50px;
+  background: url(../assets/like-btn.png);
+  background-repeat: no-repeat;
+  background-position: left;
+  transition: background-position 1s steps(29);
+  transition-duration: 1s;
+}
+.userGalleryControls .likeBtn:active {
+  transition-duration: 0s;
+  background-position: -1450px 0;
 }
 .userGalleryControls .viewGalleryBtn {
   border: 2px solid #323031;
-  box-shadow: 5px 5px 0px white;
+  box-shadow: 5px 5px 0px #fff;
 }
 
 .deleteBtn,
@@ -1040,7 +1056,6 @@ body {
   font-weight: 700;
 }
 
-.loginModal,
 .signUpModal {
   position: fixed;
   left: 0;
@@ -1054,7 +1069,6 @@ body {
   z-index: 50;
 }
 
-.loginContent,
 .signUpContent {
   width: 500px;
   border-radius: 15px;
@@ -1068,11 +1082,9 @@ body {
   align-items: center;
   padding: 50px 100px;
 }
-.loginContent form,
 .signUpContent form {
   background-image: none;
 }
-.loginContent .loginAnonBtn,
 .signUpContent .loginAnonBtn {
   box-shadow: 10px 10px 0px white;
   border: 2px solid #323031;
@@ -1111,8 +1123,9 @@ body {
   position: fixed;
   left: 0;
   top: 0;
-  left: 30%;
-  background-color: #ff5e5b;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1129,11 +1142,6 @@ body {
   padding: 30px 40px;
   border-radius: 10px;
   position: absolute;
-}
-.errorMsgContainer .closeButton {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .errorPageContainer {
@@ -1153,6 +1161,40 @@ body {
   -webkit-animation: float 5s ease-in-out alternate infinite;
           animation: float 5s ease-in-out alternate infinite;
   padding-bottom: 30px;
+}
+
+.deleteMsgContainer {
+  background-color: #323031;
+}
+.deleteMsgContainer p {
+  color: #fff;
+  font-weight: 400;
+  text-transform: none;
+  margin-bottom: 20px;
+}
+.deleteMsgContainer button {
+  border: 2px solid transparent;
+  transition: color background-color border 0.4s ease-in-out;
+}
+.deleteMsgContainer button:hover {
+  background-color: transparent;
+  color: #ff5e5b;
+  border: 2px solid #ff5e5b;
+}
+.deleteMsgContainer button:first-child:hover {
+  color: #c0f5fa;
+  border: 2px solid #c0f5fa;
+}
+
+.deleteControls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.deleteBackronym {
+  background-color: #ff5e5b;
 }
 
 .loginPage {
@@ -1193,6 +1235,47 @@ body {
   border: 2px solid #323031;
 }
 
+.loginContainer {
+  background-color: #404040;
+  width: 100%;
+  border-radius: 10px;
+  padding: 40px 20px;
+}
+.loginContainer h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
+  text-transform: uppercase;
+}
+.loginContainer form {
+  background-image: none;
+}
+.loginContainer form input {
+  margin-right: 0;
+}
+
+.logInAnonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logInAnonContainer p {
+  margin: 0;
+}
+
+.signUpControls {
+  display: flex;
+}
+.signUpControls button {
+  font-size: 0.8rem;
+  background-color: transparent;
+  color: #c0f5fa;
+  padding: 5px;
+  transition: color 0.4s ease-in-out;
+}
+.signUpControls button:hover {
+  color: #ff5e5b;
+}
+
 @media screen and (max-width: 575px) {
   .loginPageMain {
     flex-direction: column-reverse;
@@ -1213,11 +1296,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.viewNgramPageBtn {
-  border: 2px solid #323031;
-  box-shadow: 5px 5px 0px white;
 }
 
 .tooltip {
@@ -1295,7 +1373,7 @@ body {
   transition: 0.25s ease-in-out;
   height: 0;
   position: relative;
-  top: -50vh;
+  top: -100vh;
 }
 
 .deleteMessageContainer {
