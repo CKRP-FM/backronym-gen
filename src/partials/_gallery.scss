@@ -82,24 +82,24 @@
   .likeBtn {
     width: 50px;
     height: 50px;
-    background: url(../assets/like-btn.png);
+    background: url(../assets/like-btn2.png);
     background-repeat: no-repeat;
     background-position: left;
-    transition: background-position 1s steps(29);
-    transition-duration: 1s;
+    transition: background-position 1s steps(28);
+    // transition-duration: 1s;
+    transition-duration: 0s;
 
-    &:active {
-      transition-duration: 0s;
-      background-position: -1450px 0;
+    // &:active {
+    //   transition-duration: 0s;
+    //   background-position: -1450px 0;
+    // }
+
+    &.is-filled {
+      transition-duration: 1s;
+      background-position: -1400px 0;
     }
   }
 
-  .likeFilled {
-    width: 50px;
-    height: 50px;
-    background: url(../assets/like-filled.png);
-    background-position: no-repeat;
-  }
 
   .viewGalleryBtn {
     border: 2px solid $black;

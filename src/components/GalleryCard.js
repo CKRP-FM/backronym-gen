@@ -9,13 +9,13 @@ import ErrorModal from './ErrorModal.js';
 function GalleryCard({ result }) {
   const [deleteWarning, setDeleteWarning] = useState(false);
   const [deleteID, setDeleteID] = useState('');
-  // // track whether user has already liked a backronym
+  //track whether user has already liked a backronym
   const [likedStatus, setLikedStatus] = useState('');
   const [error, setError] = useState('');
 
   let { user } = useUserAuth();
 
-  // delete entry
+  //delete entry
   function handleDelete(e, resultKey) {
     e.preventDefault();
     const database = getDatabase(firebase);
@@ -28,7 +28,7 @@ function GalleryCard({ result }) {
 
   //updating like count
   function handleLike(resultKey, resultLikes) {
-    // check if the user has already liked this specific backronym
+    //check if the user has already liked this specific backronym
     const liked = localStorage.getItem(`${result.key}`);
     setLikedStatus(liked);
 
@@ -41,7 +41,7 @@ function GalleryCard({ result }) {
       const childRef = ref(database, `/${resultKey}`);
       update(childRef, updatedLikes);
 
-      // // set liked status to local storage
+      //set liked status to local storage
       localStorage.setItem(`${result.key}`, 'liked');
     } else {
       setError("You've already liked this!");
@@ -93,7 +93,7 @@ function GalleryCard({ result }) {
 
         {user ? (
           <button
-            className={likedStatus === 'liked' ? 'likeFilled' : 'likeBtn'}
+            className={`likeBtn ${likedStatus === 'liked' ? 'is-filled' : ''}`}
             onClick={() => {
               handleLike(result.key, result.likes);
             }}
