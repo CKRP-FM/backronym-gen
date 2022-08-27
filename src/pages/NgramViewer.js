@@ -56,11 +56,11 @@ function NgramViewer() {
         `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`
       )
       .then((response) => {
-        if (response.data.length > 0) {
-          console.log(response.data);
-        } else {
-          setError('No results found. Please try a different input!');
-        }
+        // if (response.data.length > 0) {
+        console.log(response.data);
+        // } else {
+        //   setError('No results found. Please try a different input!');
+        // }
       })
       .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
   };
@@ -83,14 +83,15 @@ function NgramViewer() {
     <div className="ngramViewer">
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <NavBar />
-      <main className="wrapper">
+      <main className="wrapper ngramViewerMain">
         <section className="ngramViewerContent">
           <h1>Ngram Viewer</h1>
           <p>Powered by Google Ngram Viewer API</p>
           <h2>What is the Google Ngram Viewer?</h2>
           <p>
-            It is an online search engine that charts the frequencies of any set of search strings, like words or a
-            phrase, using a yearly count of{' '}
+            It is an online search engine that draws data from Google Books, which contains a digital archive of books
+            that ranges from 1500 to the present. It charts the frequencies of any set of search strings, like words or
+            a phrase, using a yearly count of{' '}
             <span className="tooltip">
               n-grams
               <span className="tooltipText">
@@ -99,57 +100,65 @@ function NgramViewer() {
                 <a href="https://en.wikipedia.org/wiki/N-gram">Wikipedia</a>
               </span>
             </span>{' '}
-            found in printed sources (e.g. books) published between 1500 and 2019. The program can search for a word or
-            a phrase, including misspellings or gibberish. The n-grams are matched with the text within the selected
-            corpus (e.g. English) and, if found in 40 or more books, are then displayed as a graph.{' '}
+            found in printed sources (e.g. books). This means you can plug in words (or phrases, using comma-delimited
+            search strings) and chart the popular usage of these words over the course of history. Basically, by
+            searching specific terms, it is possible to identify historical trends.{' '}
             <span>
-              Source: <a href="https://en.wikipedia.org/wiki/Google_Ngram_Viewer">Wikipedia</a>
+              Source: <a href="https://en.wikipedia.org/wiki/Google_Ngram_Viewer">Wikipedia</a> and{' '}
+              <a href="https://uwaterloo.ca/writing-and-communication-centre/blog/post/experiment-google-ngram-viewer-or-how-i-learned-stop">
+                University of Waterloo
+              </a>
             </span>
           </p>
           <div className="visualizerContainer">
-            <form className="ngramForm">
-              {/* If user wants to search for ANY word or phrase */}
-              <fieldset>
-                <legend>Enter a word, several words (seperated by a comma) or a phrase:</legend>
-                <label htmlFor="searchNgram" className="sr-only">
-                  Search for a word or phrase
-                </label>
-                <input
-                  type="text"
-                  id="searchNgram"
-                  onChange={handleInput}
-                  placeholder="Frankenstein, Dracula..."
-                  // value={currentInput}
-                />
-              </fieldset>
+            <div className="userNgramInputBox">
+              <form className="ngramForm">
+                {/* If user wants to search for ANY word or phrase */}
+                <fieldset>
+                  <legend>Enter a word, several words (seperated by a comma) or a phrase:</legend>
+                  <label htmlFor="searchNgram" className="sr-only">
+                    Search for a word or phrase
+                  </label>
+                  <input
+                    type="text"
+                    id="searchNgram"
+                    onChange={handleInput}
+                    placeholder="Frankenstein, Dracula..."
+                    // value={currentInput}
+                  />
+                </fieldset>
 
-              {/* If user wants to select from our list of saved backronyms */}
-              <fieldset>
-                <legend>Or pick from our existing backronyms and check their frequency in printed sources! </legend>
-                <label htmlFor="savedBackronyms" className="sr-only">
-                  Search for the frenquency of a saved backronym
-                </label>
-                <select
-                  name="savedBackronyms"
-                  id="savedBackronyms"
-                  defaultValue={'default'}
-                  // value={currentInput}
-                  onChange={handleInput}
-                >
-                  <option value="default" disabled>
-                    Select your option
-                  </option>
-                  {gallery.map((result) => {
-                    return (
-                      <option value={result.userInput} key={result.key}>
-                        {result.userInput}
-                      </option>
-                    );
-                  })}
-                </select>
-              </fieldset>
-              <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
-            </form>
+                {/* If user wants to select from our list of saved backronyms */}
+                <fieldset>
+                  <legend>Or pick from our existing backronyms and check their frequency in printed sources! </legend>
+                  <label htmlFor="savedBackronyms" className="sr-only">
+                    Search for the frenquency of a saved backronym
+                  </label>
+                  <select
+                    name="savedBackronyms"
+                    id="savedBackronyms"
+                    defaultValue={'default'}
+                    // value={currentInput}
+                    onChange={handleInput}
+                  >
+                    <option value="default" disabled>
+                      Select your option
+                    </option>
+                    {gallery.map((result) => {
+                      return (
+                        <option value={result.userInput} key={result.key}>
+                          {result.userInput}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </fieldset>
+                <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+              </form>
+            </div>
+            <div className="ngramGraphBox">
+              <h3>Usage Frequency Graph</h3>
+            </div>
           </div>
         </section>
       </main>
