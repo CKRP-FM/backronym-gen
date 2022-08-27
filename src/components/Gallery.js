@@ -43,7 +43,6 @@ function Gallery({ closeGallery, showGallery }) {
 
     //for every change in the firebase db, push the new value into our gallery state
     onValue(dbRef, (response) => {
-      console.log(response.val());
       const newState = [];
       const data = response.val();
       for (let key in data) {
@@ -68,7 +67,6 @@ function Gallery({ closeGallery, showGallery }) {
       }
       //setting the user's fb submission to our gallery state
       setGallery(newState);
-      console.log(gallery);
     });
   }, [backronymFilter]);
 

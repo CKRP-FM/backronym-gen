@@ -55,8 +55,14 @@ function NgramViewer() {
       .get(
         `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`
       )
-      .then((response) => console.log(response))
-      .catch((err) => setError(err.message));
+      .then((response) => {
+        if (response.data.length > 0) {
+          console.log(response.data);
+        } else {
+          setError('No results found. Please try a different input!');
+        }
+      })
+      .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
   };
 
   const handleInput = (e) => {
@@ -65,8 +71,12 @@ function NgramViewer() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    setSearchInput(currentInput);
-    getNgram();
+    if (currentInput !== '') {
+      setSearchInput(currentInput);
+      getNgram();
+    } else {
+      setError('Select a word or phrase to search for their frequency!');
+    }
   };
 
   return (
