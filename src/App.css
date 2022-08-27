@@ -291,6 +291,10 @@ html {
   color: #fff;
 }
 
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
 ul,
 li,
 a,
@@ -371,6 +375,10 @@ button:disabled {
   color: rgba(50, 48, 49, 0.5);
   background-color: rgba(224, 224, 224, 0.5);
   cursor: not-allowed;
+}
+
+.saveWordButton:focus {
+  background-color: #ff5e5b;
 }
 
 .wrapper {
@@ -1290,12 +1298,70 @@ body {
   justify-content: center;
   align-items: center;
 }
+.ngramViewerContent p {
+  line-height: 1.5;
+}
+
+.ngramViewerMain {
+  flex: 1;
+}
+
+.visualizerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
 
 .ngramViewer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.viewNgramPageBtn {
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #c0f5fa;
+}
+
+.ngramForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: #fff;
+  background-image: none;
+  padding: 30px;
+  margin-top: 10px;
+  border-radius: 30px;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #c0f5fa;
+}
+.ngramForm fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ngramForm fieldset legend {
+  font-weight: bold;
+  padding-bottom: 10px;
+  color: #323031;
+}
+.ngramForm fieldset legend a {
+  color: #ff5e5b;
+}
+.ngramForm fieldset legend a:hover {
+  color: #c0f5fa;
+}
+.ngramForm button {
+  background-color: #ff5e5b;
+  box-shadow: 5px 5px 0px #c0f5fa;
+}
+.ngramForm button:hover {
+  background-color: #c0f5fa;
 }
 
 .tooltip {
@@ -1421,4 +1487,50 @@ body {
 .emptyProfileMessage h3 {
   width: 75%;
   text-align: center;
-}/*# sourceMappingURL=App.css.map */
+}
+
+.loadingContainer {
+  padding: 20px;
+  position: fixed;
+}
+
+.loadingBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border: 3px solid #ff5e5b;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.loadingBar::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  top: -11px;
+  left: -11px;
+  border: 3px solid #e0e0e0;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.loadingBar::after {
+  content: "";
+  position: absolute;
+  width: 228px;
+  height: 228px;
+  top: 5px;
+  left: 5px;
+  border: 3px solid #c0f5fa;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+@-webkit-keyframes spin {}
+
+@keyframes spin {}/*# sourceMappingURL=App.css.map */

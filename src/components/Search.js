@@ -250,7 +250,7 @@ function Search() {
           ) : null }
 
           {checkedWord !== '' ? (
-            <button onClick={(e) => handleSaveWord(e)}>Save Word</button>
+            <button className='saveWordButton' autoFocus={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
           ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
           null}
 

@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react';
 import ErrorPage from '../pages/ErrorPage';
 import DeleteConfirmation from './DeleteConfirmation';
 
+// test
+import Loading from './Loading';
+
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
     const { user, deleteProfile } = useUserAuth();
@@ -97,6 +100,9 @@ function UserProfile() {
 
     return(
         <section className="userProfile">
+
+            <Loading />
+
             <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
                 {
                     <div className='deleteMessageContainer wrapper'>
