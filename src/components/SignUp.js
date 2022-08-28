@@ -1,3 +1,4 @@
+import { set } from 'firebase/database';
 import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
@@ -10,6 +11,7 @@ function SignUp({ toggleSignUpModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [hasSignedUp, setHasSignedUp] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -26,7 +28,10 @@ function SignUp({ toggleSignUpModal }) {
     // try catch sign up
     try {
       await signUp(email, password);
-      toggleSignUpModal(e);
+      setHasSignedUp(true);
+      setTimeout(() => {
+        toggleSignUpModal(e);
+      }, 3000);
     } catch (err) {
       setError(err.message);
     }
@@ -51,6 +56,9 @@ function SignUp({ toggleSignUpModal }) {
             Sign Up
           </button>
         </form>
+
+        {hasSignedUp ? <p>Sign up successful. Redirecting to login form.</p> : null}
+        
       </div>
     </div>
   );
