@@ -38,17 +38,17 @@ function NavBar() {
         <div className="hamburgerMenu"
           onClick={toggleNav}
         >
-          <span className="top"></span>
-          <span className="mid"></span>
-          <span className="bottom"></span>
+          <span className={`top ${nav ? 'topClosed' : ''}`}></span>
+          <span className={`mid ${nav ? 'midClosed' : ''}`}></span>
+          <span className={`bottom ${nav ? 'bottomClosed' : ''}`}></span>
         </div>
 
         <div className="navLinksContainer">
-          <div className="linkContainer">
-          <ul className={`navLinks ${nav ? 'showNav' : ''}`}>
+          <div className={`navLinks ${nav ? 'showNav' : ''}`}>
+          <ul className="linkContainer">
             {/* for when user is on user page, can go back to home */}
             <li>
-              <Link to={`/`}>Home</Link>
+              <Link to={`/`} onClick={toggleNav}>Home</Link>
             </li>
 
             <li>

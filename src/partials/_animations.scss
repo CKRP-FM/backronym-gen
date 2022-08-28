@@ -26,7 +26,7 @@
   }
 }
 
-@keyframes btn-shine {
+@keyframes btnShine {
   0% {
     transform: skewX(-45deg) translateX(-400px) scaleX(5);
   }
@@ -78,7 +78,7 @@
   }
 }
 
-@keyframes menu-in-left {
+@keyframes menuLeft {
   0% {
     transform: translate(-150%, -100%) translate3d(0, 0, 0);
   }
@@ -88,7 +88,7 @@
   }
 }
 
-@keyframes menu-in-right {
+@keyframes menuRight {
   0% {
     transform: translate(100%, 0%) translate3d(0, 0, 0);
   }
