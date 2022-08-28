@@ -8,20 +8,54 @@
 }
 
 .navLinks {
-  display: none;
+  visibility: hidden;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: $red;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: transparent;
   z-index: 100;
   font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
   text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
+
+  //add 2 rects on top and bottom to prepare for swipe
+  &::before,
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: 80%;
+    background-color: $red;
+    transform-origin: center center;
+    transition: all 500ms ease;
+    z-index: -1;
+  }
+  
+  &::before {
+    //Position and transition for animation Open -> Closed
+    top: 51%;
+    transform: translate(100%, -100%) translate3d(0, 0, 0);
+  }
+
+  &::after {
+    //Position and transition for animation Open -> Closed
+    top: 49%;
+    transform: translate(-150%, 0%) translate3d(0, 0, 0);
+    transition-delay: 100ms;
+  }
+
+  li {
+    transform: translateY(-10px);
+    transition: transform 100ms ease 100ms;
+  }
 
   a:hover {
     color: $ice;
@@ -152,5 +186,28 @@
 }
 
 .showNav {
-  display: flex;
+  visibility: visible;
+
+  &::before {
+    //Opening animation
+    animation: menu-in-left 500ms ease;
+
+    //Opened transform and transition
+    transform: translate(-50%, -100%) translate3d(0, 0, 0);
+    transition-duration: 100ms;
+  }
+
+  &::after {
+    //Opening animation
+    animation: menu-in-right 500ms ease 100ms;
+
+    //Opened transform and transition
+    transform: translate(-50%, 0%) translate3d(0, 0, 0);
+    transition-duration: 100ms;
+  }
+
+  li {
+    transform: translateY(0px);
+    transition: transform 250ms ease;
+  }
 }
