@@ -20,6 +20,7 @@ function Search() {
   //useState to disable btn (once submitted to firebase)
   const [hideBtn, setHideBtn] = useState(false);
 
+  //useState to toggle loading
   const [loading, setLoading] = useState(false);
 
   // Returns a copy of an array that includes the first 10 elements
@@ -32,6 +33,7 @@ function Search() {
 
   const { user } = useUserAuth();
 
+  // set loading state to false
   function handleLoading() {
     setLoading(false);
   }
@@ -76,6 +78,7 @@ function Search() {
   }
 
   useEffect(() => {
+    // timeout function that will change loading state to false after X milliseconds
     timeout(handleLoading, 500);
     getWords();
   }, [currentIndex, selectedWord]);
@@ -232,7 +235,7 @@ function Search() {
 
           <ul>
             {loading ?            
-              <div key='searchLoading' className="loadingSection searchLoading">
+              <div key={`loading` + currentIndex} className="loadingSection searchLoading">
                 <Loading />
               </div>
               :

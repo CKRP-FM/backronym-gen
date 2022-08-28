@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import ErrorPage from '../pages/ErrorPage';
 import DeleteConfirmation from './DeleteConfirmation';
 
-// test
 import Loading from './Loading';
 import timeout from '../utilities/timeout';
 
@@ -55,6 +54,7 @@ function UserProfile() {
         }
     }
 
+    // set loading state to false
     function handleLoading() {
         setLoading(false);
     }
@@ -73,6 +73,7 @@ function UserProfile() {
     }
 
     useEffect(() => {
+        // timeout function that will change loading state to false after X milliseconds
         timeout(handleLoading, 800);
 
         // database details
