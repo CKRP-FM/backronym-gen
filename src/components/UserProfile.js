@@ -10,6 +10,7 @@ import DeleteConfirmation from './DeleteConfirmation';
 
 // test
 import Loading from './Loading';
+import timeout from '../utilities/timeout';
 
 function UserProfile() {
     const [gallery, setGallery] = useState([]);
@@ -54,6 +55,10 @@ function UserProfile() {
         }
     }
 
+    function handleLoading() {
+        setLoading(false);
+    }
+
     // delete account
     const handleUserAccountDeletion = async (e) => {
         
@@ -68,9 +73,7 @@ function UserProfile() {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000)
+        timeout(handleLoading, 800);
 
         // database details
         const database = getDatabase(firebase);
@@ -107,7 +110,7 @@ function UserProfile() {
         <div>
 
             { loading ?
-                <section className="loadingSection">
+                <section className="loadingSection userLoading">
                     <Loading />
                 </section>
 

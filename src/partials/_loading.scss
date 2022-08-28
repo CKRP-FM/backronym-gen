@@ -1,12 +1,18 @@
 .loadingSection {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.userLoading {
+    height: 100vh;
+}
+
+.searchLoading {
+    height: 280px;
+}
+
 .loadingContainer {
-    padding: 20px;
     position: fixed;
     display: flex;
     justify-content: center;

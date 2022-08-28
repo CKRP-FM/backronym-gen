@@ -5,6 +5,8 @@ import firebase from '../firebase.js';
 import { getDatabase, ref, push } from 'firebase/database';
 import { useUserAuth } from '../context/UserAuthContext.js';
 import ErrorModal from './ErrorModal.js';
+import Loading from './Loading.js';
+import timeout from '../utilities/timeout.js';
 
 function Search() {
   const [currentIndex, setCurrentIndex] = useState('');
@@ -18,6 +20,8 @@ function Search() {
   //useState to disable btn (once submitted to firebase)
   const [hideBtn, setHideBtn] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
     // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
@@ -27,6 +31,10 @@ function Search() {
   }
 
   const { user } = useUserAuth();
+
+  function handleLoading() {
+    setLoading(false);
+  }
 
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
@@ -53,6 +61,7 @@ function Search() {
 
       setBackronym([]);
       setHideBtn(false);
+      setLoading(true);
       setCurrentIndex(0);
       setWordInput('');
     } else {
@@ -67,6 +76,7 @@ function Search() {
   }
 
   useEffect(() => {
+    timeout(handleLoading, 500);
     getWords();
   }, [currentIndex, selectedWord]);
 
@@ -129,6 +139,7 @@ function Search() {
     setBackronym(clone);
     setRandomArray([]);
     setCheckedWord('');
+    setLoading(true);
     let increment = currentIndex + 1;
     setCurrentIndex(increment);
   }
@@ -220,22 +231,27 @@ function Search() {
           </p>
 
           <ul>
-            {randomArray?.map((word) => {
-              return (
-                <li key={word.word + word.score}>
-                  <input
-                    value={word.word}
-                    id={word.word}
-                    type="checkbox"
-                    // checked={isChecked}
-                    className="wordListItem"
-                    onChange={(e) => handleCheckbox(e)}
-                    disabled={checkedWord !== '' && checkedWord !== word.word}
-                  />
-                  <label htmlFor={word.word}>{word.word}</label>
-                </li>
-              );
-            })}
+            {loading ?            
+              <div key='searchLoading' className="loadingSection searchLoading">
+                <Loading />
+              </div>
+              :
+              randomArray?.map((word) => {
+                return (
+                  <li key={word.word + word.score}>
+                    <input
+                      value={word.word}
+                      id={word.word}
+                      type="checkbox"
+                      // checked={isChecked}
+                      className="wordListItem"
+                      onChange={(e) => handleCheckbox(e)}
+                      disabled={checkedWord !== '' && checkedWord !== word.word}
+                    />
+                    <label htmlFor={word.word}>{word.word}</label>
+                  </li>
+                );
+              })}
           </ul>
 
           {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
