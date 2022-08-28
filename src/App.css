@@ -1489,15 +1489,27 @@ body {
   text-align: center;
 }
 
-.loadingContainer {
-  padding: 20px;
-  position: fixed;
-}
-
-.loadingBar {
+.loadingSection {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.loadingContainer {
+  padding: 20px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingText {
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.loadingBar {
   position: relative;
   width: 250px;
   height: 250px;
@@ -1505,6 +1517,8 @@ body {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
+  -webkit-animation: spin 20s linear infinite;
+          animation: spin 20s linear infinite;
 }
 .loadingBar::before {
   content: "";
@@ -1517,6 +1531,8 @@ body {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
+  -webkit-animation: spin 18s linear infinite;
+          animation: spin 18s linear infinite;
 }
 .loadingBar::after {
   content: "";
@@ -1529,8 +1545,24 @@ body {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
+  -webkit-animation: spin 22s linear infinite;
+          animation: spin 22s linear infinite;
 }
 
-@-webkit-keyframes spin {}
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(3600deg);
+  }
+}
 
-@keyframes spin {}/*# sourceMappingURL=App.css.map */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(3600deg);
+  }
+}/*# sourceMappingURL=App.css.map */
