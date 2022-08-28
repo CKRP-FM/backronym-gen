@@ -200,7 +200,7 @@
 .bottom {
   display: block;
   width: 100%;
-  height: 4px;
+  height: 5px;
   border-radius: 5px;
   background-color: $white;
   position: absolute;
@@ -214,7 +214,7 @@
 }
 
 .mid {
-  top: 50%;
+  top: 48%;
   transform: translateY(-50%);
   transition: opacity 0.5s ease-in-out;
 }
