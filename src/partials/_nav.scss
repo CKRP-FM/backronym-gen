@@ -8,18 +8,34 @@
 }
 
 .navLinks {
-  display: flex;
+  display: none;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $red;
+  z-index: 100;
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
+
+  a:hover {
+    color: $ice;
+  }
+
   button {
-    background-color: $black;
+    background-color: transparent;
     color: $white;
     transition: 0.4s ease-in-out;
     padding: 0;
     margin: 0;
+    text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
     &:hover {
-      color: $red;
+      color: $ice;
     }
   }
 }
@@ -30,6 +46,11 @@
   justify-content: space-between;
   gap: 20px;
   width: 100%;
+}
+.currentUser {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 20px 0 0;
 }
 
 .loggedInUser {
@@ -96,4 +117,40 @@
 
 .profileLink {
   text-transform: none;
+}
+
+// hamburger menu
+.hamburgerMenu {
+  position: relative;
+  width: 45px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.top,
+.mid,
+.bottom {
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;
+  background-color: $white;
+  position: absolute;
+}
+
+.top {
+  top: 0;
+}
+
+.mid {
+  top: 45%;
+}
+
+.bottom {
+  bottom: 0;
+}
+
+.showNav {
+  display: flex;
 }

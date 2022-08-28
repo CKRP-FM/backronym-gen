@@ -173,13 +173,13 @@ form {
     position: absolute;
     top: 0;
     right: -20px;
-    background-color: rgba($color: #7ef4fe, $alpha: 0.6);
+    background-color: rgba($color: #7ef4fe, $alpha: 0.5);
     filter: blur(5px);
     width: 20px;
     height: 100%;
     transform: skewX(-40deg) scaleX(5);
     transform-origin: left bottom;
-    animation: btn-shine 5s ease-in infinite;
+    animation: btn-shine 4s ease-in infinite;
   }
 }
 
