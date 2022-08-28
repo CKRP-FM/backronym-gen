@@ -52,12 +52,12 @@ function NavBar() {
             </li>
 
             <li>
-              <Link to={`/ngramviewer`}>Ngram Viewer</Link>
+              <Link to={`/ngramviewer`} onClick={toggleNav}>Ngram Viewer</Link>
             </li>
 
             {user ? (
               <li>
-                <Link to={`/profile/${user.uid}`}>Profile</Link>
+                <Link to={`/profile/${user.uid}`} onClick={toggleNav}>Profile</Link>
               </li>
             )
               : null
