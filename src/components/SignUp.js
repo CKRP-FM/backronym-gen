@@ -1,4 +1,3 @@
-import { set } from 'firebase/database';
 import React, { useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
@@ -40,12 +39,12 @@ function SignUp({ toggleSignUpModal }) {
   };
 
   return (
-    <div className="signUpContainer signUpModal">
+    <div className="signUpContainer signUpModal" onClick={(e) => toggleSignUpModal(e)}>
       <div className="signUpContent">
         <h2>Sign Up</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
         <button className="closeBtn" onClick={(e) => toggleSignUpModal(e)}>
-          x
+          <span className="sr-only">Close</span>X
         </button>
         <form className="signUpForm">
           <label htmlFor="email">Email</label>
