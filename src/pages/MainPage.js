@@ -38,7 +38,7 @@ function MainPage() {
               // document.body.classList.add('modalActive');
             }}
           >
-            <span>View Saved Gallery</span>
+            View Saved Gallery
           </button>
         </div>
         <Footer />

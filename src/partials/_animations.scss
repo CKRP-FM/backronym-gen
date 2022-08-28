@@ -31,12 +31,12 @@
     transform: skewX(-45deg) translateX(-450px) scaleX(5);
   }
 
-  7% {
-    transform: skewX(-45deg) translateX(0) scaleX(1);
+  50% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
   }
 
   100% {
-    transform: skewX(-45deg) translateX(0) scaleX(1);
+    transform: skewX(-45deg) translateX(0) scaleX(3);
   }
 }
 

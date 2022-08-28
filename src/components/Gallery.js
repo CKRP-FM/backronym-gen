@@ -37,7 +37,10 @@ function Gallery({ closeGallery, showGallery }) {
         newState.sort((a, b) => {
           return a.userInput.join('').localeCompare(b.userInput.join(''), { ignorePunctuation: true });
         });
+      } else if (backronymFilter === 'highest') {
+        newState.sort((a, b) => b.likes - a.likes);
       }
+
       //setting the user's fb submission to our gallery state
       setGallery(newState);
     });
@@ -75,6 +78,7 @@ function Gallery({ closeGallery, showGallery }) {
             <label htmlFor="filter">Sort by: </label>
             <select id="filter" onChange={setFilter} value={backronymFilter}>
               <option value="recent">Most Recent</option>
+              <option value="highest">Most Liked</option>
               <option value="alphabetical">Alphabetical</option>
               <option value="oldest">Oldest to Newest</option>
             </select>
