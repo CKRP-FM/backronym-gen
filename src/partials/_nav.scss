@@ -1,5 +1,4 @@
 // nav
-
 .mainNav {
   padding: 20px 0;
   display: flex;
@@ -7,20 +6,97 @@
   gap: 10px;
 }
 
+//slide out menu (adapted from https: //codepen.io/empryaen/pen/joELEw)
 .navLinks {
+  visibility: hidden;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: transparent;
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
+  transform: rotate(-15deg) translate3d(0, 0, 0);
+  z-index: 100;
+
+  //add 2 rects on top and bottom for swipe animation
+  &::before,
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: 80%;
+    background-color: $red;
+    transform-origin: center center;
+    transition: all 500ms ease;
+    z-index: -10;
+  }
+  
+  &::before {
+    //Position and transition for animation Open -> Closed
+    top: 51%;
+    transform: translate(100%, -100%) translate3d(0, 0, 0);
+  }
+
+  &::after {
+    //Position and transition for animation Open -> Closed
+    top: 49%;
+    transform: translate(-150%, 0%) translate3d(0, 0, 0);
+    transition-delay: 100ms;
+  }
+
+  li {
+    color: rgba($color: $white, $alpha: 0);
+    transition: color 50ms ease-in-out;
+  }
+
+  a:hover,
+  button:hover {
+    color: $ice;
+  }
+
   button {
-    background-color: $black;
-    color: $white;
+    background-color: transparent;
+    color: rgba($color: $white, $alpha: 0);
     transition: 0.4s ease-in-out;
     padding: 0;
     margin: 0;
-    &:hover {
-      color: $red;
-    }
+    text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
+  }
+}
+
+//show slide out nav
+.showNav {
+  visibility: visible;
+
+  &::before {
+    //Opening animation
+    animation: menuLeft 500ms ease;
+
+    //Opened transform and transition
+    transform: translate(-50%, -100%) translate3d(0, 0, 0);
+    transition-duration: 100ms;
+  }
+
+  &::after {
+    //Opening animation
+    animation: menuRight 500ms ease 100ms;
+
+    //Opened transform and transition
+    transform: translate(-50%, 0%) translate3d(0, 0, 0);
+    transition-duration: 100ms;
+  }
+
+  li,
+  button {
+    color: rgba($color: $white, $alpha: 1);
+    transition: color 50ms ease-in-out;
   }
 }
 
@@ -28,8 +104,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
   width: 100%;
+}
+
+.linkContainer {
+  transform: rotate(15deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.currentUser {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 20px 0 0;
 }
 
 .loggedInUser {
@@ -96,4 +184,60 @@
 
 .profileLink {
   text-transform: none;
+}
+
+// hamburger menu (slightly adapted from chow's portfolio)
+.hamburgerMenu {
+  position: relative;
+  width: 45px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.top,
+.mid,
+.bottom {
+  display: block;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: $white;
+  position: absolute;
+}
+
+.top {
+  top: 0;
+  transform-origin: left top;
+  transform: rotateZ(0deg);
+  transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.mid {
+  top: 48%;
+  transform: translateY(-50%);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.bottom {
+  bottom: 0;
+  transform-origin: left bottom;
+  transform: rotateZ(0deg);
+  transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.topClosed {
+  transform: rotateZ(45deg);
+  width: 111%;
+  background-color: $black;
+}
+
+.midClosed {
+  opacity: 0;
+}
+
+.bottomClosed {
+  transform: rotateZ(-45deg);
+  width: 111%;
+  background-color: $black;
 }

@@ -10,6 +10,7 @@ function SignUp({ toggleSignUpModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [hasSignedUp, setHasSignedUp] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -26,7 +27,10 @@ function SignUp({ toggleSignUpModal }) {
     // try catch sign up
     try {
       await signUp(email, password);
-      toggleSignUpModal(e);
+      setHasSignedUp(true);
+      setTimeout(() => {
+        toggleSignUpModal(e);
+      }, 3000);
     } catch (err) {
       setError(err.message);
     }
@@ -35,12 +39,12 @@ function SignUp({ toggleSignUpModal }) {
   };
 
   return (
-    <div className="signUpContainer signUpModal">
+    <div className="signUpContainer signUpModal" onClick={(e) => toggleSignUpModal(e)}>
       <div className="signUpContent">
         <h2>Sign Up</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
         <button className="closeBtn" onClick={(e) => toggleSignUpModal(e)}>
-          x
+          <span className="sr-only">Close</span>X
         </button>
         <form className="signUpForm">
           <label htmlFor="email">Email</label>
@@ -51,6 +55,9 @@ function SignUp({ toggleSignUpModal }) {
             Sign Up
           </button>
         </form>
+
+        {hasSignedUp ? <p>Sign up successful. Redirecting to login form.</p> : null}
+        
       </div>
     </div>
   );
