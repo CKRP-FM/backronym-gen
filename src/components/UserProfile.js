@@ -117,29 +117,29 @@ function UserProfile() {
 
                 :
 
-                <section className="userProfile">
+        <section className="userProfile">
 
-                    <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
-                        <div className='deleteMessageContainer wrapper'>
-                            <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
-                            <div className='deleteButtonContainer'>
-                            <Link to="/login">
-                                <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
-                            </Link>
-                            <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
-                            </div> 
+            <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
+                    <div className='deleteMessageContainer wrapper'>
+                        <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
+                        <div className='deleteButtonContainer'>
+                        <Link to="/login">
+                            <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
+                        </Link>
+                        <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
                         </div>
                     </div>
+            </div>
 
-                    <div className="wrapper">
-                        <h2>Your Profile</h2>
-                        {
-                            uid === user.uid && backronymKeys.length === 0 ?
-                            <div className="emptyProfileMessage">
-                                <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
-                            </div>
-                            : null
-                        }
+            <div className="wrapper">
+                <h2>Your Profile</h2>
+                {
+                    uid === user.uid && backronymKeys.length === 0 ?
+                    <div className="emptyProfileMessage">
+                        <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
+                    </div>
+                    : null
+                }
 
                         <ul className="resultsDisplay">
                             {
@@ -190,16 +190,16 @@ function UserProfile() {
                         </ul>
 
                         {uid === user.uid ?
-                            <div className='profileButtons'>
-                                <Link to="/">
-                                    <button className='backButton'>Back</button>
-                                </Link>
-                                <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
-                                >Delete Account</button>
+                <div className='profileButtons'>
+                    <Link to="/">
+                        <button className='backButton'>Back</button>
+                    </Link>
+                    <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
+                    >Delete Account</button>
                             </div> : null    
                         }
-                    </div>
-                </section>
+            </div>
+        </section>
             }
         </div>
     )
