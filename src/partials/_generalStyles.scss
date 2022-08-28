@@ -2,11 +2,11 @@
 html {
   background-color: $black;
   color: $white;
+  overflow: hidden;
 }
 
 body {
   font-family: $bodyFont;
-  overflow: hidden;
 }
 
 ul,
