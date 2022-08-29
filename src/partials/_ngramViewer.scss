@@ -41,7 +41,7 @@
   background-color: $white;
   background-image: none;
   padding: 30px;
-  margin-top: 10px;
+  margin: 10px 0 0 0;
   border-radius: 30px;
   border: 2px solid $black;
   box-shadow: 5px 5px 0px $ice;
@@ -80,8 +80,8 @@
 .chartJsContainer {
   background-color: $white;
   border-radius: 30px;
-  padding: 50px;
-  width: 100%;
+  padding: 20px;
+  width: 80vw;
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px #c0f5fa;
 }

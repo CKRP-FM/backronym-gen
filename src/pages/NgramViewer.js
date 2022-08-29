@@ -24,13 +24,23 @@ function NgramViewer() {
     labels: datesData,
     datasets: [
       {
-        label: 'Frequency of the word or phrase',
+        label: `Frequency of "${searchInput}"`,
         data: frequencyData,
         backgroundColor: '#ff5e5b',
         borderColor: 'black',
         borderWidth: 2,
       },
     ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Word or Phrase Frequency Between 1959 and 2019',
+      },
+    },
   };
 
   const setDatesLabel = (start, end) => {
@@ -47,7 +57,7 @@ function NgramViewer() {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
 
-    //for every change in the firebase db, push the new value into our gallery state
+    // db listener, for every change in the firebase db, push the new value into our gallery state
     onValue(dbRef, (response) => {
       const newState = [];
       const data = response.val();
@@ -66,18 +76,18 @@ function NgramViewer() {
   }, []);
 
   function isValidInput(str) {
-    // allow text, numbers and spaces
+    // allow text, numbers and spaces and only words over 1 character, regex from https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
     return /^[a-zA-Z_]+( [a-zA-Z_]+)*$/.test(str) && str.length > 1;
   }
 
   const getNgram = async () => {
     await axios
       .get(
-        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1919&year_end=2019&corpus=26&smoothing=3`
+        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1959&year_end=2019&corpus=26&smoothing=3`
       )
       .then((response) => {
         setFrequencyData(response.data[0].timeseries);
-        setDatesLabel(1919, 2019);
+        setDatesLabel(1959, 2019);
       })
       .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
   };
@@ -89,6 +99,11 @@ function NgramViewer() {
   const handleSelection = (e) => {
     const selectionString = [...e.target.value];
     setCurrentSelection(selectionString.join('').replaceAll(',', ''));
+  };
+
+  const resetForm = (e) => {
+    e.preventDefault();
+    setCurrentSelection('');
   };
 
   const handleSearchSubmit = async (e) => {
@@ -110,8 +125,8 @@ function NgramViewer() {
     <div className="ngramViewer">
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
       <NavBar />
-      <main className="wrapper ngramViewerMain">
-        <section className="ngramViewerContent">
+      <main className="ngramViewerMain">
+        <section className="ngramViewerContent wrapper">
           <h1>Ngram Viewer</h1>
           <p>Powered by Google Ngram Viewer API</p>
           <h2>What is the Google Ngram Viewer?</h2>
@@ -147,7 +162,7 @@ function NgramViewer() {
               </a>
             </span>
           </p>
-          <div className="visualizerContainer wrapper">
+          <div className="visualizerContainer">
             <div className="userNgramInputBox">
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
@@ -160,7 +175,7 @@ function NgramViewer() {
                     type="text"
                     id="searchNgram"
                     onChange={(e) => handleInput(e)}
-                    placeholder="Frankenstein, Dracula..."
+                    placeholder="Bitcoin..."
                     value={currentInput}
                   />
                 </fieldset>
@@ -177,7 +192,7 @@ function NgramViewer() {
                     name="savedBackronyms"
                     id="savedBackronyms"
                     defaultValue={'default'}
-                    // value={currentSelection}
+                    value={currentSelection}
                     onChange={(e) => handleSelection(e)}
                   >
                     <option value="default" disabled>
@@ -193,17 +208,18 @@ function NgramViewer() {
                   </select>
                 </fieldset>
                 <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+                <button onClick={(e) => resetForm(e)}>Reset form</button>
               </form>
             </div>
-            <div className="ngramGraphBox wrapper">
+            <div className="ngramGraphBox">
               <h3>Usage Frequency Graph</h3>
-              <h4>Results between the years 1919 and 2019</h4>
+              <h4>Results between the years 1959 and 2019</h4>
               <div className="chartJsContainer">
-                <Line data={data} />
+                <Line data={data} options={options} />
               </div>
               <p>
-                More information on the Google Ngram Viewer{' '}
-                <a href="https://books.google.com/ngrams/info" target="_blank" rel="noopener noreferrer">
+                Search for other date ranges or languages{' '}
+                <a href="https://books.google.com/ngrams" target="_blank" rel="noopener noreferrer">
                   here
                 </a>
                 .
