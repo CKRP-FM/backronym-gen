@@ -137,9 +137,9 @@ function UserProfile() {
 
             {uid === user.uid ? (
               <div className="profileButtons">
-                <Link to="/">
+                {/* <Link to="/">
                   <button className="backButton">Back</button>
-                </Link>
+                </Link> */}
                 <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
                   Delete Account
                 </button>
