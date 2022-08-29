@@ -20,6 +20,19 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
+  fieldset {
+    display: flex;
+    gap: 5px;
+  }
+  @media screen and (max-width: 630px) {
+    fieldset {
+      flex-direction: column;
+      gap: 20px;
+    }
+    form {
+      margin: 0;
+    }
+  }
 }
 
 form {
@@ -50,6 +63,9 @@ form {
 
 .headerImgContainer {
   animation: float 5s ease-in-out alternate infinite;
+  @media screen and (max-width: 630px) {
+    display: none;
+  }
 }
 
 .backronymSelect {
@@ -169,7 +185,7 @@ form {
   overflow: hidden;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: -20px;
@@ -182,4 +198,3 @@ form {
     animation: btnShine 4s ease-in infinite;
   }
 }
-

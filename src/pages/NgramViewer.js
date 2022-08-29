@@ -192,7 +192,6 @@ function NgramViewer() {
                     name="savedBackronyms"
                     id="savedBackronyms"
                     defaultValue={'default'}
-                    value={currentSelection}
                     onChange={(e) => handleSelection(e)}
                   >
                     <option value="default" disabled>
