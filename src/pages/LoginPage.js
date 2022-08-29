@@ -19,16 +19,19 @@ function LoginPage() {
 
   return (
     <div className="loginPage">
-      <nav className="loginPageNav">
-        {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
-        <div className="aboutPopOut">
-          <button className="aboutBtn" onClick={() => setShow(true)}>
-            ?
-          </button>
-          {/* whenever this method is called it will close the modal */}
-          <AboutModal onClose={() => setShow(false)} show={show} />
-        </div>
-      </nav>
+      <div className="wrapper">
+        <nav className="loginPageNav">
+          {showSignUpModal ? <SignUp toggleSignUpModal={toggleSignUpModal} /> : null}
+          <div className="aboutPopOut">
+            <button className="aboutBtn" onClick={() => setShow(true)}>
+              ?
+            </button>
+            {/* whenever this method is called it will close the modal */}
+            <AboutModal onClose={() => setShow(false)} show={show} />
+          </div>
+        </nav>
+      </div>
+      
       <main className="wrapper">
         <div className="mainSearch loginPageMain">
           <div className="loginPageText">

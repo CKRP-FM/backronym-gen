@@ -1,58 +1,35 @@
-import { FaRegTrashAlt } from 'react-icons/fa';
 import firebase from '../firebase';
-import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
+import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
+import ErrorModal from './ErrorModal';
 
 import ErrorPage from '../pages/ErrorPage';
-import DeleteConfirmation from './DeleteConfirmation';
+import GalleryCard from './GalleryCard';
 
 import Loading from './Loading';
 import timeout from '../utilities/timeout';
 
 function UserProfile() {
-    const [gallery, setGallery] = useState([]);
-    const { user, deleteProfile } = useUserAuth();
-    const [error, setError] = useState('');
-    const [backronymKeys, setBackronymKeys] = useState([]);
-    const [deleteWarning, setDeleteWarning] = useState(false);
-    const [deleteID, setDeleteID] = useState('');
-    const [deleteAccountAttempt, setDeleteAccountAttempt] = useState(false);
+  const [gallery, setGallery] = useState([]);
+  const { user, deleteProfile } = useUserAuth();
+  const [error, setError] = useState('');
+  const [backronymKeys, setBackronymKeys] = useState([]);
+  const [deleteAccountAttempt, setDeleteAccountAttempt] = useState(false);
     const [loading, setLoading] = useState(true);
-    const { uid } = useParams();
+  const { uid } = useParams();
 
-    //updating like count
-    function handleLike(resultKey, resultLikes) {
-        const updatedLikes = {
-        likes: resultLikes + 1,
-        };
-
-        const database = getDatabase(firebase);
-        const childRef = ref(database, `/${resultKey}`);
-        update(childRef, updatedLikes);
-    }
-
-    // delete entry
-    function handleDelete(e, resultKey) {
-        e.preventDefault();
-        const database = getDatabase(firebase);
-        const dbRef = ref(database, `/${resultKey}`);
+  // delete user's of backronyms
+  function handleDeleteBackronyms(backronymKeyList) {
+    if (backronymKeyList.length > 0) {
+      const database = getDatabase(firebase);
+      for (let key of backronymKeyList) {
+        const dbRef = ref(database, `/${key}`);
         remove(dbRef);
-
-        setDeleteID('');
+      }
     }
-
-    // delete user's of backronyms
-    function handleDeleteBackronyms(backronymKeyList) {
-        if (backronymKeyList.length > 0) {
-            const database = getDatabase(firebase);
-            for (let key of backronymKeyList) {
-                const dbRef = ref(database, `/${key}`);
-                remove(dbRef);
-            }
-        }
-    }
+  }
 
     // set loading state to false
     function handleLoading() {
@@ -64,13 +41,13 @@ function UserProfile() {
         
         handleDeleteBackronyms(backronymKeys);
 
-        setError('');
-        try {
-            await deleteProfile();
-        } catch (err) {
-            setError(err.message);
-        }
+    setError('');
+    try {
+      await deleteProfile();
+    } catch (err) {
+      setError(err.message);
     }
+  };
 
     useEffect(() => {
         // timeout function that will change loading state to false after X milliseconds
@@ -97,15 +74,15 @@ function UserProfile() {
         })
     }, []);
 
-    useEffect(() => {
-        const tempKeyState = [];
-            gallery.forEach((result) => {
-                if (result.email === user.email || (result.email === 'anonymous' && user.email === null)) {
-                    tempKeyState.push(result.key);
-                }
-            })
-        setBackronymKeys(tempKeyState);
-    }, [gallery]);
+  useEffect(() => {
+    const tempKeyState = [];
+    gallery.forEach((result) => {
+      if (result.email === user.email || (result.email === 'anonymous' && user.email === null)) {
+        tempKeyState.push(result.key);
+      }
+    });
+    setBackronymKeys(tempKeyState);
+  }, [gallery]);
 
     return(
         <div>
@@ -141,53 +118,19 @@ function UserProfile() {
                     : null
                 }
 
-                        <ul className="resultsDisplay">
-                            {
-                                uid === user.uid ?
-                                gallery.map((result) => {
-                                    return(
-                                        (result.email === user.email || (result.email === 'anonymous' && user.email === null)) ?
-                                        <li className="galleryCard" key={result.key}>
-                                            <div className="userGalleryControls">
-
-                                                <button className="deleteBtn" onClick={(e) => {
-                                                    setDeleteWarning(true);
-                                                    setDeleteID(result.key);
-                                                    }}>
-
-                                                    <span className="sr-only">Delete</span>
-                                                    <FaRegTrashAlt />
-
-                                                </button>
-
-                                                {deleteWarning ? (
-                                                    <DeleteConfirmation
-                                                    setDeleteWarning={setDeleteWarning}
-                                                    handleDelete={handleDelete}
-                                                    deleteID={deleteID}
-                                                    />
-                                                ) : null}
-
-                                                <button
-                                                className="likeBtn"
-                                                onClick={() => {
-                                                    handleLike(result.key, result.likes);
-                                                }}>
-                                                    <span className="sr-only">Like</span>
-                                                </button>
-                                                <p className="likeCount">{result.likes}</p>
-                                            </div>
-                                            <h3>{result.userInput}</h3>
-                                            {
-                                                result.results.map((initialWord, index) => {
-                                                    return <p key={`${result.key}-${index}`}>{initialWord}</p>;
-                                                })
-                                            }
-                                        </li> : ""
-                                    )
-                                }) : <ErrorPage />
-                            }
-                        </ul>
+        <ul className="resultsDisplay">
+          {uid === user.uid ? (
+            gallery.map((result) => {
+              return result.email === user.email || (result.email === 'anonymous' && user.email === null) ? (
+                <GalleryCard result={result} key={result.key} />
+              ) : (
+                ''
+              );
+            })
+          ) : (
+            <ErrorPage />
+          )}
+        </ul>
 
                         {uid === user.uid ?
                 <div className='profileButtons'>

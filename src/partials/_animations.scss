@@ -26,6 +26,20 @@
   }
 }
 
+@keyframes btnShine {
+  0% {
+    transform: skewX(-45deg) translateX(-400px) scaleX(5);
+  }
+
+  50% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+
+  100% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+}
+
 // Animation for gallery
 
 @keyframes slideUp {
@@ -61,5 +75,25 @@
   }
   100% {
     transform: translateY(100%);
+  }
+}
+
+@keyframes menuLeft {
+  0% {
+    transform: translate(-150%, -100%) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate(-50%, -100%) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes menuRight {
+  0% {
+    transform: translate(100%, 0%) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate(-50%, 0%) translate3d(0, 0, 0);
   }
 }
