@@ -82,8 +82,8 @@ function Search() {
   useEffect(() => {
     // timeout function that will change loading state to false after X milliseconds
     timeout(handleLoading, 500);
-    // eslint-disable-next-line
     getWords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, selectedWord]);
 
   function getWords() {
