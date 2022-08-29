@@ -11,6 +11,7 @@ import 'chart.js/auto';
 
 function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
+  const [currentSelection, setCurrentSelection] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [gallery, setGallery] = useState([]);
   const [error, setError] = useState('');
@@ -30,6 +31,14 @@ function NgramViewer() {
         borderWidth: 2,
       },
     ],
+  };
+
+  const setDatesLabel = (start, end) => {
+    let datesArray = [];
+    for (let i = start; i <= end; i++) {
+      datesArray.push(i);
+    }
+    setDatesData(datesArray);
   };
 
   //connect to firebase when NgramViewer component mounts
@@ -56,13 +65,10 @@ function NgramViewer() {
     });
   }, []);
 
-  const setDatesLabel = (start, end) => {
-    let datesArray = [];
-    for (let i = start; i <= end; i++) {
-      datesArray.push(i);
-    }
-    setDatesData(datesArray);
-  };
+  function isValidInput(str) {
+    // allow text, numbers and spaces
+    return /^[a-zA-Z_]+( [a-zA-Z_]+)*$/.test(str) && str.length > 1;
+  }
 
   const getNgram = async () => {
     await axios
@@ -80,11 +86,21 @@ function NgramViewer() {
     setCurrentInput(e.target.value);
   };
 
-  const handleSearchSubmit = (e) => {
+  const handleSelection = (e) => {
+    const selectionString = [...e.target.value];
+    setCurrentSelection(selectionString.join('').replaceAll(',', ''));
+  };
+
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     if (currentInput !== '') {
-      setSearchInput(currentInput);
-      getNgram();
+      if (isValidInput(currentInput)) {
+        setSearchInput(currentInput);
+        await getNgram();
+        setCurrentInput('');
+      } else {
+        setError('Only text inputs over one character are allowed!');
+      }
     } else {
       setError('Select a word or phrase to search for their frequency!');
     }
@@ -136,11 +152,17 @@ function NgramViewer() {
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
                 <fieldset>
-                  <legend>Enter a word, several words seperated by a comma, or a phrase:</legend>
+                  <legend>Enter a word or a phrase:</legend>
                   <label htmlFor="searchNgram" className="sr-only">
                     Search for a word or phrase
                   </label>
-                  <input type="text" id="searchNgram" onChange={handleInput} placeholder="Frankenstein, Dracula..." />
+                  <input
+                    type="text"
+                    id="searchNgram"
+                    onChange={(e) => handleInput(e)}
+                    placeholder="Frankenstein, Dracula..."
+                    value={currentInput}
+                  />
                 </fieldset>
 
                 {/* If user wants to select from our list of saved backronyms */}
@@ -155,8 +177,8 @@ function NgramViewer() {
                     name="savedBackronyms"
                     id="savedBackronyms"
                     defaultValue={'default'}
-                    // value={currentInput}
-                    onChange={handleInput}
+                    // value={currentSelection}
+                    onChange={(e) => handleSelection(e)}
                   >
                     <option value="default" disabled>
                       Select your option
