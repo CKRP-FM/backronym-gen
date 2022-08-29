@@ -39,7 +39,7 @@ function SignUp({ toggleSignUpModal }) {
   };
 
   return (
-    <div className="signUpContainer signUpModal" onClick={(e) => toggleSignUpModal(e)}>
+    <div className="signUpContainer signUpModal" >
       <div className="signUpContent">
         <h2>Sign Up</h2>
         {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
