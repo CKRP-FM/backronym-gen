@@ -97,25 +97,27 @@ function NgramViewer() {
   };
 
   const handleInput = (e) => {
-    resetGraph();
+    // resetGraph();
     setCurrentInput(e.target.value);
   };
 
-  const resetGraph = () => {
-    setSearchInput('');
-    setFrequencyData([]);
-    setDatesLabel([]);
-  };
+  // const resetGraph = () => {
+  //   setSearchInput('');
+  //   setFrequencyData([]);
+  //   setDatesLabel([]);
+  // };
 
   const handleSelection = (e) => {
-    resetGraph();
+    // resetGraph();
     const selectionString = [...e.target.value];
     setCurrentSelection(selectionString.join('').replaceAll(',', ''));
+    console.log(currentSelection);
   };
 
   const resetForm = (e) => {
     e.preventDefault();
-    setCurrentSelection('default');
+    setCurrentSelection('');
+    setCurrentInput('');
   };
 
   const handleSearchSubmit = (e) => {
@@ -186,7 +188,8 @@ function NgramViewer() {
                   <label htmlFor="searchNgram" className="sr-only">
                     Search for a word or phrase
                   </label>
-                  {currentSelection === '' || 'default' ? (
+                  {/* Only let user input new word if no selected word has been selected in the dropdown */}
+                  {currentSelection === '' ? (
                     <input
                       type="text"
                       id="searchNgram"
@@ -221,7 +224,7 @@ function NgramViewer() {
                       value={currentSelection}
                       onChange={(e) => handleSelection(e)}
                     >
-                      <option value="default" disabled>
+                      <option value="" disabled>
                         Select your option
                       </option>
                       {gallery.map((result) => {
@@ -237,6 +240,7 @@ function NgramViewer() {
                   )}
                 </fieldset>
                 <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+                {/* resets the dropdown field */}
                 <button onClick={(e) => resetForm(e)}>Reset form</button>
               </form>
             </div>
