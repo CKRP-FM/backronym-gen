@@ -26,7 +26,9 @@ function Search() {
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
     // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
-    let newArray = array.filter((str) => str.word.length > 1 || str.word == 'a' || str.word == 'i' || str.word == 'o');
+    let newArray = array.filter(
+      (str) => str.word.length > 1 || str.word === 'a' || str.word === 'i' || str.word === 'o'
+    );
     // only get the first 10 results
     return newArray.slice(0, 10);
   }
@@ -81,6 +83,7 @@ function Search() {
     // timeout function that will change loading state to false after X milliseconds
     timeout(handleLoading, 500);
     getWords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, selectedWord]);
 
   function getWords() {
@@ -234,11 +237,11 @@ function Search() {
           </p>
 
           <ul>
-            {loading ?            
+            {loading ? (
               <div key={`loading` + currentIndex} className="loadingSection searchLoading">
                 <Loading />
               </div>
-              :
+            ) : (
               randomArray?.map((word) => {
                 return (
                   <li key={word.word + word.score}>
@@ -254,7 +257,8 @@ function Search() {
                     <label htmlFor={word.word}>{word.word}</label>
                   </li>
                 );
-              })}
+              })
+            )}
           </ul>
 
           {currentIndex !== '' && currentIndex < selectedWord.length && checkedWord === '' ? (
@@ -266,20 +270,21 @@ function Search() {
             >
               Refresh Words
             </button>
-          ) : null }
+          ) : null}
 
           {checkedWord !== '' ? (
-            <button className='saveWordButton' autoFocus={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
+            <button className="saveWordButton" autoFocus={true} onClick={(e) => handleSaveWord(e)}>
+              Save Word
+            </button>
           ) : // <button disabled={true} onClick={(e) => handleSaveWord(e)}>Save Word</button>
           null}
 
-          {backronym.length >= 1 ? 
+          {backronym.length >= 1 ? (
             <p className="generatedBackronym">
               Your backronym is: <span>{backronym.join(' ')}</span>
-            </p> 
-            : null
-          }
-          
+            </p>
+          ) : null}
+
           {/* save to firebase btn */}
           {currentIndex === selectedWord.length ? (
             <button onClick={handleFirebase} disabled={hideBtn}>

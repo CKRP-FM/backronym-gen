@@ -17,7 +17,7 @@ function UserProfile() {
   const [error, setError] = useState('');
   const [backronymKeys, setBackronymKeys] = useState([]);
   const [deleteAccountAttempt, setDeleteAccountAttempt] = useState(false);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { uid } = useParams();
 
   // delete user's of backronyms
@@ -31,15 +31,14 @@ function UserProfile() {
     }
   }
 
-    // set loading state to false
-    function handleLoading() {
-        setLoading(false);
-    }
+  // set loading state to false
+  function handleLoading() {
+    setLoading(false);
+  }
 
-    // delete account
-    const handleUserAccountDeletion = async (e) => {
-        
-        handleDeleteBackronyms(backronymKeys);
+  // delete account
+  const handleUserAccountDeletion = async (e) => {
+    handleDeleteBackronyms(backronymKeys);
 
     setError('');
     try {
@@ -49,30 +48,30 @@ function UserProfile() {
     }
   };
 
-    useEffect(() => {
-        // timeout function that will change loading state to false after X milliseconds
-        timeout(handleLoading, 800);
+  useEffect(() => {
+    // timeout function that will change loading state to false after X milliseconds
+    timeout(handleLoading, 800);
 
-        // database details
-        const database = getDatabase(firebase);
-        const dbRef = ref(database);
-            
-        onValue(dbRef, (response) => {
-            const newState = [];
-            const data = response.val();
-            for(let key in data) {
-                newState.push({
-                    key: key,
-                    timestamp: data[key].timestamp,
-                    email: data[key].email,
-                    userInput: data[key].userInput,
-                    results: data[key].results,
-                    likes: data[key].likes,
-                })
-            }
-            setGallery(newState);
-        })
-    }, []);
+    // database details
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+
+    onValue(dbRef, (response) => {
+      const newState = [];
+      const data = response.val();
+      for (let key in data) {
+        newState.push({
+          key: key,
+          timestamp: data[key].timestamp,
+          email: data[key].email,
+          userInput: data[key].userInput,
+          results: data[key].results,
+          likes: data[key].likes,
+        });
+      }
+      setGallery(newState);
+    });
+  }, []);
 
   useEffect(() => {
     const tempKeyState = [];
@@ -82,70 +81,72 @@ function UserProfile() {
       }
     });
     setBackronymKeys(tempKeyState);
-  }, [gallery]);
+  }, [gallery, user.email]);
 
-    return(
-        <div>
+  return (
+    <div>
+      {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
-        { loading ?
-            <section className="loadingSection userLoading">
-              <Loading />
-            </section>
-
-            :
-
+      {loading ? (
+        <section className="loadingSection userLoading">
+          <Loading />
+        </section>
+      ) : (
         <section className="userProfile">
-
-            <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
-                    <div className='deleteMessageContainer wrapper'>
-                        <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
-                        <div className='deleteButtonContainer'>
-                        <Link to="/login">
-                            <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
-                        </Link>
-                        <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
-                        </div>
-                    </div>
-            </div>
-
-            <div className="wrapper">
-                <h2>Your Profile</h2>
-                {
-                    uid === user.uid && backronymKeys.length === 0 ?
-                    <div className="emptyProfileMessage">
-                        <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
-                    </div>
-                    : null
-                }
-
-        <ul className="resultsDisplay">
-          {uid === user.uid ? (
-            gallery.map((result) => {
-              return result.email === user.email || (result.email === 'anonymous' && user.email === null) ? (
-                <GalleryCard result={result} key={result.key} />
-              ) : (
-                ''
-              );
-            })
-          ) : (
-            <ErrorPage />
-          )}
-        </ul>
-
-          {uid === user.uid ?
-            <div className='profileButtons'>
-              <Link to="/">
-                <button className='backButton'>Back</button>
+          <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
+            <div className="deleteMessageContainer wrapper">
+              <p>
+                Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to
+                proceed?
+              </p>
+              <div className="deleteButtonContainer">
+                <Link to="/login">
+                  <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
                 </Link>
-                <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
-                >Delete Account</button>
-            </div> : null    
-          }
+                <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
+              </div>
+            </div>
           </div>
-          </section>
-        }
-        </div>
-    )
+
+          <div className="wrapper">
+            <h2>Your Profile</h2>
+            {uid === user.uid && backronymKeys.length === 0 ? (
+              <div className="emptyProfileMessage">
+                <h3>
+                  Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!
+                </h3>
+              </div>
+            ) : null}
+
+            <ul className="resultsDisplay">
+              {uid === user.uid ? (
+                gallery.map((result) => {
+                  return result.email === user.email || (result.email === 'anonymous' && user.email === null) ? (
+                    <GalleryCard result={result} key={result.key} />
+                  ) : (
+                    ''
+                  );
+                })
+              ) : (
+                <ErrorPage />
+              )}
+            </ul>
+
+            {uid === user.uid ? (
+              <div className="profileButtons">
+                <Link to="/">
+                  <button className="backButton">Back</button>
+                </Link>
+                <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
+                  Delete Account
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      )}
+    </div>
+  );
 }
 
 export default UserProfile;

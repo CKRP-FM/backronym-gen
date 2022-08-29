@@ -10,6 +10,15 @@ function NavBar() {
   const [error, setError] = useState('');
   const [nav, setNav] = useState(false);
 
+  //hide overflowing elements when slide out nav is shown on page
+  // useEffect(() => {
+  //   if (nav === true) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //   }
+  // }, [nav])
+
   const { user, logOut } = useUserAuth();
 
   const handleUserLogOut = async (e) => {
