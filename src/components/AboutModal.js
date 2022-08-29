@@ -10,7 +10,7 @@ const AboutModal = props => {
     if (props.show) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'auto';
     }
   }, [props.show])
 

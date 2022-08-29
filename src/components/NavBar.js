@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
@@ -10,14 +10,14 @@ function NavBar() {
   const [error, setError] = useState('');
   const [nav, setNav] = useState(false);
 
-  //hide overflowing elements when slide out nav is shown on page
-  // useEffect(() => {
-  //   if (nav === true) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //   }
-  // }, [nav])
+  //Hide overflowing elements when slide out nav is shown on page. This is to prevent users to be able to scroll the base html while the navbar is out
+  useEffect(() => {
+    if (nav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [nav])
 
   const { user, logOut } = useUserAuth();
 
@@ -44,7 +44,8 @@ function NavBar() {
       ) : null}
 
       <nav className="mainNav">
-        <div className="hamburgerMenu"
+        <span className="sr-only">Open website menu</span>
+        <div className="hamburgerMenu" tabindex="0"
           onClick={toggleNav}
         >
           <span className={`top ${nav ? 'topClosed' : ''}`}></span>

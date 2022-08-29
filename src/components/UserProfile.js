@@ -3,12 +3,13 @@ import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
-import ErrorModal from './ErrorModal';
 
+import ErrorModal from './ErrorModal';
 import ErrorPage from '../pages/ErrorPage';
 import GalleryCard from './GalleryCard';
-
 import Loading from './Loading';
+import NavBar from './NavBar';
+
 import timeout from '../utilities/timeout';
 
 function UserProfile() {
@@ -107,6 +108,8 @@ function UserProfile() {
               </div>
             </div>
           </div>
+
+          <NavBar />
 
           <div className="wrapper">
             <h2>Your Profile</h2>

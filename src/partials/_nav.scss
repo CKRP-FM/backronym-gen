@@ -188,19 +188,22 @@
 
 // hamburger menu (slightly adapted from chow's portfolio)
 .hamburgerMenu {
+  flex-shrink: 0;
+  display: block;
   position: relative;
-  width: 45px;
+  width: 40px;
   height: 35px;
   cursor: pointer;
   z-index: 1000;
 }
+
 
 .top,
 .mid,
 .bottom {
   display: block;
   width: 100%;
-  height: 5px;
+  height: 4px;
   border-radius: 5px;
   background-color: $white;
   position: absolute;
@@ -209,12 +212,12 @@
 .top {
   top: 0;
   transform-origin: left top;
-  transform: rotateZ(0deg);
+  transform: rotate(0deg);
   transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .mid {
-  top: 48%;
+  top: 50%;
   transform: translateY(-50%);
   transition: opacity 0.5s ease-in-out;
 }
@@ -222,12 +225,12 @@
 .bottom {
   bottom: 0;
   transform-origin: left bottom;
-  transform: rotateZ(0deg);
+  transform: rotate(0deg);
   transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .topClosed {
-  transform: rotateZ(45deg);
+  transform: rotate(45deg);
   width: 111%;
   background-color: $black;
 }
@@ -237,7 +240,7 @@
 }
 
 .bottomClosed {
-  transform: rotateZ(-45deg);
+  transform: rotate(-45deg);
   width: 111%;
   background-color: $black;
 }
