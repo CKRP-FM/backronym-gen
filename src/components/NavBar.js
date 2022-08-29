@@ -45,19 +45,19 @@ function NavBar() {
 
         <div className="navLinksContainer">
           <div className={`navLinks ${nav ? 'showNav' : ''}`}>
-          <ul className="linkContainer">
+          <ul className="linkContainer" onClick={toggleNav}>
             {/* for when user is on user page, can go back to home */}
             <li>
-              <Link to={`/`} onClick={toggleNav}>Home</Link>
+              <Link to={`/`}>Home</Link>
             </li>
 
             <li>
-              <Link to={`/ngramviewer`} onClick={toggleNav}>Ngram Viewer</Link>
+              <Link to={`/ngramviewer`}>Ngram Viewer</Link>
             </li>
 
             {user ? (
               <li>
-                <Link to={`/profile/${user.uid}`} onClick={toggleNav}>Profile</Link>
+                <Link to={`/profile/${user.uid}`}>Profile</Link>
               </li>
             )
               : null

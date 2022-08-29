@@ -87,12 +87,12 @@ function UserProfile() {
     return(
         <div>
 
-            { loading ?
-                <section className="loadingSection userLoading">
-                    <Loading />
-                </section>
+        { loading ?
+            <section className="loadingSection userLoading">
+              <Loading />
+            </section>
 
-                :
+            :
 
         <section className="userProfile">
 
@@ -132,18 +132,18 @@ function UserProfile() {
           )}
         </ul>
 
-                        {uid === user.uid ?
-                <div className='profileButtons'>
-                    <Link to="/">
-                        <button className='backButton'>Back</button>
-                    </Link>
-                    <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
-                    >Delete Account</button>
-                            </div> : null    
-                        }
-            </div>
-        </section>
-            }
+          {uid === user.uid ?
+            <div className='profileButtons'>
+              <Link to="/">
+                <button className='backButton'>Back</button>
+                </Link>
+                <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}
+                >Delete Account</button>
+            </div> : null    
+          }
+          </div>
+          </section>
+        }
         </div>
     )
 }
