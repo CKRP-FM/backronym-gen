@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   p {
     line-height: 1.5;
   }
@@ -27,6 +28,20 @@
   justify-content: space-between;
 }
 
+.ngramViewerHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 0.8rem;
+    margin-top: 0;
+  }
+}
+
 .viewNgramPageBtn {
   border: 2px solid $black;
   box-shadow: 5px 5px 0px $ice;
@@ -41,7 +56,7 @@
   background-color: $white;
   background-image: none;
   padding: 30px;
-  margin-top: 10px;
+  margin: 10px 0 0 0;
   border-radius: 30px;
   border: 2px solid $black;
   box-shadow: 5px 5px 0px $ice;
@@ -49,6 +64,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    select {
+      padding-right: 50px;
+    }
+    input[type='text']:disabled {
+      color: rgba($black, 0.5);
+      background-color: rgba($gray, 0.5);
+      cursor: not-allowed;
+    }
+    p {
+      color: $red;
+    }
     legend {
       font-weight: bold;
       padding-bottom: 10px;
@@ -68,6 +94,23 @@
       background-color: $ice;
     }
   }
+}
+
+.ngramGraphBox {
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.chartJsContainer {
+  background-color: $white;
+  border-radius: 30px;
+  padding: 20px;
+  width: 80vw;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #c0f5fa;
 }
 
 // tooltip
