@@ -93,6 +93,13 @@ button {
   }
 }
 
+// testing purposes
+.saveWordButton {
+  &:focus {
+    background-color: $red;
+  }
+}
+
 .wrapper {
   max-width: 1250px;
   width: 90%;
