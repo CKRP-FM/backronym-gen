@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   p {
     line-height: 1.5;
   }
@@ -27,6 +28,20 @@
   justify-content: space-between;
 }
 
+.ngramViewerHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 0.8rem;
+    margin-top: 0;
+  }
+}
+
 .viewNgramPageBtn {
   border: 2px solid $black;
   box-shadow: 5px 5px 0px $ice;
@@ -49,6 +64,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    input[type='text']:disabled {
+      color: rgba($black, 0.5);
+      background-color: rgba($gray, 0.5);
+      cursor: not-allowed;
+    }
+    p {
+      color: $red;
+    }
     legend {
       font-weight: bold;
       padding-bottom: 10px;

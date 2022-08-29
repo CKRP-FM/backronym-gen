@@ -80,6 +80,10 @@ function NgramViewer() {
     return /^[a-zA-Z_]+( [a-zA-Z_]+)*$/.test(str) && str.length > 1;
   }
 
+  // function toPercentage(arr) {
+  //   return arr.map((x) => `${(x * 100).toString()} %`);
+  // }
+
   const getNgram = async () => {
     await axios
       .get(
@@ -93,25 +97,33 @@ function NgramViewer() {
   };
 
   const handleInput = (e) => {
+    resetGraph();
     setCurrentInput(e.target.value);
   };
 
+  const resetGraph = () => {
+    setSearchInput('');
+    setFrequencyData([]);
+    setDatesLabel([]);
+  };
+
   const handleSelection = (e) => {
+    resetGraph();
     const selectionString = [...e.target.value];
     setCurrentSelection(selectionString.join('').replaceAll(',', ''));
   };
 
   const resetForm = (e) => {
     e.preventDefault();
-    setCurrentSelection('');
+    setCurrentSelection('default');
   };
 
-  const handleSearchSubmit = async (e) => {
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (currentInput !== '') {
       if (isValidInput(currentInput)) {
         setSearchInput(currentInput);
-        await getNgram();
+        getNgram();
         setCurrentInput('');
       } else {
         setError('Only text inputs over one character are allowed!');
@@ -127,8 +139,11 @@ function NgramViewer() {
       <NavBar />
       <main className="ngramViewerMain">
         <section className="ngramViewerContent wrapper">
-          <h1>Ngram Viewer</h1>
-          <p>Powered by Google Ngram Viewer API</p>
+          <div className="ngramViewerHeading">
+            <h1>Ngram Viewer</h1>
+            <p>Powered by Google Ngram Viewer API</p>
+          </div>
+
           <h2>What is the Google Ngram Viewer?</h2>
           <p>
             It is an online search engine that draws data from Google Books, which contains a digital archive of books
@@ -171,13 +186,24 @@ function NgramViewer() {
                   <label htmlFor="searchNgram" className="sr-only">
                     Search for a word or phrase
                   </label>
-                  <input
-                    type="text"
-                    id="searchNgram"
-                    onChange={(e) => handleInput(e)}
-                    placeholder="Bitcoin..."
-                    value={currentInput}
-                  />
+                  {currentSelection === '' || 'default' ? (
+                    <input
+                      type="text"
+                      id="searchNgram"
+                      onChange={(e) => handleInput(e)}
+                      placeholder="Bitcoin..."
+                      value={currentInput}
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      id="searchNgram"
+                      onChange={(e) => handleInput(e)}
+                      placeholder="Bitcoin..."
+                      value={currentInput}
+                      disabled
+                    />
+                  )}
                 </fieldset>
 
                 {/* If user wants to select from our list of saved backronyms */}
@@ -188,23 +214,27 @@ function NgramViewer() {
                   <label htmlFor="savedBackronyms" className="sr-only">
                     Search for the frequency of a saved backronym
                   </label>
-                  <select
-                    name="savedBackronyms"
-                    id="savedBackronyms"
-                    defaultValue={'default'}
-                    onChange={(e) => handleSelection(e)}
-                  >
-                    <option value="default" disabled>
-                      Select your option
-                    </option>
-                    {gallery.map((result) => {
-                      return (
-                        <option value={result.userInput} key={result.key}>
-                          {result.userInput}
-                        </option>
-                      );
-                    })}
-                  </select>
+                  {currentInput === '' ? (
+                    <select
+                      name="savedBackronyms"
+                      id="savedBackronyms"
+                      value={currentSelection}
+                      onChange={(e) => handleSelection(e)}
+                    >
+                      <option value="default" disabled>
+                        Select your option
+                      </option>
+                      {gallery.map((result) => {
+                        return (
+                          <option value={result.userInput} key={result.key}>
+                            {result.userInput}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  ) : (
+                    <p>Please clear your input above before selecting a saved word.</p>
+                  )}
                 </fieldset>
                 <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
                 <button onClick={(e) => resetForm(e)}>Reset form</button>
