@@ -6,12 +6,31 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import firebase from '../firebase';
 import ErrorModal from '../components/ErrorModal';
 import { Link } from 'react-router-dom';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
 
 function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [gallery, setGallery] = useState([]);
   const [error, setError] = useState('');
+
+  // for chart js
+  const [datesData, setDatesData] = useState([]);
+  const [frequencyData, setFrequencyData] = useState([]);
+
+  const data = {
+    labels: datesData,
+    datasets: [
+      {
+        label: 'Frequency of the word or phrase',
+        data: frequencyData,
+        backgroundColor: '#ff5e5b',
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+    ],
+  };
 
   //connect to firebase when NgramViewer component mounts
   useEffect(() => {
@@ -37,31 +56,22 @@ function NgramViewer() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   axios({
-  //     url: `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`,
-  //     method: 'GET',
-  //     dataResponse: 'json',
-  //   })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message);
-  //     });
-  // }, [searchInput]);
+  const setDatesLabel = (start, end) => {
+    let datesArray = [];
+    for (let i = start; i <= end; i++) {
+      datesArray.push(i);
+    }
+    setDatesData(datesArray);
+  };
 
   const getNgram = async () => {
     await axios
       .get(
-        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1800&year_end=2000&corpus=26&smoothing=3`
+        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1919&year_end=2019&corpus=26&smoothing=3`
       )
       .then((response) => {
-        // if (response.data.length > 0) {
-        console.log(response.data);
-        // } else {
-        //   setError('No results found. Please try a different input!');
-        // }
+        setFrequencyData(response.data[0].timeseries);
+        setDatesLabel(1919, 2019);
       })
       .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
   };
@@ -91,8 +101,8 @@ function NgramViewer() {
           <h2>What is the Google Ngram Viewer?</h2>
           <p>
             It is an online search engine that draws data from Google Books, which contains a digital archive of books
-            that ranges from 1500 to the present. It charts the frequencies of any set of search strings, like words or
-            a phrase, using a yearly count of{' '}
+            that ranges from years 1500 to 2019. It charts the frequencies of any set of search strings, like words or a
+            phrase, using a yearly count of{' '}
             <span className="tooltip">
               n-grams
               <span className="tooltipText">
@@ -121,7 +131,7 @@ function NgramViewer() {
               </a>
             </span>
           </p>
-          <div className="visualizerContainer">
+          <div className="visualizerContainer wrapper">
             <div className="userNgramInputBox">
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
@@ -130,13 +140,7 @@ function NgramViewer() {
                   <label htmlFor="searchNgram" className="sr-only">
                     Search for a word or phrase
                   </label>
-                  <input
-                    type="text"
-                    id="searchNgram"
-                    onChange={handleInput}
-                    placeholder="Frankenstein, Dracula..."
-                    // value={currentInput}
-                  />
+                  <input type="text" id="searchNgram" onChange={handleInput} placeholder="Frankenstein, Dracula..." />
                 </fieldset>
 
                 {/* If user wants to select from our list of saved backronyms */}
@@ -169,8 +173,19 @@ function NgramViewer() {
                 <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
               </form>
             </div>
-            <div className="ngramGraphBox">
+            <div className="ngramGraphBox wrapper">
               <h3>Usage Frequency Graph</h3>
+              <h4>Results between the years 1919 and 2019</h4>
+              <div className="chartJsContainer">
+                <Line data={data} />
+              </div>
+              <p>
+                More information on the Google Ngram Viewer{' '}
+                <a href="https://books.google.com/ngrams/info" target="_blank" rel="noopener noreferrer">
+                  here
+                </a>
+                .
+              </p>
             </div>
           </div>
         </section>
