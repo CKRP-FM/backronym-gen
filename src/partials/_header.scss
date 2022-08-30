@@ -24,14 +24,9 @@ h1 {
     display: flex;
     gap: 5px;
   }
-  @media screen and (max-width: 630px) {
-    fieldset {
-      flex-direction: column;
-      gap: 20px;
-    }
-    form {
-      margin: 0;
-    }
+
+  form {
+    padding: 40px 0;
   }
 }
 
@@ -63,9 +58,6 @@ form {
 
 .headerImgContainer {
   animation: float 5s ease-in-out alternate infinite;
-  @media screen and (max-width: 630px) {
-    display: none;
-  }
 }
 
 .backronymSelect {
@@ -189,12 +181,62 @@ form {
     position: absolute;
     top: 0;
     right: -20px;
-    background-color: rgba($color: #7ef4fe, $alpha: 0.5);
+    background-color: rgba($color: #f4ce44, $alpha: 0.3);
     filter: blur(5px);
     width: 20px;
     height: 100%;
     transform: skewX(-40deg) scaleX(5);
     transform-origin: left bottom;
     animation: btnShine 4s ease-in infinite;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mainSearch {
+    fieldset {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    input {
+      margin: 0;
+    }
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .mainSearch {
+    flex-direction: column-reverse;
+  }
+
+  form {
+    align-items: center;
+    margin-right: 0;
+    background-position: center;
+    background-size: 95%;
+  }
+
+  form input {
+    margin-right: 0;
+  }
+
+  h1 span {
+    text-align: center;
+  }
+
+  .headerImgContainer {
+    width: 30%;
+  }
+  
+}
+
+@media screen and (max-width: 400px){
+  .mainSearch fieldset {
+    align-items: center;
+
+    * {
+      width: 80%;
+    }
   }
 }

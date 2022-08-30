@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 60;
+
 }
 
 .aboutContent {
@@ -74,8 +75,15 @@
 }
 
 .closeButton {
-  border: none;
-  background: none;
+  display: flex;
+  font-family: $headingFont;
+  transition: background-color 0.4s ease-in-out;
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  &:hover {
+    background-color: $red;
+  }
   padding: 8px;
 
 }
@@ -108,15 +116,23 @@
     font-size: clamp(1.1rem, 0.96rem + 0.7vw, 1.8rem);
     text-transform: uppercase;
     text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
-    
   }
-}.linkedIn {
+}
+
+.linkedIn {
   color: $black;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .linkedIn:hover {
   transform: scale(1.05);
+  color: $ice;
+}
+
+@media screen and (max-width: 1000px) {
+  .aboutContent {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 670px) {
@@ -124,6 +140,8 @@
     width: 80%;
   }
 }
+
+
 
 
 

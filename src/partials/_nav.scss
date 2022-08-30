@@ -147,7 +147,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 100px;
+  padding: 50px;
   form {
     background-image: none;
   }
@@ -243,4 +243,11 @@
   transform: rotate(-45deg);
   width: 111%;
   background-color: $black;
+}
+
+@media screen and (max-width: 500px) {
+  .currentUser {
+    margin-top: 5px;
+  }
+  
 }
