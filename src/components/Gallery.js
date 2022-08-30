@@ -69,7 +69,7 @@ function Gallery({ closeGallery, showGallery }) {
           </button>
           <h2>Backronym Gallery</h2>
           <p className="galleryDesc">WOW. Wall of Wisdom. Check out these cool backronyms!</p>
-          <p>
+          <p className="deleteNote">
             Note: You can only delete your own posts as a logged in user or other anonymous posts if you are logged in
             anonymously.
           </p>
