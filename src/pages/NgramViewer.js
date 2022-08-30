@@ -93,22 +93,22 @@ function NgramViewer() {
         setFrequencyData(response.data[0].timeseries);
         setDatesLabel(1959, 2019);
       })
-      .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
+      .catch((err) => {
+        setError('No results found. Please try a different input!');
+        console.log(err);
+      });
   };
 
   const handleInput = (e) => {
-    // resetGraph();
     setCurrentInput(e.target.value);
   };
 
-  // const resetGraph = () => {
-  //   setSearchInput('');
-  //   setFrequencyData([]);
-  //   setDatesLabel([]);
-  // };
+  const resetGraph = () => {
+    setFrequencyData([]);
+    setDatesLabel([]);
+  };
 
   const handleSelection = (e) => {
-    // resetGraph();
     const selectionString = [...e.target.value];
     setCurrentSelection(selectionString.join('').replaceAll(',', ''));
     console.log(currentSelection);
@@ -124,6 +124,7 @@ function NgramViewer() {
     e.preventDefault();
     if (currentInput !== '') {
       if (isValidInput(userInput)) {
+        resetGraph();
         setSearchInput(userInput);
         getNgram(userInput);
         setCurrentInput('');
