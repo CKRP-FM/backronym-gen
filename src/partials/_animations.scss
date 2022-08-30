@@ -97,3 +97,15 @@
     transform: translate(-50%, 0%) translate3d(0, 0, 0);
   }
 }
+
+// Animation for loading
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
