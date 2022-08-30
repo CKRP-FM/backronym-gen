@@ -466,6 +466,28 @@ select {
     color: #c0f5fa;
   }
 }
+@-webkit-keyframes btnShine {
+  0% {
+    transform: skewX(-45deg) translateX(-400px) scaleX(5);
+  }
+  50% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+  100% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+}
+@keyframes btnShine {
+  0% {
+    transform: skewX(-45deg) translateX(-400px) scaleX(5);
+  }
+  50% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+  100% {
+    transform: skewX(-45deg) translateX(0) scaleX(3);
+  }
+}
 @-webkit-keyframes slideUp {
   0% {
     transform: translateY(0%);
@@ -528,6 +550,38 @@ select {
   }
   100% {
     transform: translateY(100%);
+  }
+}
+@-webkit-keyframes menuLeft {
+  0% {
+    transform: translate(-150%, -100%) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate(-50%, -100%) translate3d(0, 0, 0);
+  }
+}
+@keyframes menuLeft {
+  0% {
+    transform: translate(-150%, -100%) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate(-50%, -100%) translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes menuRight {
+  0% {
+    transform: translate(100%, 0%) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate(-50%, 0%) translate3d(0, 0, 0);
+  }
+}
+@keyframes menuRight {
+  0% {
+    transform: translate(100%, 0%) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate(-50%, 0%) translate3d(0, 0, 0);
   }
 }
 .aboutModal {
@@ -628,6 +682,7 @@ select {
   flex-direction: row;
   justify-content: center;
   justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
 .team {
@@ -657,9 +712,9 @@ select {
   background-color: inherit;
   color: #fff;
   text-align: center;
-  padding: 5px;
   font-family: "Montserrat", sans-serif;
   font-size: 0.8rem;
+  background-color: #323031;
 }
 .modalFooter p {
   margin: 0;
@@ -695,6 +750,19 @@ h1 span {
   align-items: center;
   margin-bottom: 40px;
 }
+.mainSearch fieldset {
+  display: flex;
+  gap: 5px;
+}
+@media screen and (max-width: 630px) {
+  .mainSearch fieldset {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mainSearch form {
+    margin: 0;
+  }
+}
 
 form {
   display: flex;
@@ -722,6 +790,11 @@ form button {
 .headerImgContainer {
   -webkit-animation: float 5s ease-in-out alternate infinite;
           animation: float 5s ease-in-out alternate infinite;
+}
+@media screen and (max-width: 630px) {
+  .headerImgContainer {
+    display: none;
+  }
 }
 
 .backronymSelect {
@@ -826,6 +899,25 @@ form button {
   display: block;
 }
 
+.viewGalleryBtn {
+  position: relative;
+  overflow: hidden;
+}
+.viewGalleryBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -20px;
+  background-color: rgba(126, 244, 254, 0.5);
+  filter: blur(5px);
+  width: 20px;
+  height: 100%;
+  transform: skewX(-40deg) scaleX(5);
+  transform-origin: left bottom;
+  -webkit-animation: btnShine 4s ease-in infinite;
+          animation: btnShine 4s ease-in infinite;
+}
+
 .gallery {
   display: flex;
   flex-direction: column;
@@ -906,12 +998,12 @@ form button {
   background: url(../assets/like-btn.png);
   background-repeat: no-repeat;
   background-position: left;
-  transition: background-position 1s steps(29);
-  transition-duration: 1s;
-}
-.userGalleryControls .likeBtn:active {
+  transition: background-position 1s steps(28);
   transition-duration: 0s;
-  background-position: -1450px 0;
+}
+.userGalleryControls .likeBtn.is-filled {
+  transition-duration: 1s;
+  background-position: -1400px 0;
 }
 .userGalleryControls .viewGalleryBtn {
   border: 2px solid #323031;
@@ -1036,28 +1128,98 @@ body {
 }
 
 .navLinks {
+  visibility: hidden;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: transparent;
+  font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
+  transform: rotate(-15deg) translate3d(0, 0, 0);
+  z-index: 100;
+}
+.navLinks::before, .navLinks::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  height: 80%;
+  background-color: #ff5e5b;
+  transform-origin: center center;
+  transition: all 500ms ease;
+  z-index: -10;
+}
+.navLinks::before {
+  top: 51%;
+  transform: translate(100%, -100%) translate3d(0, 0, 0);
+}
+.navLinks::after {
+  top: 49%;
+  transform: translate(-150%, 0%) translate3d(0, 0, 0);
+  transition-delay: 100ms;
+}
+.navLinks li {
+  color: rgba(255, 255, 255, 0);
+  transition: color 50ms ease-in-out;
+}
+.navLinks a:hover,
+.navLinks button:hover {
+  color: #c0f5fa;
 }
 .navLinks button {
-  background-color: #323031;
-  color: #fff;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0);
   transition: 0.4s ease-in-out;
   padding: 0;
   margin: 0;
+  text-shadow: 3px 4px 0 #323031, -1px -1px 0 #323031, 1px -1px 0 #323031, -1px 1px 0 #323031, 1px 1px 0 #323031;
 }
-.navLinks button:hover {
-  color: #ff5e5b;
+
+.showNav {
+  visibility: visible;
+}
+.showNav::before {
+  -webkit-animation: menuLeft 500ms ease;
+          animation: menuLeft 500ms ease;
+  transform: translate(-50%, -100%) translate3d(0, 0, 0);
+  transition-duration: 100ms;
+}
+.showNav::after {
+  -webkit-animation: menuRight 500ms ease 100ms;
+          animation: menuRight 500ms ease 100ms;
+  transform: translate(-50%, 0%) translate3d(0, 0, 0);
+  transition-duration: 100ms;
+}
+.showNav li,
+.showNav button {
+  color: white;
+  transition: color 50ms ease-in-out;
 }
 
 .navLinksContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
   width: 100%;
+}
+
+.linkContainer {
+  transform: rotate(15deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.currentUser {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 20px 0 0;
 }
 
 .loggedInUser {
@@ -1127,6 +1289,61 @@ body {
   text-transform: none;
 }
 
+.hamburgerMenu {
+  position: relative;
+  width: 45px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.top,
+.mid,
+.bottom {
+  display: block;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  position: absolute;
+}
+
+.top {
+  top: 0;
+  transform-origin: left top;
+  transform: rotateZ(0deg);
+  transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.mid {
+  top: 48%;
+  transform: translateY(-50%);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.bottom {
+  bottom: 0;
+  transform-origin: left bottom;
+  transform: rotateZ(0deg);
+  transition: transform 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.topClosed {
+  transform: rotateZ(45deg);
+  width: 111%;
+  background-color: #323031;
+}
+
+.midClosed {
+  opacity: 0;
+}
+
+.bottomClosed {
+  transform: rotateZ(-45deg);
+  width: 111%;
+  background-color: #323031;
+}
+
 .errorModal {
   position: fixed;
   left: 0;
@@ -1146,7 +1363,8 @@ body {
 
 .errorMsgContainer {
   background-color: #ff5e5b;
-  width: 30%;
+  width: 95%;
+  max-width: 410px;
   padding: 30px 40px;
   border-radius: 10px;
   position: absolute;
@@ -1215,8 +1433,7 @@ body {
 .loginPageNav {
   padding: 20px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .loginPageMain {
@@ -1297,6 +1514,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 .ngramViewerContent p {
   line-height: 1.5;
@@ -1321,6 +1539,20 @@ body {
   justify-content: space-between;
 }
 
+.ngramViewerHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ngramViewerHeading h1 {
+  margin-bottom: 10px;
+}
+.ngramViewerHeading p {
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
 .viewNgramPageBtn {
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px #c0f5fa;
@@ -1335,7 +1567,7 @@ body {
   background-color: #fff;
   background-image: none;
   padding: 30px;
-  margin-top: 10px;
+  margin: 10px 0 0 0;
   border-radius: 30px;
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px #c0f5fa;
@@ -1344,6 +1576,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.ngramForm fieldset select {
+  padding-right: 50px;
+}
+.ngramForm fieldset input[type=text]:disabled {
+  color: rgba(50, 48, 49, 0.5);
+  background-color: rgba(224, 224, 224, 0.5);
+  cursor: not-allowed;
+}
+.ngramForm fieldset p {
+  color: #ff5e5b;
 }
 .ngramForm fieldset legend {
   font-weight: bold;
@@ -1362,6 +1605,23 @@ body {
 }
 .ngramForm button:hover {
   background-color: #c0f5fa;
+}
+
+.ngramGraphBox {
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.chartJsContainer {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  width: 80vw;
+  border: 2px solid #323031;
+  box-shadow: 5px 5px 0px #c0f5fa;
 }
 
 .tooltip {
@@ -1504,7 +1764,7 @@ body {
 }
 
 .loadingContainer {
-  position: fixed;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1517,14 +1777,15 @@ body {
 
 .loadingBar {
   position: relative;
+  display: block;
   width: 250px;
   height: 250px;
   border: 3px solid #ff5e5b;
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
-  -webkit-animation: spin 20s linear infinite;
-          animation: spin 20s linear infinite;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
 }
 .loadingBar::before {
   content: "";
@@ -1537,8 +1798,8 @@ body {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
-  -webkit-animation: spin 18s linear infinite;
-          animation: spin 18s linear infinite;
+  -webkit-animation: spin 3s linear infinite;
+          animation: spin 3s linear infinite;
 }
 .loadingBar::after {
   content: "";
@@ -1551,8 +1812,8 @@ body {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
-  -webkit-animation: spin 22s linear infinite;
-          animation: spin 22s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;
+          animation: spin 1.5s linear infinite;
 }
 
 @-webkit-keyframes spin {
@@ -1560,7 +1821,7 @@ body {
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(3600deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -1569,6 +1830,6 @@ body {
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(3600deg);
+    transform: rotate(360deg);
   }
 }/*# sourceMappingURL=App.css.map */

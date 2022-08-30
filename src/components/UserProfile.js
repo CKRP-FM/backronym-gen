@@ -3,12 +3,15 @@ import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
+
 import ErrorModal from './ErrorModal';
+import ProfileDeleteModal from './ProfileDeleteModal';
 
 import ErrorPage from '../pages/ErrorPage';
 import GalleryCard from './GalleryCard';
-
 import Loading from './Loading';
+import NavBar from './NavBar';
+
 import timeout from '../utilities/timeout';
 
 function UserProfile() {
@@ -31,17 +34,15 @@ function UserProfile() {
     }
   }
 
-    // set loading state to false
-    function handleLoading() {
-      setLoading(false);
-    }
+  // set loading state to false
+  function handleLoading() {
+    setLoading(false);
+  }
 
-    // delete account
-    const handleUserAccountDeletion = async (e) => {
-        
+  // delete account
+  const handleAccountDeletion = async () => {
     handleDeleteBackronyms(backronymKeys);
 
-    setError('');
     try {
       await deleteProfile();
     } catch (err) {
@@ -49,30 +50,30 @@ function UserProfile() {
     }
   };
 
-    useEffect(() => {
-      // timeout function that will change loading state to false after X milliseconds
-      timeout(handleLoading, 800);
+  useEffect(() => {
+    // timeout function that will change loading state to false after X milliseconds
+    timeout(handleLoading, 1000);
 
-      // database details
-      const database = getDatabase(firebase);
-      const dbRef = ref(database);
-          
-      onValue(dbRef, (response) => {
-        const newState = [];
-        const data = response.val();
-        for(let key in data) {
-          newState.push({
-            key: key,
-            timestamp: data[key].timestamp,
-            email: data[key].email,
-            userInput: data[key].userInput,
-            results: data[key].results,
-            likes: data[key].likes,
-          })
-        }
-        setGallery(newState);
-      })
-    }, []);
+    // database details
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+
+    onValue(dbRef, (response) => {
+      const newState = [];
+      const data = response.val();
+      for (let key in data) {
+        newState.push({
+          key: key,
+          timestamp: data[key].timestamp,
+          email: data[key].email,
+          userInput: data[key].userInput,
+          results: data[key].results,
+          likes: data[key].likes,
+        });
+      }
+      setGallery(newState);
+    });
+  }, []);
 
   useEffect(() => {
     const tempKeyState = [];
@@ -82,68 +83,65 @@ function UserProfile() {
       }
     });
     setBackronymKeys(tempKeyState);
-  }, [gallery]);
+  }, [gallery, user.email]);
 
   return (
     <div>
-    { loading ?
-      <section className="loadingSection userLoading">
-        <Loading />
-      </section>
+      {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
+      {deleteAccountAttempt ? (
+        <ProfileDeleteModal
+          setDeleteAccountAttempt={setDeleteAccountAttempt}
+          handleAccountDeletion={handleAccountDeletion}
+        />
+      ) : null}
 
-      :
+      {loading ? (
+        <section className="loadingSection userLoading">
+          <Loading />
+        </section>
+      ) : (
+        <section className="userProfile">
+          <NavBar />
 
-      <section className="userProfile">
-        <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
-          <div className='deleteMessageContainer wrapper'>
-              <p>Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to proceed?</p>
-              <div className='deleteButtonContainer'>
-              <Link to="/login">
-                <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
-              </Link>
-              <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
+          <div className="wrapper">
+            <h2>Your Profile</h2>
+            {uid === user.uid && backronymKeys.length === 0 ? (
+              <div className="emptyProfileMessage">
+                <h3>
+                  Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!
+                </h3>
               </div>
-          </div>
-        </div>
+            ) : null}
 
-        <div className="wrapper">
-          <h2>Your Profile</h2>
-          {
-            uid === user.uid && backronymKeys.length === 0 ?
-            <div className="emptyProfileMessage">
-              <h3>Oops! Looks like you don't have any backronyms created. Go back to the main page to get started!</h3>
-            </div>
-            : null
-          }
-
-        <ul className="resultsDisplay">
-          {uid === user.uid ? (
-            gallery.map((result) => {
-              return result.email === user.email || (result.email === 'anonymous' && user.email === null) ? (
-                <GalleryCard result={result} key={result.key} />
+            <ul className="resultsDisplay">
+              {uid === user.uid ? (
+                gallery.map((result) => {
+                  return result.email === user.email || (result.email === 'anonymous' && user.email === null) ? (
+                    <GalleryCard result={result} key={result.key} />
+                  ) : (
+                    ''
+                  );
+                })
               ) : (
-                ''
-              );
-            })
-          ) 
-          : <ErrorPage />
-          }
-        </ul>
+                <ErrorPage />
+              )}
+            </ul>
 
-        {uid === user.uid ?
-          <div className='profileButtons'>
-            <Link to="/">
-              <button className='backButton'>Back</button>
-            </Link>
-            <button className='deleteProfileButton' onClick={() => setDeleteAccountAttempt(true)}>Delete Account</button>
-          </div> 
-          : null    
-        }
-        </div>
-      </section>
-    }
+            {uid === user.uid ? (
+              <div className="profileButtons">
+                <Link to="/">
+                  <button className="backButton">Back</button>
+                </Link>
+                <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
+                  Delete Account
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      )}
     </div>
-  )
+  );
 }
 
 export default UserProfile;

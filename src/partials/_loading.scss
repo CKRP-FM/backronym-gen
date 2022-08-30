@@ -26,6 +26,7 @@
 
 .loadingBar {
     position: relative;
+    display: block;
 
     width: 250px;
     height: 250px;
@@ -34,8 +35,7 @@
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
-    animation: spin 20s linear infinite;
-    
+    animation: spin 2s linear infinite;
 
     &::before {
         content: "";
@@ -49,7 +49,7 @@
         border-radius: 50%;
         border-left-color: transparent;
         border-right-color: transparent;
-        animation: spin 18s linear infinite;
+        animation: spin 3s linear infinite;
     }
 
     &::after {
@@ -64,12 +64,11 @@
         border-radius: 50%;
         border-left-color: transparent;
         border-right-color: transparent;
-        animation: spin 22s linear infinite;
+        animation: spin 1.5s linear infinite;
     }
-    
 }
 
 @keyframes spin {
     0% {transform: rotate(0deg);}
-    100% {transform: rotate(3600deg);}
+    100% {transform: rotate(360deg);}
 }
