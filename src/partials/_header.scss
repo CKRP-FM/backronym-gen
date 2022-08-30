@@ -192,7 +192,6 @@ form {
 }
 
 @media screen and (max-width: 800px) {
-  // HEADER SEARCH FORM
   .mainSearch {
     fieldset {
       flex-direction: column;
@@ -207,7 +206,6 @@ form {
 }
 
 @media screen and (max-width: 600px) {
-  // HEADER SEARCH FORM
   .mainSearch {
     flex-direction: column-reverse;
   }
@@ -223,12 +221,10 @@ form {
     margin-right: 0;
   }
 
-  // HEADER HEADER
   h1 span {
     text-align: center;
   }
 
-  // HERO IMG
   .headerImgContainer {
     width: 30%;
   }
@@ -236,9 +232,8 @@ form {
 }
 
 @media screen and (max-width: 400px){
-  //HEADER SEARCH FORM
-    .mainSearch fieldset {
-      align-items: center;
+  .mainSearch fieldset {
+    align-items: center;
 
     * {
       width: 80%;
