@@ -92,7 +92,7 @@ function UserProfile() {
             handleAccountDeletion={handleAccountDeletion}
         /> : null}
 
-      {!loading ? (
+      {loading ? (
         <section className="loadingSection userLoading">
           <Loading />
         </section>
