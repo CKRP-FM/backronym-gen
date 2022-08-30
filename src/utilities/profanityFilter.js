@@ -1,25 +1,20 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-function profanityFilter(word) {
+// function profanityFilter(word) {
+//     const isProfane = async () => {
+//         const results = await axios
+//             .get(
+//                 `https://www.purgomalum.com/service/containsprofanity?text=${word}`
+//             )
+//             .then((response) => {
+//                 console.log(word)
+//                 console.log("success: " + response.data)
+//             })
+//             .catch((err) => {
+//                 console.log('error: ' + err);
+//             })
+//             return results
+//     }
+// }
 
-    let results;
-    const isProfane = async () => {
-        results = await axios
-            .get(
-                `https://www.purgomalum.com/service/containsprofanity?text=${word}`
-            )
-            .then((response) => {
-                // console.log("success: " + response.data)
-                return response.data;
-            })
-            .catch((err) => {
-                // console.log('error: ' + err);
-                return err.data;
-            })
-        console.log(results);
-    }
-     
-    return results;
-}
-
-export default profanityFilter;
+// export default profanityFilter;

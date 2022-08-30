@@ -7,7 +7,7 @@ import { useUserAuth } from '../context/UserAuthContext.js';
 import ErrorModal from './ErrorModal.js';
 import Loading from './Loading.js';
 import timeout from '../utilities/timeout.js';
-import profanityFilter from '../utilities/profanityFilter.js';
+// import profanityFilter from '../utilities/profanityFilter.js';
 
 function Search() {
   const [currentIndex, setCurrentIndex] = useState('');
@@ -46,13 +46,10 @@ function Search() {
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function isValidInput(str) {
-    
-    if (!profanityFilter(str)) {
-      setIsProfane(true);
-      return false;
-    }
 
-    return /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
+    profanityFilter(str);
+
+    return !isProfane && /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
   }
 
   // Break down string into array of chars
@@ -78,7 +75,7 @@ function Search() {
       setCurrentIndex(0);
       setWordInput('');
     } else if (isProfane === true) {
-      setError('Please refrain from using inappropriate language!')
+      setError('Please refrain from using inappropriate language!');
     } else {
       setError('Your input has to be a word between 2 and 10 characters!');
     }
@@ -107,6 +104,23 @@ function Search() {
       }
     }
   }
+
+// function to confirm if the entered word is profane
+  function profanityFilter(word) {
+    axios({
+      url: `https://www.purgomalum.com/service/containsprofanity?text=${word}`,
+      method: 'GET',
+      dataResponse: 'json'
+    })
+      .then((response) => {
+        console.log("success: " + response.data);
+        setIsProfane(response.data);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+
 
   // function to fetch random words that start with a specific letter
   function fetchRandomWords() {
