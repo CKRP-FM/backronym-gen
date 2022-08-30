@@ -1,8 +1,9 @@
 import React from 'react';
 
-function ErrorModal({ errorMsg, setError }) {
+function ErrorModal({ errorMsg, setError, setIsProfane }) {
   setTimeout(() => {
     setError('');
+    setIsProfane(false);
   }, 3000);
 
   return (
@@ -10,6 +11,7 @@ function ErrorModal({ errorMsg, setError }) {
       className="errorModal"
       onClick={() => {
         setError('');
+        setIsProfane(false);
       }}
     >
       <div className="errorMsgContainer">

@@ -295,6 +295,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+p {
+  font-size: clamp(0.8rem, 5vw, 1rem);
+}
+
 ul,
 li,
 a,
@@ -654,6 +658,8 @@ select {
   background-color: #c0f5fa;
   text-align: center;
   line-height: 1.5rem;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
 }
 .modalFooter p {
   border-bottom: none;
@@ -734,6 +740,7 @@ select {
 }
 .modalFooter p {
   margin: 0;
+  font-size: 0.8rem;
 }
 
 @media screen and (max-width: 575px) {
@@ -1534,7 +1541,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: clamp(0.3rem, 2vw, 1rem);
 }
 .ngramViewerContent p {
   line-height: 1.5;
@@ -1567,10 +1574,12 @@ body {
 }
 .ngramViewerHeading h1 {
   margin-bottom: 10px;
+  text-align: center;
 }
 .ngramViewerHeading p {
   font-size: 0.8rem;
   margin-top: 0;
+  text-align: center;
 }
 
 .viewNgramPageBtn {
@@ -1591,11 +1600,16 @@ body {
   border-radius: 30px;
   border: 2px solid #323031;
   box-shadow: 5px 5px 0px #c0f5fa;
+  text-align: center;
+  font-size: clamp(0.9rem, 5vw, 1.1rem);
 }
 .ngramForm fieldset {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.ngramForm fieldset input {
+  width: 100%;
 }
 .ngramForm fieldset select {
   padding-right: 50px;
@@ -1625,6 +1639,10 @@ body {
 }
 .ngramForm button:hover {
   background-color: #c0f5fa;
+}
+
+.userNgramInputBox {
+  width: 100%;
 }
 
 .ngramGraphBox {

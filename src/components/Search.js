@@ -7,6 +7,7 @@ import { useUserAuth } from '../context/UserAuthContext.js';
 import ErrorModal from './ErrorModal.js';
 import Loading from './Loading.js';
 import timeout from '../utilities/timeout.js';
+import profanityFilter from '../utilities/profanityFilter.js';
 
 function Search() {
   const [currentIndex, setCurrentIndex] = useState('');
@@ -22,6 +23,8 @@ function Search() {
 
   //useState to toggle loading
   const [loading, setLoading] = useState(false);
+
+  const [isProfane, setIsProfane] = useState(false);
 
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
@@ -43,6 +46,12 @@ function Search() {
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
   function isValidInput(str) {
+    
+    if (!profanityFilter(str)) {
+      setIsProfane(true);
+      return false;
+    }
+
     return /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
   }
 
@@ -68,6 +77,8 @@ function Search() {
       setLoading(true);
       setCurrentIndex(0);
       setWordInput('');
+    } else if (isProfane === true) {
+      setError('Please refrain from using inappropriate language!')
     } else {
       setError('Your input has to be a word between 2 and 10 characters!');
     }
@@ -191,7 +202,7 @@ function Search() {
   return (
     <header>
       <div className="wrapper">
-        {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
+        {error ? <ErrorModal errorMsg={error} setError={setError} setIsProfane={setIsProfane} /> : null}
 
         <div className="mainSearch">
           <form>
