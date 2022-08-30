@@ -8,6 +8,9 @@ import ErrorModal from '../components/ErrorModal';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+// load state
+import Loading from '../components/Loading';
+import timeout from '../utilities/timeout';
 
 function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
@@ -19,6 +22,9 @@ function NgramViewer() {
   // for chart js
   const [datesData, setDatesData] = useState([]);
   const [frequencyData, setFrequencyData] = useState([]);
+
+  // API loading state
+  const [loading, setLoading] = useState(false);
 
   const data = {
     labels: datesData,
@@ -81,6 +87,11 @@ function NgramViewer() {
     });
   }, []);
 
+  // set loading state to false
+  function handleLoading() {
+    setLoading(false);
+  }
+
   function isValidInput(str) {
     // allow text, numbers and spaces and only words over 1 character, regex from https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
     return /^[a-zA-Z_]+( [a-zA-Z_]+)*$/.test(str) && str.length > 1;
@@ -133,6 +144,8 @@ function NgramViewer() {
       if (isValidInput(userInput)) {
         resetGraph();
         setSearchInput(userInput);
+        setLoading(true);
+        timeout(handleLoading, 1000);
         getNgram(userInput);
         setCurrentInput('');
       } else {
@@ -141,6 +154,8 @@ function NgramViewer() {
     } else if (currentInput === '' && currentSelection !== '') {
       resetGraph();
       setSearchInput(currentSelection);
+      setLoading(true);
+      timeout(handleLoading, 1000);
       getNgram(currentSelection);
       setCurrentSelection('');
     } else {
@@ -260,9 +275,15 @@ function NgramViewer() {
             <div className="ngramGraphBox">
               <h3>Usage Frequency Graph</h3>
               <h4>Results between the years 1959 and 2019</h4>
-              <div className="chartJsContainer">
-                <Line data={data} options={options} />
-              </div>
+              {loading ? (
+                <div className="loadingSection">
+                  <Loading />
+                </div>
+              ) : (
+                <div className="chartJsContainer">
+                  <Line data={data} options={options} />
+                </div>
+              )}
               <p>
                 Search for other date ranges or languages{' '}
                 <a href="https://books.google.com/ngrams" target="_blank" rel="noopener noreferrer">
