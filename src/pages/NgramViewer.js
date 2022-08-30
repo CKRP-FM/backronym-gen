@@ -13,7 +13,6 @@ function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
   const [currentSelection, setCurrentSelection] = useState('');
   const [searchInput, setSearchInput] = useState('');
-  const [gallery, setGallery] = useState([]);
   const [selectOptions, setSelectOptions] = useState([]);
   const [error, setError] = useState('');
 
@@ -72,7 +71,6 @@ function NgramViewer() {
           likes: data[key].likes,
         });
       }
-      setGallery(newState);
 
       // result.userinput comes in ["k", "e", "o", "n"] form, need to join them as a string and remove commas
       let optionsArray = newState.map((result) => result.userInput.join('').replaceAll(',', ''));
