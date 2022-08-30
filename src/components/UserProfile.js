@@ -88,11 +88,12 @@ function UserProfile() {
   return (
     <div>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
-      {deleteAccountAttempt ?
+      {deleteAccountAttempt ? (
         <ProfileDeleteModal
-            setDeleteAccountAttempt={setDeleteAccountAttempt}
-            handleAccountDeletion={handleAccountDeletion}
-        /> : null}
+          setDeleteAccountAttempt={setDeleteAccountAttempt}
+          handleAccountDeletion={handleAccountDeletion}
+        />
+      ) : null}
 
       {loading ? (
         <section className="loadingSection userLoading">
@@ -127,14 +128,14 @@ function UserProfile() {
             </ul>
 
             {uid === user.uid ? (
-                <div className="profileButtons">
-                    <Link to="/">
-                        <button className="backButton">Back</button>
-                    </Link>
-                    <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
-                        Delete Account
-                    </button>
-                </div>
+              <div className="profileButtons">
+                <Link to="/">
+                  <button className="backButton">Back</button>
+                </Link>
+                <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
+                  Delete Account
+                </button>
+              </div>
             ) : null}
           </div>
         </section>
