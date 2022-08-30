@@ -27,7 +27,14 @@ function App() {
             }
           ></Route>
 
-          <Route path="/profile/:uid" element={<UserProfile/>}/>
+          <Route
+            path="/profile/:uid"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/ngramviewer"
