@@ -179,7 +179,7 @@ function NgramViewer() {
               </a>
             </span>
           </p>
-          <div className="visualizerContainer">
+          <div className="visualizerContainer wrapper">
             <div className="userNgramInputBox">
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
