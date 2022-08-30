@@ -125,6 +125,7 @@
     text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
   }
 }
+
 .linkedIn {
   color: $black;
   transition: all 0.2s ease-in-out;
@@ -134,3 +135,11 @@
   transform: scale(1.05);
   color: $ice;
 }
+
+@media screen and (max-width: 1000px) {
+  .aboutContent {
+    width: 90%;
+  }
+}
+
+

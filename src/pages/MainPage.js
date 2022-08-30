@@ -27,20 +27,22 @@ function MainPage() {
       <div className="mainPageContent">
         <NavBar />
         <Search />
-        <div className="mainButtonsContainer">
-          <Link to={`/ngramviewer`} className="viewNgramBtn">
-            <button className="viewNgramPageBtn">Try the Ngram Viewer</button>
-          </Link>
-          <button
-            className="viewGalleryBtn"
-            onClick={(e) => {
-              handleShowGallery(e);
-              // document.body.classList.add('modalActive');
-            }}
-          >
-            View Saved Gallery
-          </button>
+
+        <div className="wrapper">
+          <div className="mainButtonsContainer">
+            <Link to={`/ngramviewer`} className="viewNgramBtn">
+              <button className="viewNgramPageBtn">Try the Ngram Viewer</button>
+            </Link>
+            <button
+              className="viewGalleryBtn"
+              onClick={(e) => {
+                handleShowGallery(e);
+                // document.body.classList.add('modalActive');
+              }}
+            >View Saved Gallery</button>
+          </div>
         </div>
+        
         <Footer />
       </div>
     </div>

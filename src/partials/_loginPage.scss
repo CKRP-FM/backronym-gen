@@ -82,11 +82,56 @@
   }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 800px) {
   .loginPageMain {
     flex-direction: column-reverse;
-    .headerImgContainer img {
-      max-height: 300px;
+    padding: 0;
+  }
+
+  .headerImgContainer {
+    width: 20%;
+  }
+
+  .loginContainer {
+    padding: 40px 50px;
+  }
+
+  .loginPageText span {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  // MAIN SIGN UP SCREEN FORM
+  .loginContainer {
+    padding: 20px;
+
+    input {
+      width: 100%;
     }
+  }
+
+  .signUpControls {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  // SIGN UP MODAL
+  .signUpContent {
+    width: 300px;
+    padding: 20px
+  }
+
+  .signUpForm {
+    width: 100%;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .closeBtn {
+    padding: 10px;
   }
 }
