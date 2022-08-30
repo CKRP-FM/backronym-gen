@@ -81,9 +81,6 @@ const AboutModal = props => {
             </div>
           </div>
         </div>
-        <div className="modalFooter">
-          <Footer />
-        </div>
       </div>
     </div>
   )

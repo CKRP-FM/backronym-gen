@@ -9,14 +9,14 @@
   align-items: center;
   justify-content: center;
   z-index: 60;
-
 }
 
 .aboutContent {
-  overflow-y: initial !important;
   background-color: $white;
   border-radius: 15px;
-  width: 50%;
+  width: 60%;
+  height: 80%;
+  overflow-y: auto;
 }
 
 .aboutHeader {
@@ -35,6 +35,7 @@
 }
 .aboutTitle {
   margin: 0;
+
 }
 
 .aboutMain {
@@ -47,17 +48,10 @@
     margin-top: 0;
   }
 }
-
-.modalFooter {
-  background-color: $ice;
-  text-align: center;
-  line-height: 1.5rem;
-  border-bottom-left-radius: 14px;
-  border-bottom-right-radius: 14px;
-  p {
-    border-bottom: none;
-  }
-}
+ .modalTitle {
+  text-align: left;
+ }
+ 
 
 .aboutHowTo {
   margin-left: 30px;
@@ -82,6 +76,8 @@
 .closeButton {
   border: none;
   background: none;
+  padding: 8px;
+
 }
 
 .teamHeader {
@@ -122,5 +118,13 @@
 .linkedIn:hover {
   transform: scale(1.05);
 }
+
+@media screen and (max-width: 670px) {
+  .aboutContent {
+    width: 80%;
+  }
+}
+
+
 
 
