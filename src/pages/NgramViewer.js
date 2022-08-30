@@ -14,6 +14,7 @@ function NgramViewer() {
   const [currentSelection, setCurrentSelection] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [gallery, setGallery] = useState([]);
+  const [selectOptions, setSelectOptions] = useState([]);
   const [error, setError] = useState('');
 
   // for chart js
@@ -72,6 +73,14 @@ function NgramViewer() {
         });
       }
       setGallery(newState);
+
+      // result.userinput comes in ["k", "e", "o", "n"] form, need to join them as a string and remove commas
+      let optionsArray = newState.map((result) => result.userInput.join('').replaceAll(',', ''));
+      // removes duplicates to keep unique values
+      // ES6 has a native object Set to store unique values
+      let uniqueOptionsArray = optionsArray.filter((value, index, arr) => arr.indexOf(value) === index);
+      setSelectOptions(uniqueOptionsArray);
+      console.log('hi', selectOptions);
     });
   }, []);
 
@@ -108,8 +117,8 @@ function NgramViewer() {
     setDatesLabel([]);
   };
 
-  const handleSelection = (e) => {
-    const selectionString = [...e.target.value];
+  const handleSelection = (value) => {
+    const selectionString = [value];
     setCurrentSelection(selectionString.join('').replaceAll(',', ''));
     console.log(currentSelection);
   };
@@ -118,6 +127,7 @@ function NgramViewer() {
     e.preventDefault();
     setCurrentSelection('');
     setCurrentInput('');
+    setSearchInput('');
   };
 
   const handleSearchSubmit = (e, userInput) => {
@@ -223,15 +233,15 @@ function NgramViewer() {
                       name="savedBackronyms"
                       id="savedBackronyms"
                       value={currentSelection}
-                      onChange={(e) => handleSelection(e)}
+                      onChange={(e) => handleSelection(e.target.value)}
                     >
                       <option value="" disabled>
                         Select your option
                       </option>
-                      {gallery.map((result) => {
+                      {selectOptions.map((option, index) => {
                         return (
-                          <option value={result.userInput} key={result.key}>
-                            {result.userInput}
+                          <option value={option} key={index}>
+                            {option}
                           </option>
                         );
                       })}
