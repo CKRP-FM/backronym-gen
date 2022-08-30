@@ -35,6 +35,7 @@ button,
 select {
   font-family: $bodyFont;
   color: $black;
+  font-size: clamp(0.8rem, 3vw, 1rem);
 }
 
 label {
