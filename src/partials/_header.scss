@@ -216,7 +216,7 @@ form {
     align-items: center;
     margin-right: 0;
     background-position: center;
-    background-size: 100%;
+    background-size: 95%;
   }
 
   form input {
@@ -233,4 +233,15 @@ form {
     width: 30%;
   }
   
+}
+
+@media screen and (max-width: 400px){
+  //HEADER SEARCH FORM
+    .mainSearch fieldset {
+      align-items: center;
+
+    * {
+      width: 80%;
+    }
+  }
 }

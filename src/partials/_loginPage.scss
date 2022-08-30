@@ -82,6 +82,26 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  //LOGIN PAGE CONTAINER
+  .loginPageMain {
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  .headerImgContainer {
+    width: 20%;
+  }
+
+  .loginContainer {
+    padding: 40px 50px;
+  }
+
+  .loginPageText span {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 575px) {
   .loginPageMain {
     flex-direction: column-reverse;
