@@ -15,14 +15,21 @@
   h2 {
     padding-bottom: 20px;
   }
+  button,
+  select {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
 }
 
 .sortingContainer {
-  margin-top: 35px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  select {
+    text-align: center;
+  }
 }
 
 .resultsDisplay {
@@ -30,10 +37,18 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin: 35px 0 100px 0;
+  margin: 20px 0;
   padding: 20px;
-  height: 60vh;
+  height: 70vh;
   overflow-y: scroll;
+  // border: 1px solid $red;
+  // background-color: $white;
+  // border-radius: 30px;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 
   h3 {
     margin-bottom: 10px;
@@ -214,7 +229,7 @@ body {
       padding: 0 20px;
       width: 100%;
       // overflow-y: scroll;
-      // height: 100vh;
+      height: 100vh;
     }
   }
 }
@@ -223,4 +238,32 @@ body {
   position: relative;
   z-index: 0;
   overflow: hidden;
+}
+
+// media queries
+@media screen and (max-width: 768px) {
+  .closeGalleryBtn {
+    margin: 10px;
+    padding: 10px;
+  }
+  .galleryModal {
+    h2 {
+      font-size: 1.2rem;
+      padding: 10px 0;
+    }
+  }
+  .galleryDesc,
+  .deleteNote {
+    display: none;
+  }
+  .sortingContainer {
+    margin-top: 10px;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    select {
+      padding: 10px 30px 10px 10px;
+    }
+  }
 }
