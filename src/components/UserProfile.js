@@ -5,6 +5,8 @@ import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
 
 import ErrorModal from './ErrorModal';
+import ProfileDeleteModal from './ProfileDeleteModal';
+
 import ErrorPage from '../pages/ErrorPage';
 import GalleryCard from './GalleryCard';
 import Loading from './Loading';
@@ -38,10 +40,9 @@ function UserProfile() {
   }
 
   // delete account
-  const handleUserAccountDeletion = async (e) => {
+  const handleAccountDeletion = async () => {
     handleDeleteBackronyms(backronymKeys);
 
-    setError('');
     try {
       await deleteProfile();
     } catch (err) {
@@ -51,7 +52,7 @@ function UserProfile() {
 
   useEffect(() => {
     // timeout function that will change loading state to false after X milliseconds
-    timeout(handleLoading, 800);
+    timeout(handleLoading, 1000);
 
     // database details
     const database = getDatabase(firebase);
@@ -87,6 +88,11 @@ function UserProfile() {
   return (
     <div>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
+      {deleteAccountAttempt ?
+        <ProfileDeleteModal
+            setDeleteAccountAttempt={setDeleteAccountAttempt}
+            handleAccountDeletion={handleAccountDeletion}
+        /> : null}
 
       {loading ? (
         <section className="loadingSection userLoading">
@@ -94,21 +100,6 @@ function UserProfile() {
         </section>
       ) : (
         <section className="userProfile">
-          <div className={`accountDeleteBanner ${deleteAccountAttempt ? `addHeight` : ``}`}>
-            <div className="deleteMessageContainer wrapper">
-              <p>
-                Deleting your account is permanent and will erase ALL your backronyms. Are you sure you would like to
-                proceed?
-              </p>
-              <div className="deleteButtonContainer">
-                <Link to="/login">
-                  <button onClick={(e) => handleUserAccountDeletion(e)}>Confirm</button>
-                </Link>
-                <button onClick={() => setDeleteAccountAttempt(false)}>Cancel</button>
-              </div>
-            </div>
-          </div>
-
           <NavBar />
 
           <div className="wrapper">
@@ -136,14 +127,14 @@ function UserProfile() {
             </ul>
 
             {uid === user.uid ? (
-              <div className="profileButtons">
-                {/* <Link to="/">
-                  <button className="backButton">Back</button>
-                </Link> */}
-                <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
-                  Delete Account
-                </button>
-              </div>
+                <div className="profileButtons">
+                    <Link to="/">
+                        <button className="backButton">Back</button>
+                    </Link>
+                    <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
+                        Delete Account
+                    </button>
+                </div>
             ) : null}
           </div>
         </section>

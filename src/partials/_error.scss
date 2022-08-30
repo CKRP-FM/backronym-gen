@@ -19,7 +19,8 @@
 
 .errorMsgContainer {
   background-color: $red;
-  width: 30%;
+  width: 95%;
+  max-width: 410px;
   padding: 30px 40px;
   border-radius: 10px;
   position: absolute;
