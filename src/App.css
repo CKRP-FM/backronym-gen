@@ -584,6 +584,22 @@ select {
     transform: translate(-50%, 0%) translate3d(0, 0, 0);
   }
 }
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .aboutModal {
   position: fixed;
   left: 0;
@@ -1818,22 +1834,4 @@ body {
   border-right-color: transparent;
   -webkit-animation: spin 1.5s linear infinite;
           animation: spin 1.5s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }/*# sourceMappingURL=App.css.map */
