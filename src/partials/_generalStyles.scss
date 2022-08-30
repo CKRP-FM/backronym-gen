@@ -1,4 +1,4 @@
-//general style stripping and such
+// general style stripping and such
 html {
   background-color: $black;
   color: $white;
@@ -6,6 +6,10 @@ html {
 
 body {
   font-family: $bodyFont;
+}
+
+p {
+  font-size: clamp(0.8rem, 5vw, 1rem);
 }
 
 ul,

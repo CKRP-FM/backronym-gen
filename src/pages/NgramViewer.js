@@ -14,6 +14,7 @@ function NgramViewer() {
   const [currentSelection, setCurrentSelection] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [gallery, setGallery] = useState([]);
+  const [selectOptions, setSelectOptions] = useState([]);
   const [error, setError] = useState('');
 
   // for chart js
@@ -72,6 +73,13 @@ function NgramViewer() {
         });
       }
       setGallery(newState);
+
+      // result.userinput comes in ["k", "e", "o", "n"] form, need to join them as a string and remove commas
+      let optionsArray = newState.map((result) => result.userInput.join('').replaceAll(',', ''));
+      // removes duplicates to keep unique values
+      // ES6 has a native object Set to store unique values
+      let uniqueOptionsArray = optionsArray.filter((value, index, arr) => arr.indexOf(value) === index);
+      setSelectOptions(uniqueOptionsArray);
     });
   }, []);
 
@@ -84,33 +92,33 @@ function NgramViewer() {
   //   return arr.map((x) => `${(x * 100).toString()} %`);
   // }
 
-  const getNgram = async () => {
+  const getNgram = async (word) => {
     await axios
       .get(
-        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1959&year_end=2019&corpus=26&smoothing=3`
+        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${word}&year_start=1959&year_end=2019&corpus=26&smoothing=3`
       )
       .then((response) => {
         setFrequencyData(response.data[0].timeseries);
         setDatesLabel(1959, 2019);
       })
-      .catch((err) => setError(err.message, 'No results found. Please try a different input!'));
+      .catch((err) => {
+        setError('No results found. Please try a different input!');
+        console.log(err);
+      });
   };
 
   const handleInput = (e) => {
-    // resetGraph();
     setCurrentInput(e.target.value);
   };
 
-  // const resetGraph = () => {
-  //   setSearchInput('');
-  //   setFrequencyData([]);
-  //   setDatesLabel([]);
-  // };
+  const resetGraph = () => {
+    setFrequencyData([]);
+    setDatesLabel([]);
+  };
 
-  const handleSelection = (e) => {
-    // resetGraph();
-    const selectionString = [...e.target.value];
-    setCurrentSelection(selectionString.join('').replaceAll(',', ''));
+  const handleSelection = (value) => {
+    setCurrentSelection(value);
+    console.log(value);
     console.log(currentSelection);
   };
 
@@ -118,18 +126,25 @@ function NgramViewer() {
     e.preventDefault();
     setCurrentSelection('');
     setCurrentInput('');
+    setSearchInput('');
   };
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = (e, userInput) => {
     e.preventDefault();
-    if (currentInput !== '') {
-      if (isValidInput(currentInput)) {
-        setSearchInput(currentInput);
-        getNgram();
+    if (currentInput !== '' && currentSelection === '') {
+      if (isValidInput(userInput)) {
+        resetGraph();
+        setSearchInput(userInput);
+        getNgram(userInput);
         setCurrentInput('');
       } else {
-        setError('Only text inputs over one character are allowed!');
+        setError('Only text inputs over one character are allowed! Special characters are not allowed!');
       }
+    } else if (currentInput === '' && currentSelection !== '') {
+      resetGraph();
+      setSearchInput(currentSelection);
+      getNgram(currentSelection);
+      setCurrentSelection('');
     } else {
       setError('Select a word or phrase to search for their frequency!');
     }
@@ -179,7 +194,7 @@ function NgramViewer() {
               </a>
             </span>
           </p>
-          <div className="visualizerContainer">
+          <div className="visualizerContainer wrapper">
             <div className="userNgramInputBox">
               <form className="ngramForm">
                 {/* If user wants to search for ANY word or phrase */}
@@ -222,15 +237,15 @@ function NgramViewer() {
                       name="savedBackronyms"
                       id="savedBackronyms"
                       value={currentSelection}
-                      onChange={(e) => handleSelection(e)}
+                      onChange={(e) => handleSelection(e.target.value)}
                     >
                       <option value="" disabled>
                         Select your option
                       </option>
-                      {gallery.map((result) => {
+                      {selectOptions.map((option, index) => {
                         return (
-                          <option value={result.userInput} key={result.key}>
-                            {result.userInput}
+                          <option value={option} key={index}>
+                            {option}
                           </option>
                         );
                       })}
@@ -239,7 +254,7 @@ function NgramViewer() {
                     <p>Please clear your input above before selecting a saved word.</p>
                   )}
                 </fieldset>
-                <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+                <button onClick={(e) => handleSearchSubmit(e, currentInput)}>Search</button>
                 {/* resets the dropdown field */}
                 <button onClick={(e) => resetForm(e)}>Reset form</button>
               </form>

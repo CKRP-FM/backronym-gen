@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: clamp(0.3rem, 2vw, 1rem);
   p {
     line-height: 1.5;
   }
@@ -35,10 +35,12 @@
   justify-content: center;
   h1 {
     margin-bottom: 10px;
+    text-align: center;
   }
   p {
     font-size: 0.8rem;
     margin-top: 0;
+    text-align: center;
   }
 }
 
@@ -60,10 +62,15 @@
   border-radius: 30px;
   border: 2px solid $black;
   box-shadow: 5px 5px 0px $ice;
+  text-align: center;
+  font-size: clamp(0.9rem, 5vw, 1.1rem);
   fieldset {
     display: flex;
     flex-direction: column;
     align-items: center;
+    input {
+      width: 100%;
+    }
     select {
       padding-right: 50px;
     }
@@ -94,6 +101,10 @@
       background-color: $ice;
     }
   }
+}
+
+.userNgramInputBox {
+  width: 100%;
 }
 
 .ngramGraphBox {
