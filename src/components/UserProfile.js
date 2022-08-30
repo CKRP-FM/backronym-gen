@@ -3,12 +3,13 @@ import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { Link, useParams } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useEffect, useState } from 'react';
-import ErrorModal from './ErrorModal';
 
+import ErrorModal from './ErrorModal';
 import ErrorPage from '../pages/ErrorPage';
 import GalleryCard from './GalleryCard';
-
 import Loading from './Loading';
+import NavBar from './NavBar';
+
 import timeout from '../utilities/timeout';
 
 function UserProfile() {
@@ -108,6 +109,8 @@ function UserProfile() {
             </div>
           </div>
 
+          <NavBar />
+
           <div className="wrapper">
             <h2>Your Profile</h2>
             {uid === user.uid && backronymKeys.length === 0 ? (
@@ -134,9 +137,9 @@ function UserProfile() {
 
             {uid === user.uid ? (
               <div className="profileButtons">
-                <Link to="/">
+                {/* <Link to="/">
                   <button className="backButton">Back</button>
-                </Link>
+                </Link> */}
                 <button className="deleteProfileButton" onClick={() => setDeleteAccountAttempt(true)}>
                   Delete Account
                 </button>

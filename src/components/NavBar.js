@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import ErrorModal from './ErrorModal';
 import AboutModal from './AboutModal';
@@ -9,6 +9,15 @@ function NavBar() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
   const [nav, setNav] = useState(false);
+
+  //Hide overflowing elements when slide out nav is shown on page. This is to prevent users to be able to scroll the base html while the navbar is out
+  useEffect(() => {
+    if (nav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [nav])
 
   const { user, logOut } = useUserAuth();
 
@@ -35,7 +44,8 @@ function NavBar() {
       ) : null}
 
       <nav className="mainNav">
-        <div className="hamburgerMenu"
+        <span className="sr-only">Open website menu</span>
+        <div className="hamburgerMenu" tabindex="0"
           onClick={toggleNav}
         >
           <span className={`top ${nav ? 'topClosed' : ''}`}></span>
@@ -45,19 +55,19 @@ function NavBar() {
 
         <div className="navLinksContainer">
           <div className={`navLinks ${nav ? 'showNav' : ''}`}>
-          <ul className="linkContainer">
+          <ul className="linkContainer" onClick={toggleNav}>
             {/* for when user is on user page, can go back to home */}
             <li>
-              <Link to={`/`} onClick={toggleNav}>Home</Link>
+              <Link to={`/`}>Home</Link>
             </li>
 
             <li>
-              <Link to={`/ngramviewer`} onClick={toggleNav}>Ngram Viewer</Link>
+              <Link to={`/ngramviewer`}>Ngram Viewer</Link>
             </li>
 
             {user ? (
               <li>
-                <Link to={`/profile/${user.uid}`} onClick={toggleNav}>Profile</Link>
+                <Link to={`/profile/${user.uid}`}>Profile</Link>
               </li>
             )
               : null
