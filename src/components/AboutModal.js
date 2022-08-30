@@ -53,7 +53,7 @@ const AboutModal = props => {
               <h3 className="initials">RS</h3>
               <IconContext.Provider value={{ className: "linkedIn", size: 28}}>
                 <div>
-                  <a href="www.linkedin.com/in/ryansted" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/ryansted/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
                   </a>
                 </div>

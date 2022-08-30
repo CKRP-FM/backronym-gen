@@ -33,6 +33,12 @@ function NavBar() {
     setNav(!nav);
   }
 
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      toggleNav();
+    }
+  }
+
   return (
     <div className={user ? 'wrapper' : 'wrapper signedOutHeight'}>
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
@@ -45,8 +51,9 @@ function NavBar() {
 
       <nav className="mainNav">
         <span className="sr-only">Open website menu</span>
-        <div className="hamburgerMenu" tabindex="0"
+        <div className="hamburgerMenu" tabIndex="0"
           onClick={toggleNav}
+          onKeyDown={handleKeyPress}
         >
           <span className={`top ${nav ? 'topClosed' : ''}`}></span>
           <span className={`mid ${nav ? 'midClosed' : ''}`}></span>
@@ -55,7 +62,7 @@ function NavBar() {
 
         <div className="navLinksContainer">
           <div className={`navLinks ${nav ? 'showNav' : ''}`}>
-          <ul className="linkContainer" onClick={toggleNav}>
+          <ul className="linkContainer" onClick={toggleNav} onKeyDown={handleKeyPress}>
             {/* for when user is on user page, can go back to home */}
             <li>
               <Link to={`/`}>Home</Link>
