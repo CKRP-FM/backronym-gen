@@ -80,7 +80,6 @@ function NgramViewer() {
       // ES6 has a native object Set to store unique values
       let uniqueOptionsArray = optionsArray.filter((value, index, arr) => arr.indexOf(value) === index);
       setSelectOptions(uniqueOptionsArray);
-      console.log('hi', selectOptions);
     });
   }, []);
 
@@ -118,8 +117,8 @@ function NgramViewer() {
   };
 
   const handleSelection = (value) => {
-    const selectionString = [value];
-    setCurrentSelection(selectionString.join('').replaceAll(',', ''));
+    setCurrentSelection(value);
+    console.log(value);
     console.log(currentSelection);
   };
 
@@ -132,7 +131,7 @@ function NgramViewer() {
 
   const handleSearchSubmit = (e, userInput) => {
     e.preventDefault();
-    if (currentInput !== '') {
+    if (currentInput !== '' && currentSelection === '') {
       if (isValidInput(userInput)) {
         resetGraph();
         setSearchInput(userInput);
@@ -141,6 +140,11 @@ function NgramViewer() {
       } else {
         setError('Only text inputs over one character are allowed! Special characters are not allowed!');
       }
+    } else if (currentInput === '' && currentSelection !== '') {
+      resetGraph();
+      setSearchInput(currentSelection);
+      getNgram(currentSelection);
+      setCurrentSelection('');
     } else {
       setError('Select a word or phrase to search for their frequency!');
     }
