@@ -84,10 +84,10 @@ function NgramViewer() {
   //   return arr.map((x) => `${(x * 100).toString()} %`);
   // }
 
-  const getNgram = async () => {
+  const getNgram = async (word) => {
     await axios
       .get(
-        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${searchInput}&year_start=1959&year_end=2019&corpus=26&smoothing=3`
+        `https://intense-dusk-96795.herokuapp.com/https://books.google.com/ngrams/json?content=${word}&year_start=1959&year_end=2019&corpus=26&smoothing=3`
       )
       .then((response) => {
         setFrequencyData(response.data[0].timeseries);
@@ -120,15 +120,15 @@ function NgramViewer() {
     setCurrentInput('');
   };
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = (e, userInput) => {
     e.preventDefault();
     if (currentInput !== '') {
-      if (isValidInput(currentInput)) {
-        setSearchInput(currentInput);
-        getNgram();
+      if (isValidInput(userInput)) {
+        setSearchInput(userInput);
+        getNgram(userInput);
         setCurrentInput('');
       } else {
-        setError('Only text inputs over one character are allowed!');
+        setError('Only text inputs over one character are allowed! Special characters are not allowed!');
       }
     } else {
       setError('Select a word or phrase to search for their frequency!');
@@ -239,7 +239,7 @@ function NgramViewer() {
                     <p>Please clear your input above before selecting a saved word.</p>
                   )}
                 </fieldset>
-                <button onClick={(e) => handleSearchSubmit(e)}>Search</button>
+                <button onClick={(e) => handleSearchSubmit(e, currentInput)}>Search</button>
                 {/* resets the dropdown field */}
                 <button onClick={(e) => resetForm(e)}>Reset form</button>
               </form>
