@@ -38,7 +38,6 @@ function MainPage() {
               className="viewGalleryBtn"
               onClick={(e) => {
                 handleShowGallery(e);
-                // document.body.classList.add('modalActive');
               }}
             >View Saved Gallery</button>
           </div>

@@ -59,7 +59,7 @@ function NavBar() {
       ) : null}
 
       <nav className="mainNav">
-        <span className="sr-only">Open website menu</span>
+        <span className="sr-only">Open website navigation</span>
         <div className="hamburgerMenu" tabIndex="0" onClick={toggleNav} onKeyDown={handleKeyPress}>
           <span className={`top ${nav ? 'topClosed' : ''}`}></span>
           <span className={`mid ${nav ? 'midClosed' : ''}`}></span>
@@ -97,7 +97,7 @@ function NavBar() {
 
         <div className="aboutPopOut">
           <button className="aboutBtn" onClick={() => setShow(true)}>
-            ?
+            <span className="sr-only">Help on how to use the Backronym Generator</span>?
           </button>
           {/* whenever this method is called it will close the modal */}
           <AboutModal onClose={() => setShow(false)} show={show} />

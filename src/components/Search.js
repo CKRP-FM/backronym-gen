@@ -166,8 +166,7 @@ function Search() {
 
   // handle save word
   // store the chosen word (state current chosen word) into the backronym array
-  // locks in the letter, push letter to letterArr
-  // randomArray([])
+  // locks in the letter, push letter to randomArray([])
   // incraement current index
 
   function handleSaveWord(e) {
@@ -233,7 +232,7 @@ function Search() {
 
             <fieldset>
               <label htmlFor="search" className="sr-only">
-                Search
+                Enter your word
               </label>
               <input
                 id="search"
