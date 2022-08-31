@@ -27,7 +27,7 @@
   &::before,
   &::after {
     display: block;
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     width: 100%;
@@ -37,7 +37,7 @@
     transition: all 500ms ease;
     z-index: -10;
   }
-  
+
   &::before {
     //Position and transition for animation Open -> Closed
     top: 51%;
@@ -105,6 +105,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  button {
+    font-size: inherit;
+  }
 }
 
 .linkContainer {
@@ -197,7 +200,6 @@
   z-index: 1000;
 }
 
-
 .top,
 .mid,
 .bottom {
@@ -250,6 +252,8 @@
     margin-top: 5px;
   }
 }
+<<<<<<< HEAD
+=======
 
 
 //Height media queries
@@ -266,3 +270,4 @@
     transform: rotate(0);
   }
 }
+>>>>>>> main

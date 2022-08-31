@@ -71,6 +71,7 @@ function Search() {
   // async
   async function handleSearchSubmit(e) {
     e.preventDefault();
+    setCheckedWord('');
 
     const confirmation = await isValidInput(wordInput);
     
