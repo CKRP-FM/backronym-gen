@@ -23,6 +23,15 @@ function Search() {
   //useState to toggle loading
   const [loading, setLoading] = useState(false);
 
+  // const [isProfane, setIsProfane] = useState(false);
+
+  // variable to track if word is profane
+  let isProfane = false;
+
+  const setIsProfane = (status) => {
+    isProfane = status;
+  }
+
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
     // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
@@ -42,8 +51,12 @@ function Search() {
 
   // check if string only contains letters, from https://bobbyhadz.com/blog/javascript-check-if-string-contains-only-letters#:~:text=Use%20the%20test()%20method,only%20letters%20and%20false%20otherwise.&text=Copied!
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
-  function isValidInput(str) {
-    return /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
+
+  async function isValidInput(str) {
+
+    await profanityFilter(str);
+
+    return !isProfane && /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
   }
 
   // Break down string into array of chars
@@ -56,10 +69,12 @@ function Search() {
   }
 
   // async
-  function handleSearchSubmit(e) {
+  async function handleSearchSubmit(e) {
     e.preventDefault();
 
-    if (isValidInput(wordInput)) {
+    const confirmation = await isValidInput(wordInput);
+    
+    if (confirmation) {
       const clone = wordInput;
       setSelectedWord(splitIntoChars(clone));
 
@@ -68,6 +83,9 @@ function Search() {
       setLoading(true);
       setCurrentIndex(0);
       setWordInput('');
+    } 
+    else if (isProfane === true) {
+      setError('Please refrain from using inappropriate language!');
     } else {
       setError('Your input has to be a word between 2 and 10 characters!');
     }
@@ -96,6 +114,22 @@ function Search() {
       }
     }
   }
+
+  const profanityFilter = async (word) => {
+    await axios
+      .get(
+        `https://www.purgomalum.com/service/containsprofanity?text=${word}`
+      )
+      .then((response) => {
+        console.log("success: " + response.data);
+        setIsProfane(response.data);
+      })
+      .catch((error) => {
+        setError(error)
+      }
+    );
+  }
+
 
   // function to fetch random words that start with a specific letter
   function fetchRandomWords() {
@@ -191,7 +225,7 @@ function Search() {
   return (
     <header>
       <div className="wrapper">
-        {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
+        {error ? <ErrorModal errorMsg={error} setError={setError} setIsProfane={setIsProfane} /> : null}
 
         <div className="mainSearch">
           <form>
