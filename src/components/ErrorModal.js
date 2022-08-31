@@ -3,7 +3,10 @@ import React from 'react';
 function ErrorModal({ errorMsg, setError, setIsProfane }) {
   setTimeout(() => {
     setError('');
-    setIsProfane(false);
+    
+    if (setIsProfane) {
+      setIsProfane(false);
+    }
   }, 3000);
 
   return (
@@ -11,7 +14,10 @@ function ErrorModal({ errorMsg, setError, setIsProfane }) {
       className="errorModal"
       onClick={() => {
         setError('');
-        setIsProfane(false);
+
+        if (setIsProfane) {
+          setIsProfane(false);
+        }
       }}
     >
       <div className="errorMsgContainer">

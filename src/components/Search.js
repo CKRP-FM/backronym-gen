@@ -23,8 +23,6 @@ function Search() {
   //useState to toggle loading
   const [loading, setLoading] = useState(false);
 
-  // const [isProfane, setIsProfane] = useState(false);
-
   // variable to track if word is profane
   let isProfane = false;
 
@@ -122,7 +120,6 @@ function Search() {
         `https://www.purgomalum.com/service/containsprofanity?text=${word}`
       )
       .then((response) => {
-        console.log("success: " + response.data);
         setIsProfane(response.data);
       })
       .catch((error) => {
