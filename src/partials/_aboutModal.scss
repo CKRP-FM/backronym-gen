@@ -72,12 +72,8 @@
 }
 
 .closeButton {
-  display: flex;
   font-family: $headingFont;
   transition: background-color 0.4s ease-in-out;
-  position: absolute;
-  right: -15px;
-  top: -15px;
   &:hover {
     background-color: $red;
   }
@@ -137,3 +133,5 @@
     height: 80%;
   }
 }
+
+
