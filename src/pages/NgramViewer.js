@@ -97,10 +97,6 @@ function NgramViewer() {
     return /^[a-zA-Z_]+( [a-zA-Z_]+)*$/.test(str) && str.length > 1;
   }
 
-  // function toPercentage(arr) {
-  //   return arr.map((x) => `${(x * 100).toString()} %`);
-  // }
-
   const getNgram = async (word) => {
     await axios
       .get(
@@ -110,9 +106,8 @@ function NgramViewer() {
         setFrequencyData(response.data[0].timeseries);
         setDatesLabel(1959, 2019);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('No results found. Please try a different input!');
-        console.log(err);
       });
   };
 
@@ -127,8 +122,6 @@ function NgramViewer() {
 
   const handleSelection = (value) => {
     setCurrentSelection(value);
-    console.log(value);
-    console.log(currentSelection);
   };
 
   const resetForm = (e) => {

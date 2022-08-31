@@ -1,93 +1,99 @@
 .userProfile {
-    position: absolute;
-    width: 100%;
+	position: absolute;
+	width: 100%;
 
-    h2 {
-        padding-top: 30px;
-    }
+	h2 {
+		padding-top: 30px;
+	}
+
+	.resultsDisplay {
+		padding: 0;
+		border: 3px solid $white;
+		background-color: $white;
+	}
 }
 
 .profileButtons {
-    text-align: center;
+	text-align: center;
 }
 
 .backButton {
-    margin: 30px;
-    border: 2px solid #323031;
-    box-shadow: 5px 5px 0px $white;
+	margin: 30px;
+	border: 2px solid #323031;
+	box-shadow: 5px 5px 0px $white;
 }
 
 .deleteProfileButton {
-    color: $white;
-    background-color: $red;
-    margin: 30px;
-    border: 2px solid #323031;
-    box-shadow: 5px 5px 0px $white;
-    transition: 0.4s ease-in-out;
+	color: $white;
+	background-color: $red;
+	margin: 30px;
+	border: 2px solid #323031;
+	box-shadow: 5px 5px 0px $white;
+	transition: 0.4s ease-in-out;
 
-    &:hover {
-        color: $black;
-        background-color: $white;
-        box-shadow: 5px 5px 0px $red;
-    }
+	&:hover {
+		color: $black;
+		background-color: $white;
+		box-shadow: 5px 5px 0px $red;
+	}
 }
 
 .accountDeleteBanner {
-    background-color: $red;
-    transition: 0.25s ease-in-out;
+	background-color: $red;
+	transition: 0.25s ease-in-out;
 
-    height: 0;
-    position: relative;
-    top: -100vh;
+	height: 0;
+	position: relative;
+	top: -100vh;
 }
 
 .deleteMessageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    p {
-        color: $white;
-        margin: 0;
-        font-weight: bold;
-    }
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	p {
+		color: $white;
+		margin: 0;
+		font-weight: bold;
+	}
 }
 
 .deleteButtonContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
     
+	> * {
+		transition: none;
+	}
 
-     > * {
-        transition: none;
-     }
-    button {
-        margin: 30px;
-        border: 2px solid #323031;
-        box-shadow: 5px 5px 0px $white;
-        transition: 0.4s ease-in-out;
+	button {
+		margin: 30px;
+		border: 2px solid #323031;
+		box-shadow: 5px 5px 0px $white;
+		transition: 0.4s ease-in-out;
 
-        &:hover {
-            background-color: $white;
-            box-shadow: 5px 5px 0px $black;
-        }
-    }
+		&:hover {
+			background-color: $white;
+			box-shadow: 5px 5px 0px $black;
+		}
+	}
 }
 
 .addHeight {
-    top: 0vh;
-    height: 100%;
+	top: 0vh;
+	height: 100%;
 }
 
 .emptyProfileMessage {
-    height: 40vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 40vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    h3 { 
-        width: 75%;
-        text-align: center;
-    }
+	h3 { 
+		width: 75%;
+		text-align: center;
+	}
 }
