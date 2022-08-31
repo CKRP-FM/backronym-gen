@@ -58,6 +58,7 @@ function Search() {
   // async
   function handleSearchSubmit(e) {
     e.preventDefault();
+    setCheckedWord('');
 
     if (isValidInput(wordInput)) {
       const clone = wordInput;
