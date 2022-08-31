@@ -97,8 +97,7 @@ function NavBar() {
 
         <div className="aboutPopOut">
           <button className="aboutBtn" onClick={() => setShow(true)}>
-            <span className="sr-only">Help on how to use the Backronym Generator</span>
-            ?
+            <span className="sr-only">Help on how to use the Backronym Generator</span>?
           </button>
           {/* whenever this method is called it will close the modal */}
           <AboutModal onClose={() => setShow(false)} show={show} />

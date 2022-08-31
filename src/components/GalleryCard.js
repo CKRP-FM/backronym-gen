@@ -31,7 +31,7 @@ function GalleryCard({ result }) {
     //check if the user has already liked this specific backronym
     const liked = localStorage.getItem(`${result.key}`);
     setLikedStatus(liked);
-
+  
     if (likedStatus === 'unliked' && likedStatus != null) {
       const updatedLikes = {
         likes: resultLikes + 1,
