@@ -275,3 +275,53 @@ body {
     }
   }
 }
+
+//height width specific media queries for fixing gallery height
+@media screen and (min-width: 810px) and (max-height: 1080px) {
+  .resultsDisplay {
+    height: calc(65% - 30px);
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-height: 1366px) {
+  .resultsDisplay {
+    height: calc(65% - 40px);
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-height: 800px) {
+  .resultsDisplay {
+    height: calc(65% - 100px);
+  }
+}
+
+@media screen and (min-width: 1280px) and (max-height: 950px) {
+  .resultsDisplay {
+    height: calc(65% - 60px);
+  }
+}
+
+@media screen and (min-width: 1280px) and (max-height: 720px) {
+  .resultsDisplay {
+    height: calc(65% - 140px);
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-height: 900px) {
+  .resultsDisplay {
+    height: calc(65% - 70px);
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-height: 800px) {
+  .resultsDisplay {
+    height: calc(65% - 100px);
+  }
+}
+
+@media screen and (min-width: 1920px) and (max-height: 1080px) {
+  .resultsDisplay {
+    height: calc(65% - 25px);
+  }
+}
+
