@@ -14,10 +14,7 @@ function ErrorModal({ errorMsg, setError }) {
     >
       <div className="errorMsgContainer">
         <p className="errorMessage">{errorMsg}</p>
-        
-        <div className="errorBar">
-          <span className="progress"></span>
-        </div>
+
       </div>
     </div>
   );
