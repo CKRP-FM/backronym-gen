@@ -68,6 +68,7 @@ function Search() {
       setLoading(true);
       setCurrentIndex(0);
       setWordInput('');
+      setCheckedWord('');
     } else {
       setError('Your input has to be a word between 2 and 10 characters!');
     }
