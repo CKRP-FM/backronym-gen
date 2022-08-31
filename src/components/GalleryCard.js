@@ -10,7 +10,7 @@ function GalleryCard({ result }) {
   const [deleteWarning, setDeleteWarning] = useState(false);
   const [deleteID, setDeleteID] = useState('');
   //track whether user has already liked a backronym
-  const [likedStatus, setLikedStatus] = useState('');
+  const [likedStatus, setLikedStatus] = useState('unliked');
   const [error, setError] = useState('');
 
   let { user } = useUserAuth();
@@ -31,8 +31,9 @@ function GalleryCard({ result }) {
     //check if the user has already liked this specific backronym
     const liked = localStorage.getItem(`${result.key}`);
     setLikedStatus(liked);
+    console.log(liked);
 
-    if (likedStatus !== 'liked') {
+    if (likedStatus === 'unliked' && likedStatus != null) {
       const updatedLikes = {
         likes: resultLikes + 1,
       };
@@ -93,7 +94,7 @@ function GalleryCard({ result }) {
 
         {user ? (
           <button
-            className={`likeBtn ${likedStatus === 'liked' ? 'is-filled' : ''}`}
+            className={`likeBtn ${likedStatus !== 'unliked' ? 'is-filled' : ''}`}
             onClick={() => {
               handleLike(result.key, result.likes);
             }}
