@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import shuffle from '../utilities/shuffle.js';
 import firebase from '../firebase.js';
 import { getDatabase, ref, push } from 'firebase/database';
@@ -28,6 +28,13 @@ function Search() {
 
   const setIsProfane = (status) => {
     isProfane = status;
+  };
+
+  // to scroll down to choices when search is pressed
+  const choicesRef = useRef(null);
+
+  function scrollToChoices() {
+    choicesRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
 
   // Returns a copy of an array that includes the first 10 elements
@@ -51,7 +58,6 @@ function Search() {
   // regex explanation: https://stackoverflow.com/questions/33022051/regex-explanation
 
   async function isValidInput(str) {
-
     await profanityFilter(str);
 
     return !isProfane && /^[a-zA-Z]+$/.test(str) && str.length < 10 && str.length > 1;
@@ -72,18 +78,18 @@ function Search() {
     setCheckedWord('');
 
     const confirmation = await isValidInput(wordInput);
-    
+
     if (confirmation) {
       const clone = wordInput;
       setSelectedWord(splitIntoChars(clone));
+      timeout(scrollToChoices, 500);
 
       setBackronym([]);
       setHideBtn(false);
       setLoading(true);
       setCurrentIndex(0);
       setWordInput('');
-    } 
-    else if (isProfane === true) {
+    } else if (isProfane === true) {
       setError('Please refrain from using inappropriate language!');
     } else {
       setError('Your input has to be a word between 2 and 10 characters!');
@@ -116,18 +122,14 @@ function Search() {
 
   const profanityFilter = async (word) => {
     await axios
-      .get(
-        `https://www.purgomalum.com/service/containsprofanity?text=${word}`
-      )
+      .get(`https://www.purgomalum.com/service/containsprofanity?text=${word}`)
       .then((response) => {
         setIsProfane(response.data);
       })
       .catch((error) => {
-        setError(error)
-      }
-    );
-  }
-
+        setError(error);
+      });
+  };
 
   // function to fetch random words that start with a specific letter
   function fetchRandomWords() {
@@ -254,7 +256,7 @@ function Search() {
           </div>
         </div>
 
-        <div className="backronymSelect">
+        <div ref={choicesRef} className="backronymSelect">
           <p className="userBackronym">
             {selectedWord !== undefined || selectedWord.length !== 0
               ? selectedWord.map((letter, index) => {
