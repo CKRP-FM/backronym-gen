@@ -138,7 +138,7 @@ function NgramViewer() {
         resetGraph();
         setSearchInput(userInput);
         setLoading(true);
-        timeout(handleLoading, 1000);
+        timeout(handleLoading, 5000);
         getNgram(userInput);
         setCurrentInput('');
       } else {
