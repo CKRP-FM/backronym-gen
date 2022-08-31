@@ -35,8 +35,6 @@ function Login({ toggleSignUpModal }) {
     } catch (err) {
       setError(err.message);
     }
-
-    // setUserStatus(true);
   };
 
   // Log in as Anonymous
@@ -51,8 +49,6 @@ function Login({ toggleSignUpModal }) {
     } catch (err) {
       setError(err.message);
     }
-
-    // setUserStatus(true);
   };
 
   return (

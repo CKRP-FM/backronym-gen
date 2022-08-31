@@ -54,6 +54,7 @@ function GalleryCard({ result }) {
       {error ? <ErrorModal errorMsg={error} setError={setError} /> : null}
 
       <h3>{result.userInput}</h3>
+
       {/* mapping over each user's submission results array item (each word in array is the initial) */}
       {result.results.map((initialWord, index) => {
         return <p key={`${result.key}-${index}`}>{initialWord}</p>;
@@ -103,7 +104,7 @@ function GalleryCard({ result }) {
           </button>
         ) : null}
 
-        <p className="likeCount">{result.likes}</p>
+        <p className="likeCount"><span className="sr-only">Number of likes</span>{result.likes}</p>
       </div>
     </li>
   );

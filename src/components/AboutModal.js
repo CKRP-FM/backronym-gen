@@ -25,7 +25,7 @@ const AboutModal = (props) => {
           <h2 className="modalTitle">Backronym Generator</h2>
           {/* binds the close event */}
           <button onClick={props.onClose} className="closeButton">
-            <span className="sr-only">Close</span>x
+            <span className="sr-only">Close button</span>x
           </button>
         </div>
         <div className="aboutMain">
@@ -37,11 +37,7 @@ const AboutModal = (props) => {
           <div className="aboutHowTo">
             <h2 className="howToTitle">How To Use Backronyms</h2>
             <p>
-              First, enter a word that you want an acronym for. Our generator will first give you a random list of words
-              for the first initial. Then, our generator will give you words that it think best suits your previously
-              selected word. This will repeat until your backronym is created! Neat! Make sure you save your awesome
-              backronym to our backronym gallery. Logged in users can be able to like and delete backronyms, so be sure
-              to create an account!
+              First, enter a word that you want an acronym for. Our generator will first give you a random list of words for the first initial. Then, our generator will give you words that it thinks best suit your previously selected word. This will repeat until your backronym is created! Neat! Make sure you save your awesome backronym to our backronym gallery. Logged-in users can be able to like and delete backronyms, so be sure to create an account!
             </p>
           </div>
         </div>
@@ -54,6 +50,7 @@ const AboutModal = (props) => {
                 <div>
                   <a href="https://www.linkedin.com/in/chxw/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
+                    <span className="sr-only">Chow's Linkedin link</span>
                   </a>
                 </div>
               </IconContext.Provider>
@@ -62,8 +59,10 @@ const AboutModal = (props) => {
               <h3 className="initials">RS</h3>
               <IconContext.Provider value={{ className: 'linkedIn', size: 28 }}>
                 <div>
+                  
                   <a href="https://www.linkedin.com/in/ryansted/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
+                    <span className="sr-only">Ryan's Linkedin link</span>
                   </a>
                 </div>
               </IconContext.Provider>
@@ -74,6 +73,7 @@ const AboutModal = (props) => {
                 <div>
                   <a href="https://www.linkedin.com/in/keonpierre/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
+                    <span className="sr-only">Keon's Linkedin link</span>
                   </a>
                 </div>
               </IconContext.Provider>
@@ -84,6 +84,7 @@ const AboutModal = (props) => {
                 <div>
                   <a href="https://www.linkedin.com/in/pingyuuu/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin />
+                    <span className="sr-only">Ping's Linkedin link</span>
                   </a>
                 </div>
               </IconContext.Provider>

@@ -34,8 +34,6 @@ function SignUp({ toggleSignUpModal }) {
     } catch (err) {
       setError(err.message);
     }
-
-    // setUserStatus(true);
   };
 
   return (
