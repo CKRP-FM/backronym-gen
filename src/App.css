@@ -296,7 +296,7 @@ body {
 }
 
 p {
-  font-size: clamp(0.8rem, 5vw, 1rem);
+  font-size: clamp(0.8rem, 3vw, 1rem);
 }
 
 ul,
@@ -618,10 +618,11 @@ select {
 }
 
 .aboutContent {
-  overflow-y: initial !important;
   background-color: #fff;
   border-radius: 15px;
-  width: 50%;
+  width: 60%;
+  height: 80%;
+  overflow-y: auto;
 }
 
 .aboutHeader {
@@ -654,15 +655,8 @@ select {
   margin-top: 0;
 }
 
-.modalFooter {
-  background-color: #c0f5fa;
-  text-align: center;
-  line-height: 1.5rem;
-  border-bottom-left-radius: 14px;
-  border-bottom-right-radius: 14px;
-}
-.modalFooter p {
-  border-bottom: none;
+.modalTitle {
+  text-align: left;
 }
 
 .aboutHowTo {
@@ -686,8 +680,16 @@ select {
 }
 
 .closeButton {
-  border: none;
-  background: none;
+  display: flex;
+  font-family: "DynaPuff", cursive;
+  transition: background-color 0.4s ease-in-out;
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  padding: 8px;
+}
+.closeButton:hover {
+  background-color: #ff5e5b;
 }
 
 .teamHeader {
@@ -728,8 +730,19 @@ select {
 
 .linkedIn:hover {
   transform: scale(1.05);
+  color: #c0f5fa;
 }
 
+@media screen and (max-width: 1000px) {
+  .aboutContent {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 670px) {
+  .aboutContent {
+    width: 80%;
+  }
+}
 .modalFooter {
   background-color: inherit;
   color: #fff;
@@ -737,6 +750,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-size: 0.8rem;
   background-color: #323031;
+  padding: 0 10px;
 }
 .modalFooter p {
   margin: 0;
@@ -777,14 +791,8 @@ h1 span {
   display: flex;
   gap: 5px;
 }
-@media screen and (max-width: 630px) {
-  .mainSearch fieldset {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .mainSearch form {
-    margin: 0;
-  }
+.mainSearch form {
+  padding: 40px 0;
 }
 
 form {
@@ -813,11 +821,6 @@ form button {
 .headerImgContainer {
   -webkit-animation: float 5s ease-in-out alternate infinite;
           animation: float 5s ease-in-out alternate infinite;
-}
-@media screen and (max-width: 630px) {
-  .headerImgContainer {
-    display: none;
-  }
 }
 
 .backronymSelect {
@@ -931,7 +934,7 @@ form button {
   position: absolute;
   top: 0;
   right: -20px;
-  background-color: rgba(126, 244, 254, 0.5);
+  background-color: rgba(244, 206, 68, 0.3);
   filter: blur(5px);
   width: 20px;
   height: 100%;
@@ -941,6 +944,43 @@ form button {
           animation: btnShine 4s ease-in infinite;
 }
 
+@media screen and (max-width: 800px) {
+  .mainSearch fieldset {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mainSearch input {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mainSearch {
+    flex-direction: column-reverse;
+  }
+  form {
+    align-items: center;
+    margin-right: 0;
+    background-position: center;
+    background-size: 95%;
+  }
+  form input {
+    margin-right: 0;
+  }
+  h1 span {
+    text-align: center;
+  }
+  .headerImgContainer {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .mainSearch fieldset {
+    align-items: center;
+  }
+  .mainSearch fieldset * {
+    width: 80%;
+  }
+}
 .gallery {
   display: flex;
   flex-direction: column;
@@ -956,13 +996,20 @@ form button {
 .gallery h2 {
   padding-bottom: 20px;
 }
+.gallery button,
+.gallery select {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
 
 .sortingContainer {
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+.sortingContainer select {
+  text-align: center;
 }
 
 .resultsDisplay {
@@ -970,8 +1017,15 @@ form button {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin: 50px 0 100px 0;
-  padding: 0 20px;
+  margin: 20px 0;
+  padding: 20px;
+  height: 65%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.resultsDisplay::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 .resultsDisplay h3 {
   margin-bottom: 10px;
@@ -1133,10 +1187,9 @@ body {
   border-radius: 3px;
   font-weight: 300;
   position: relative;
-  overflow-y: scroll;
-  height: 100vh;
   padding: 0 20px;
   width: 100%;
+  height: 100vh;
 }
 
 .mainPage {
@@ -1145,6 +1198,30 @@ body {
   overflow: hidden;
 }
 
+@media screen and (max-width: 768px) {
+  .closeGalleryBtn {
+    margin: 20px 0 10px 0;
+    padding: 10px;
+  }
+  .galleryModal h2 {
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+  .galleryDesc,
+.deleteNote {
+    display: none;
+  }
+  .sortingContainer {
+    margin-top: 10px;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sortingContainer select {
+    padding: 10px 30px 10px 10px;
+  }
+}
 .mainNav {
   padding: 20px 0;
   display: flex;
@@ -1275,7 +1352,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 100px;
+  padding: 50px;
 }
 .signUpContent form {
   background-image: none;
@@ -1371,6 +1448,11 @@ body {
   background-color: #323031;
 }
 
+@media screen and (max-width: 500px) {
+  .currentUser {
+    margin-top: 5px;
+  }
+}
 .errorModal {
   position: fixed;
   left: 0;
@@ -1528,12 +1610,44 @@ body {
   color: #ff5e5b;
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 800px) {
   .loginPageMain {
     flex-direction: column-reverse;
+    padding: 0;
   }
-  .loginPageMain .headerImgContainer img {
-    max-height: 300px;
+  .headerImgContainer {
+    width: 20%;
+  }
+  .loginContainer {
+    padding: 40px 50px;
+  }
+  .loginPageText span {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 500px) {
+  .loginContainer {
+    padding: 20px;
+  }
+  .loginContainer input {
+    width: 100%;
+  }
+  .signUpControls {
+    flex-direction: column;
+    text-align: center;
+  }
+  .signUpContent {
+    width: 300px;
+    padding: 20px;
+  }
+  .signUpForm {
+    width: 100%;
+  }
+  .signUpForm input {
+    width: 100%;
+  }
+  .closeBtn {
+    padding: 10px;
   }
 }
 .ngramViewerContent {

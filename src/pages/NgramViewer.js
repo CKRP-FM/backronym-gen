@@ -8,18 +8,23 @@ import ErrorModal from '../components/ErrorModal';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+// load state
+import Loading from '../components/Loading';
+import timeout from '../utilities/timeout';
 
 function NgramViewer() {
   const [currentInput, setCurrentInput] = useState('');
   const [currentSelection, setCurrentSelection] = useState('');
   const [searchInput, setSearchInput] = useState('');
-  const [gallery, setGallery] = useState([]);
   const [selectOptions, setSelectOptions] = useState([]);
   const [error, setError] = useState('');
 
   // for chart js
   const [datesData, setDatesData] = useState([]);
   const [frequencyData, setFrequencyData] = useState([]);
+
+  // API loading state
+  const [loading, setLoading] = useState(false);
 
   const data = {
     labels: datesData,
@@ -72,7 +77,6 @@ function NgramViewer() {
           likes: data[key].likes,
         });
       }
-      setGallery(newState);
 
       // result.userinput comes in ["k", "e", "o", "n"] form, need to join them as a string and remove commas
       let optionsArray = newState.map((result) => result.userInput.join('').replaceAll(',', ''));
@@ -82,6 +86,11 @@ function NgramViewer() {
       setSelectOptions(uniqueOptionsArray);
     });
   }, []);
+
+  // set loading state to false
+  function handleLoading() {
+    setLoading(false);
+  }
 
   function isValidInput(str) {
     // allow text, numbers and spaces and only words over 1 character, regex from https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
@@ -135,6 +144,8 @@ function NgramViewer() {
       if (isValidInput(userInput)) {
         resetGraph();
         setSearchInput(userInput);
+        setLoading(true);
+        timeout(handleLoading, 1000);
         getNgram(userInput);
         setCurrentInput('');
       } else {
@@ -143,6 +154,8 @@ function NgramViewer() {
     } else if (currentInput === '' && currentSelection !== '') {
       resetGraph();
       setSearchInput(currentSelection);
+      setLoading(true);
+      timeout(handleLoading, 1000);
       getNgram(currentSelection);
       setCurrentSelection('');
     } else {
@@ -262,9 +275,15 @@ function NgramViewer() {
             <div className="ngramGraphBox">
               <h3>Usage Frequency Graph</h3>
               <h4>Results between the years 1959 and 2019</h4>
-              <div className="chartJsContainer">
-                <Line data={data} options={options} />
-              </div>
+              {loading ? (
+                <div className="loadingSection">
+                  <Loading />
+                </div>
+              ) : (
+                <div className="chartJsContainer">
+                  <Line data={data} options={options} />
+                </div>
+              )}
               <p>
                 Search for other date ranges or languages{' '}
                 <a href="https://books.google.com/ngrams" target="_blank" rel="noopener noreferrer">
