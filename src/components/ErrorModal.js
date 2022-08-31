@@ -16,6 +16,7 @@ function ErrorModal({ errorMsg, setError, setIsProfane }) {
     >
       <div className="errorMsgContainer">
         <p className="errorMessage">{errorMsg}</p>
+
       </div>
     </div>
   );
