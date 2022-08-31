@@ -66,7 +66,7 @@ function NavBar() {
           <span className={`bottom ${nav ? 'bottomClosed' : ''}`}></span>
         </div>
 
-        <div className="navLinksContainer">
+        <div className={`navLinksContainer ${nav ? 'showNavBg' : ''}`}>
           <div className={`navLinks ${nav ? 'showNav' : ''}`}>
             <ul className="linkContainer" onClick={toggleNav} onKeyDown={handleKeyPress}>
               {/* for when user is on user page, can go back to home */}

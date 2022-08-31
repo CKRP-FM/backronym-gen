@@ -2,6 +2,7 @@ import firebase from '../firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import GalleryCard from './GalleryCard';
+import { FaArrowDown } from "react-icons/fa";
 
 function Gallery({ closeGallery, showGallery }) {
   //useState for gallery of user's backronym
@@ -75,7 +76,7 @@ function Gallery({ closeGallery, showGallery }) {
           </p>
 
           <div className="sortingContainer">
-            <label htmlFor="filter">Sort by: </label>
+            <label htmlFor="filter" className='sr-only'>Sort by: </label>
             <select id="filter" onChange={setFilter} value={backronymFilter}>
               <option value="recent">Most Recent</option>
               <option value="highest">Most Liked</option>
@@ -92,6 +93,8 @@ function Gallery({ closeGallery, showGallery }) {
               })
             }
           </ul>
+
+          <p className="scrollLabel"><FaArrowDown />Scroll to see backronyms!<FaArrowDown /></p>
         </div>
       </div>
     </section>

@@ -12,6 +12,16 @@
   }
 }
 
+@keyframes flutterFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+
+  55% {
+    transform: translateY(5px);
+  }
+}
+
 @keyframes colorShift {
   0% {
     color: $red;

@@ -24,6 +24,7 @@ function MainPage() {
   return (
     <div className="mainPage">
       <Gallery showGallery={showGallery} closeGallery={handleShowGallery} />
+      
       <div className="mainPageContent">
         <NavBar />
         <Search />

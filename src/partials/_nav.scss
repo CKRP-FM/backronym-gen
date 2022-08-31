@@ -20,8 +20,8 @@
   background-color: transparent;
   font-size: clamp(1.8rem, 1.44rem + 1.8vw, 3.6rem);
   text-shadow: 3px 4px 0 $black, -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
-  transform: rotate(-15deg) translate3d(0, 0, 0);
   z-index: 100;
+  transform: rotate(-15deg) translate3d(0, 0, 0);
 
   //add 2 rects on top and bottom for swipe animation
   &::before,
@@ -252,3 +252,22 @@
     margin-top: 5px;
   }
 }
+<<<<<<< HEAD
+=======
+
+
+//Height media queries
+@media screen and (max-height: 850px) {
+  .navLinks {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: rotate(0);
+  }
+
+  .linkContainer {
+    transform: rotate(0);
+  }
+}
+>>>>>>> main
