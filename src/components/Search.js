@@ -30,13 +30,6 @@ function Search() {
     isProfane = status;
   };
 
-  // to scroll down to choices when search is pressed
-  const choicesRef = useRef(null);
-
-  function scrollToChoices() {
-    choicesRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }
-
   // Returns a copy of an array that includes the first 10 elements
   function subArray(array) {
     // remove single character results unless they are 'a' or 'i' or 'o' which are the only valid single letter words in english, source: https://english.stackexchange.com/questions/225537/one-letter-words-in-english-language
@@ -82,7 +75,6 @@ function Search() {
     if (confirmation) {
       const clone = wordInput;
       setSelectedWord(splitIntoChars(clone));
-      timeout(scrollToChoices, 500);
 
       setBackronym([]);
       setHideBtn(false);
@@ -256,7 +248,7 @@ function Search() {
           </div>
         </div>
 
-        <div ref={choicesRef} className="backronymSelect">
+        <div className="backronymSelect">
           <p className="userBackronym">
             {selectedWord !== undefined || selectedWord.length !== 0
               ? selectedWord.map((letter, index) => {
