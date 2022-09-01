@@ -1,7 +1,7 @@
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import firebase from '../firebase';
 import ErrorModal from '../components/ErrorModal';
@@ -26,6 +26,13 @@ function NgramViewer() {
   // API loading state
   const [loading, setLoading] = useState(false);
 
+  // to scroll down to graph when search is pressed
+  const graphRef = useRef(null);
+
+  function scrollToGraph() {
+    graphRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   const data = {
     labels: datesData,
     datasets: [
@@ -40,7 +47,8 @@ function NgramViewer() {
   };
 
   const options = {
-    responsive: true,
+    // responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -138,8 +146,9 @@ function NgramViewer() {
         resetGraph();
         setSearchInput(userInput);
         setLoading(true);
-        timeout(handleLoading, 1000);
+        timeout(handleLoading, 3000);
         getNgram(userInput);
+        scrollToGraph();
         setCurrentInput('');
       } else {
         setError('Only text inputs over one character are allowed! Special characters are not allowed!');
@@ -148,8 +157,9 @@ function NgramViewer() {
       resetGraph();
       setSearchInput(currentSelection);
       setLoading(true);
-      timeout(handleLoading, 1000);
+      timeout(handleLoading, 3000);
       getNgram(currentSelection);
+      scrollToGraph();
       setCurrentSelection('');
     } else {
       setError('Select a word or phrase to search for their frequency!');
@@ -260,7 +270,13 @@ function NgramViewer() {
                     <p>Please clear your input above before selecting a saved word.</p>
                   )}
                 </fieldset>
-                <button onClick={(e) => handleSearchSubmit(e, currentInput)}>Search</button>
+                <button
+                  onClick={(e) => {
+                    handleSearchSubmit(e, currentInput);
+                  }}
+                >
+                  Search
+                </button>
                 {/* resets the dropdown field */}
                 <button onClick={(e) => resetForm(e)}>Reset form</button>
               </form>
@@ -277,7 +293,7 @@ function NgramViewer() {
                   <Line data={data} options={options} />
                 </div>
               )}
-              <p>
+              <p ref={graphRef}>
                 Search for other date ranges or languages{' '}
                 <a href="https://books.google.com/ngrams" target="_blank" rel="noopener noreferrer">
                   here
