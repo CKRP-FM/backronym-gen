@@ -47,7 +47,8 @@ function NgramViewer() {
   };
 
   const options = {
-    responsive: true,
+    // responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -147,7 +148,7 @@ function NgramViewer() {
         setLoading(true);
         timeout(handleLoading, 3000);
         getNgram(userInput);
-        timeout(scrollToGraph, 3000);
+        scrollToGraph();
         setCurrentInput('');
       } else {
         setError('Only text inputs over one character are allowed! Special characters are not allowed!');
@@ -158,7 +159,7 @@ function NgramViewer() {
       setLoading(true);
       timeout(handleLoading, 3000);
       getNgram(currentSelection);
-      timeout(scrollToGraph, 3000);
+      scrollToGraph();
       setCurrentSelection('');
     } else {
       setError('Select a word or phrase to search for their frequency!');
