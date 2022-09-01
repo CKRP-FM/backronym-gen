@@ -46,9 +46,9 @@ Backronym Generator is a web application that allows users to create a ‘backro
 
 ## Preview
 
-![Screenshot of the backronym generator app](./assets/screenshots/home.jpg 'Home Page')
-![Screenshot of the backronym generator app](./assets/screenshots/gallery.jpg 'Gallery Page')
-![Screenshot of the backronym generator app](./assets/screenshots/ngram-page.jpg 'Ngram Page')
-![Screenshot of the backronym generator app](./assets/screenshots/profile.jpg 'Profile Page')
-![Screenshot of the backronym generator app](./assets/screenshots/login.jpg 'Login Page')
-![Screenshot of the backronym generator app](./assets/screenshots/error.jpg 'Error Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/home.jpg 'Home Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/gallery.jpg 'Gallery Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/ngram-page.jpg 'Ngram Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/profile.jpg 'Profile Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/login.jpg 'Login Page')
+![Screenshot of the backronym generator app](./src/assets/screenshots/error.jpg 'Error Page')
